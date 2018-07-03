@@ -1,0 +1,155 @@
+<!--#include file="/student/header.html"-->
+<style type="text/css">
+    .am-datepicker .am-datepicker-dow {
+        height: 32px;
+    }
+
+    .am-datepicker td.am-datepicker-day,
+    .am-datepicker td.am-datepicker-day:hover {
+        height: 22px;
+        width: 22px;
+    }
+
+    .am-datepicker-caret {
+        display: none !important;
+    }
+
+    .pagination ul {
+        position: relative;
+        top: -2px!important;
+    }
+
+    .pagination select {
+        display: inline-block;
+        width: 45px!important;
+        height: 32px!important;
+        padding: 0!important;
+        line-height: 32px!important;
+        padding-left: 5px!important;
+    }
+
+    .pagination input {
+        display: inline-block!important;
+        width: 45px!important;
+        height: 32px!important;
+    }
+
+    .pagination .go {
+        position: relative;
+        top: 0!important;
+    }
+</style>
+<link rel="stylesheet" type="text/css" href="/student/css/teastudio.css">
+
+<form class="am-form am-form-horizontal gform full">
+    <div id="right_content">
+        <div class="am-panel">
+            <div class="am-panel am-panel-default">
+                <div class="am-panel-hd am-cf">
+                    <h3 class="am-panel-title">
+                        <span class="am-icon am-icon-tasks"></span>&nbsp;我的收藏
+                    </h3>
+                    <div class="am-text-right">
+                        <a class="am-btn am-btn-secondary am-btn-default am-padding-horizontal-lg delete_btn" id="cancelcollect">取消收藏</a>
+                    </div>
+                </div>
+                <div style="margin-left: 28px;" class="am-form-group am-margin-top-sm" id="searchInfo">
+                </div>
+
+                <form id="fm_content">
+                    <div id="content_container" class="am-margin-top"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script id="table_html" type="text/html">
+    <table id="table_info" class="am-table am-text-center">
+        <thead>
+            <tr>
+                <th class="am-text-left" style="width: 3%">
+                    <input type="checkbox" class="checkAll" /></th>
+                <th class="am-text-left" style="width: 20%"></th>
+                <th style="width: 25%" class="am-text-left">资源名称</th>
+                <th style="width: 15%" class="am-text-left">资源类型</th>
+                <th style="width: 15%" class="am-text-left">资源大小</th>
+                <th style="width: 15%" class="am-text-left">收藏时间</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {{if list && list.length > 0}}
+                {{each list as item i}}
+                <tr id="{{item.CollectId}}">
+                    <td class="am-text-left">
+                        <input type="checkbox" class="check" /></td>
+                    <td class="am-text-left">
+                        <div class="am-inline-block am-text-middle">
+                            <a href="/mainsite/resource/resource-info.html#Id={{item.Id}}" target="_blank">
+                                <img src="{{ if item.Url}}{{item.Url}}{{else}}/common/img/noCover.jpg{{/if}}" style="height: 75px; width: 120px">
+                            </a>
+                        </div>
+                    </td>
+                    <td title="{{item.Title}}" class="am-text-left">{{#substring(item.Title,0,10)}}</td>
+                    <td class="am-text-left">{{item.DocType}}</td>
+                    <td class="am-text-left">{{item.DocSize | b2other}}</td>
+                    <td class="am-text-left">{{item.DateCreated | dateFormat:'yyyy-MM-dd'}}</td>
+                </tr>
+            {{/each}}
+            {{else}}
+                <tr>
+                    <td colspan="8">
+                        <div class="am-text-center">暂无数据</div>
+                    </td>
+                </tr>
+            {{/if}}
+        </tbody>
+    </table>
+    <div class="pagination ajax"></div>
+</script>
+
+<script type="text/html" id="searchInfoTip">
+
+    <label class="am-form-label am-u-sm-1" style="width: 45px;">名称：</label>
+    <div class="am-u-sm-3">
+        <input type="text" name="search" class="am-input-field" placeholder="请输入资源名称" />
+    </div>
+  <!--  <label class="am-form-label am-u-sm-1" style="width: 85px;">教育类型：</label>
+    <div class="am-u-sm-5 am-u-end" style="width: 237px;">
+        <select id="eduInfoId" name="eduInfoId">
+            <option value="">—— 全部 ——</option>
+            {{each edudoctype as item}}
+            <option value="{{item.Id}}">{{item.EduName}}</option>
+            {{/each}}
+        </select>
+    </div>
+    <label class="am-form-label am-u-sm-1" style="width: 85px;">学科类型：</label>
+    <div class="am-u-sm-5 am-u-end" style="width: 237px;">
+        <select id="prosInfoId" name="prosInfoId">
+            <option value="">—— 全部 ——</option>
+            {{each prosdoctype as item}}
+            <option value="{{item.Id}}">{{item.ProsName}}</option>
+            {{/each}}
+        </select>
+    </div>
+    <div style="padding-top: 10px; display: inline-block;">
+        <label class="am-form-label am-u-sm-1" style="width: 72px;">素材类型：</label>
+        <div class="am-u-sm-5 am-u-end" style="width: 237px;">
+            <select id="matInfoId" name="matInfoId">
+                <option value="">—— 全部 ——</option>
+                {{each matdoctype as item}}
+            <option value="{{item.Id}}">{{item.MatName}}</option>
+                {{/each}}
+            </select>
+        </div>-->
+        <div class="am-u-sm-1 am-text-left am-u-end" style="padding-left: 20px;">
+            <a class="am-btn am-btn-secondary" id="search">
+                <span class="am-icon am-icon-search"></span>查询
+            </a>
+        </div>
+    </div>
+</script>
+<!--#include file="/student/footer.html"-->
+
+<script type="text/javascript" src="/student/js/mycollect/mycollect.js"></script>

@@ -1,0 +1,117 @@
+{% extends  'Home_base.html' %}
+{% load  staticfiles %}
+{% block content %}
+<div class="gform full">
+    <div id="right_content" class="am-g am-g-collapse ">
+        <div class="am-panel">
+            <div class="am-panel am-panel-default">
+                <div class="am-panel-hd am-cf">
+                    <h3 class="am-panel-title">
+                        <span class="am-icon am-icon-tasks">QQ统计</span>&nbsp;
+                    </h3>
+                    <div class="am-text-right"></div>
+                </div>
+                <div style="margin-right: 28px;" class="am-form-group am-margin-top-sm" id="searchInfo"></div>
+                <form id="fm_content"  class="am-form am-form-horizontal">
+                    <div id="content_container" class="am-margin-top">
+                            <div id="searchInfoTip" class="am-form-group">
+                                <label class="am-form-label am-u-sm-2" >统计聊天总数: <span style="color: red">{{ content_nums }}</span></label>
+                            </div>
+                    </div>
+                </form>
+
+                <div id="table_html"  class="year_">
+                    <input type="hidden" name="type" value="" />
+                     <p align="center">每年教师访问频度统计</p>
+                    <table id="table_info" class="am-table am-text-center">
+                        <tbody>
+                                <tr>
+                                <th style="width: 5%" class="am-text-center">年份</th>
+                                     {% for row in rows_year %}
+                                        <td class="am-text-center" style=" {% if row.1 > avg_year %}color: red{% endif %}">{{ row.0 }}</td>
+                                     {% endfor %}
+                                </tr>
+                                <tr>
+                                <th style="width: 5%" class="am-text-center">总计</th>
+                                     {% for row in rows_year %}
+                                         <td class="am-text-center" >
+                                           <span style=" {% if row.1 > avg_year %}color: red{% endif %}"> {{ row.1 }}</span>
+                                         </td>
+                                      {% endfor %}
+                                </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="table_html"  class="month_">
+                    <input type="hidden" name="type" value="" />
+                     <p align="center">每年教师访问频度统计</p>
+                    <table id="table_info" class="am-table am-text-center">
+                        <tbody>
+                                <tr>
+                                <th style="width: 5%" class="am-text-center">月份</th>
+                                     {% for row in rows_month %}
+                                        <td class="am-text-center" style=" {% if row.1 > avg_month %}color: red{% endif %}">{{ row.0 }}</td>
+                                     {% endfor %}
+                                </tr>
+                                <tr>
+                                <th style="width: 5%" class="am-text-center">总计</th>
+                                     {% for row in rows_month %}
+                                         <td class="am-text-center" >
+                                           <span style=" {% if row.1 > avg_month %}color: red{% endif %}"> {{ row.1 }}</span>
+                                         </td>
+                                      {% endfor %}
+                                </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="table_html"  class="'day_">
+                    <input type="hidden" name="type" value="" />
+                    <p align="center"><a href="{% url 'qqhome:month' %}">月周期教师访问频度统计</a></p>
+                    <table id="table_info" class="am-table am-text-center">
+                        <tbody>
+                                <tr>
+                                <th style="width: 5%" class="am-text-center">日</th>
+                                     {% for row in rows_day %}
+                                        <td class="am-text-center" style=" {% if row.1 > avg_day %}color: red{% endif %}">{{ row.0 }}</td>
+                                     {% endfor %}
+                                </tr>
+                                     <tr>
+                                <th style="width: 5%" class="am-text-center">总计</th>
+                                     {% for row in rows_day %}
+                                         <td class="am-text-center" >
+                                           <span style=" {% if row.1 > avg_day %}color: red{% endif %}"> {{ row.1 }}</span>
+                                         </td>
+                                      {% endfor %}
+                                </tr>
+                        </tbody>
+                    </table>
+                </div>
+                 <div id="table_html"  class="'hour_">
+                    <input type="hidden" name="type" value="" />
+                     <p align="center">一天周期教师访问频度统计</p>
+                    <table id="table_info" class="am-table am-text-center">
+                        <tbody>
+                                <tr>
+                                <th style="width: 5%" class="am-text-center">时</th>
+                                     {% for row in rows_hour %}
+                                        <td class="am-text-center" style=" {% if row.1 > avg_hour %}color: red{% endif %}">{{ row.0 }}</td>
+                                     {% endfor %}
+                                </tr>
+                                     <tr>
+                                <th style="width: 5%" class="am-text-center">总计</th>
+                                     {% for row in rows_hour %}
+                                         <td class="am-text-center" >
+                                           <span style=" {% if row.1 > avg_hour %}color: red{% endif %}"> {{ row.1 }}</span>
+                                         </td>
+                                      {% endfor %}
+                                </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,185 @@
+<!--#include file="/student/header.html"-->
+<div id="right_content">
+    <div class="am-panel">
+        <div class="am-panel am-panel-default">
+            <div class="am-panel-hd am-cf">
+                <h3 class="am-panel-title">
+                    <span class="am-icon am-icon-tasks"></span>&nbsp;我的毕业
+                </h3>
+            </div>
+        </div>
+        <div class="graduation" id="graduationShow"></div>
+    </div>
+</div>
+<script type="text/html" id="graduation">
+    <div class="item">
+        <div class="title"><i class="iconfont icon-ren"></i>基本信息</div>
+        <div class="pri clearfix">
+            <img class="iconImg" src="{{if user != null}}{{user.AvatorUrl}}{{else}}/common/img/icon.jpg{{/if}}" width="100px" height="120px" />
+            <table class="info" width="720">
+                <tbody>
+                    <tr>
+                        <td>
+                            <label>姓&nbsp;&nbsp;名：</label>
+                            <span>{{person.stu.Name}}</span>
+                        </td>
+                        <td>
+                            <label>学&nbsp;&nbsp;号：</label>
+                            <span>{{person.stu.StuNo}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>证件类型：</label>
+                            <span>{{person.stu.CardType}}</span>
+                        </td>
+                        <td>
+                            <label>证件号码：</label>
+                            <span>{{person.stu.CardNum}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>性&nbsp;&nbsp;别：</label>
+                            <span>{{person.stu.Sex}}</span>
+                        </td>
+                        <td>
+                            <label>出生年月：</label>
+                            <span>{{person.stu.Birthday | dateFormat:'yyyy-MM-dd'}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>政治面貌：</label>
+                            <span>{{person.stu.PoliticalStatus}}</span>
+                        </td>
+                        <td>
+                            <label>婚姻状况：</label>
+                            <span>{{person.stu.MaritalStatus}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>教学点：</label>
+                            <span>{{person.stu.SubName}}</span>
+                        </td>
+                        <td>
+                            <label>民族：</label>
+                            <span>{{person.stu.Nation}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>专业：</label>
+                            <span>{{person.major.Name}}</span>
+                        </td>
+                        <td>
+                            <label>班级：</label>
+                            <span>{{person.classs.ClassName}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>是否电大毕业：</label>
+                            <span>{{if person.stu.IsDianda == true}}是{{/if}}{{if person.stu.IsDianda == false}}否{{/if}}</span>
+                        </td>
+                        <td>
+                            <label>入学批次：</label>
+                            <span>{{person.classs.EntranceBatches}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>学籍状态：</label>
+                            <span>{{if person.stu.StuStatus=='0'}}未入籍{{/if}}{{if person.stu.StuStatus=='1'}}在籍{{/if}}{{if person.stu.StuStatus=='-1'}}不在籍{{/if}}</span>
+                        </td>
+                        <td>
+                            <label>入学成绩：</label>
+                            <span>{{person.stu.EnterScore}}</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <ul class="import clearfix">
+                <li class="code">规则号：{{person.teaplan.RuleNum}}</li>
+                <li class="state">所获学分：{{person.stu.Credit}}</li>
+                <li class="number">审核状态：{{if person.stu.GraduationAuditingStatus == 2}}未申请{{else if person.stu.GraduationAuditingStatus == 0}}待审核{{else if person.stu.GraduationAuditingStatus == -1}}未通过{{else if person.stu.GraduationAuditingStatus == -2}}未提交{{else if person.stu.GraduationAuditingStatus == 1}}已通过{{/if}}</li>
+            </ul>
+        </div>
+    </div>
+    <div class="item">
+        <div class="title"><i class="iconfont icon-kecheng"></i>课程信息</div>
+        <table class="course" border="1" width="938">
+            <thead>
+                <tr>
+                    <th width="20%">课程代码</th>
+                    <th width="20%">课程名称</th>
+                    <th width="10%">学分</th>
+                    <th width="15%">学时</th>
+                    <th width="15%">课程成绩</th>
+                    <th width="20%">状态</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{if person.course.length > 0}}
+                {{each person.course as item}}
+                <tr>
+                    <td>{{item.basecourse.Code}}</td>
+                    <td>{{item.basecourse.Name}}</td>
+                    <td>{{item.relationcourse.Credit}}</td>
+                    <td>{{item.relationcourse.Period}}</td>
+                    <td style="color:red;text-decoration:underline;cursor:pointer;" class="scoreDetail" data-courseid="{{item.basecourse.Id}}" data-stuid="{{person.stu.Id}}">{{if item.coursescore != null}}{{item.coursescore}}{{else}}暂无{{/if}}</td>
+                    <td>
+                        <div class="status clearfix">
+                            <a {{if item.choose == 1}}class="current"{{/if}}>已选课</a>
+                            <a {{if item.choose == 0}}class="current"{{/if}}>未选课</a>
+                        </div>
+                    </td>
+                </tr>
+                {{/each}}
+                {{else}}
+                <tr>
+                    <td colspan="10">暂无数据</td>
+                </tr>
+                {{/if}}
+            </tbody>
+        </table>
+    </div>
+    <div class="item">
+        <div class="title"><i class="iconfont icon-kecheng"></i>学历信息</div>
+    </div>
+    <div class="item">
+        <div class="title"><i class="iconfont icon-kecheng"></i>其他信息</div>
+    </div>
+</script>
+
+<script id="examInfo" type="text/html">
+    <div class="content_addPower content_applyGraduation">
+        <table class="tablestu" border="1" width="500">
+            <thead>
+                <tr>
+                    <th width="50%">考试批次</th>
+                    <th width="25%">考试成绩</th>
+                    <th width="25%">课程成绩</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{if examInfo.length > 0}}
+                {{each examInfo as item i}}
+                <tr>
+                    <td>{{item.qxtk_b.ExamName}}</td>
+                    <td>{{item.qxtk_stu.PaperScore}}</td>
+                    <td>{{item.qxtk_stu.SyntheticScore}}</td>
+                </tr>
+                {{/each}}
+                {{else}}
+                <tr>
+                    <td colspan="3">暂无数据</td>
+                </tr>
+                {{/if}}
+            </tbody>
+        </table>
+    </div>
+</script>
+<!--#include file="/student/footer.html"-->
+<script type="text/javascript" src="/student/js/mygraduation/mygraduation.js"></script>

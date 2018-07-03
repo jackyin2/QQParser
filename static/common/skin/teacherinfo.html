@@ -1,0 +1,178 @@
+<!--#include file="/design/header.html"-->
+
+<link type="text/css" rel="stylesheet" href="/common/js/Jcrop/css/jquery.Jcrop.min.css" />
+
+ <div class="am-panel am-panel-default">
+        <div class="am-panel-hd">
+            <h3 class="am-panel-title"><span class="am-icon am-icon-tasks"></span><a href="javascript:;">账户设置</a></h3>
+        </div>
+        <div id="container"></div>
+ </div>
+
+ <script type="text/html" id="info_html">
+    <div class="am-panel-bd">
+       <div data-am-tabs="{noSwipe: 1}" class="am-tabs np-tabs">
+            <ul class="am-tabs-nav am-nav am-nav-tabs ultab">
+                <li class="am-active"><a href="javascript:;">个人信息</a></li>
+                <li><a href="javascript:;">修改密码</a></li>
+                <li><a href="javascript:;">修改头像</a></li>
+            </ul>
+            <div class="am-tabs-bd divtab">
+                <div class="am-tab-panel divpanel am-active">
+                        <input type="hidden" name="Id" value="{{tea.Id}}"/>
+                        <div class="am-margin-top am-form am-form-horizontal">
+                            <div class="am-form-group am-form-group-sm">
+                                <label class="am-u-sm-2 am-form-label"><strong class="am-required">* </strong>姓名：</label>
+                                <div class="am-u-sm-4 am-u-end">
+                                    <input type="text" name="name" value="{{tea.Name}}" readonly="true" >
+                                </div>
+                                <label class="am-u-sm-1 am-form-label"><strong class="am-required">* </strong>工号：</label>
+                                <div class="am-u-sm-4 am-u-end">
+                                    <input type="text" name="EmployeeNum" value="{{tea.EmployeeNum}}" readonly="true">
+                                </div>
+                            </div>
+
+                            <div class="am-form-group am-form-group-sm">
+                                 <label class="am-u-sm-2 am-form-label">证件类型：</label>
+                                <div class="am-u-sm-4 am-u-end">
+                                    <input type="text" value="{{tea.CertificateType}}" readonly="true">
+                                </div>
+                                 <div class="am-u-sm-1 am-u-end"></div>
+                                 <label class="am-u-sm-1 am-form-label">证件号：</label>
+                                <div class="am-u-sm-4 am-u-end">
+                                    <input type="text" value="{{tea.CertificateCode}}" readonly="true"  >
+                                </div>
+                            </div>
+
+                            <div class="am-form-group am-form-group-sm">
+                                 <label class="am-u-sm-2 am-form-label">性别：</label>
+                                <div class="am-u-sm-4">
+                                    <select name="gender" >
+                                        <option {{if tea.Sex!="男"|| tea.Sex!="女"}}selected="selected"{{/if}} value="">无</option>
+                                        <option {{if tea.Sex=="男"}}selected="selected"{{/if}} value="男">男</option>
+                                        <option {{if tea.Sex=="女"}}selected="selected"{{/if}} value="女">女</option>
+                                    </select>
+                                </div>
+                                <div class="am-u-sm-1 am-u-end"></div>
+                                   <label class="am-u-sm-1 am-form-label"><strong class="am-required">* </strong>手机：</label>
+                                <div class="am-u-sm-4 am-u-end">
+                                    <input type="text"value="{{tea.PhoneNum}}"name="PhoneNum" placeholder="手机">
+                                </div>
+                            </div>
+
+                            <div class="am-form-group am-form-group-sm">
+                                 <label class="am-u-sm-2 am-form-label">Q Q：</label>
+                                <div class="am-u-sm-4">
+                                    <input type="text"value="{{tea.QQ}}" name="qq" placeholder="Q Q">
+                                </div>
+                                <div class="am-u-sm-1 am-u-end"></div>
+                                   <label class="am-u-sm-1 am-form-label"><strong class="am-required">* </strong>邮箱：</label>
+                                <div class="am-u-sm-4 am-u-end">
+                                    <input type="email"value="{{tea.Email}}" name="email" placeholder="邮箱">
+                                </div>
+                            </div>
+
+                            <div class="am-form-group am-form-group-sm">
+                                <label class="am-u-sm-2 am-form-label">个人简介：</label>
+                                <div class="am-u-sm-9 am-u-end">
+                                    <textarea row="4" name="remark" maxlength="350">{{tea.Remark}}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="am-form-group am-form-group-sm">
+                                <label class="am-u-sm-2 am-form-label"></label>
+                                <div class="am-u-sm-4">
+                                    <input type="button" class="am-btn am-btn-primary am-u-sm-12" id="save" value="保存"/>
+                                </div>
+                                <div class="am-u-sm-1 am-u-end"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                <div class="am-tab-panel divpanel">
+                   <div class="am-margin-top am-form am-form-horizontal">
+                            <div class="am-form-group am-form-group-sm">
+                                <label class="am-u-sm-2 am-form-label">旧密码：</label>
+                                <div class="am-u-sm-4 am-u-end">
+                                    <input type="password" name="oldpw" placeholder="请填写旧密码">
+                                </div>
+                            </div>
+                            <div class="am-form-group am-form-group-sm">
+                                <label class="am-u-sm-2 am-form-label">新密码：</label>
+                                <div class="am-u-sm-4 am-u-end">
+                                    <input type="password" name="newpw" placeholder="请填写新密码">
+                                    <span style="color:#0FB28A;">&nbsp;(支持数字、字母和标点符号，不支持空格！)</span>
+                                </div>
+                            </div>
+                            <div class="am-form-group am-form-group-sm">
+                                <label class="am-u-sm-2 am-form-label">确认密码：</label>
+                                <div class="am-u-sm-4 am-u-end">
+                                    <input type="password" name="confirm" placeholder="请填写确认密码">
+                                </div>
+                            </div>
+                            <div class="am-form-group am-form-group-sm">
+                                <div class="am-u-sm-offset-2 am-u-sm-4 am-u-end"><a id="editPw" href="javascript:;" class="am-btn am-btn-primary">修改密码</a>&emsp;
+                                    <a id="resetBtn" href="javascript:;" class="am-btn am-btn-primary">清空</a></div>
+                            </div>
+                        </div>
+                </div>
+
+                <div class="am-tab-panel divpanel">
+                   <div class="am-margin-top np-upload-avatar" id="avatarWrap">
+                            <div class="np-upload-avatar-original">
+                                <a class="am-btn am-btn-primary np-uploader-container btn_addPic" href="javascript:;">
+                                        <span class="np-icon np-icon-shangchuantupian"></span> 选择本地图片
+                                    <div class="">
+                                        <input type="file" name="localSelect" id="localSelect" class="np-uploader-invisible filePrew" />
+                                    </div>
+                                </a>
+
+                                <!--<a class="am-btn am-btn-primary btn_addPic" id="camera" href="javascript:void(0)">
+                                    <span class="np-icon np-icon-shexiangtou pzsc"></span>
+                                    拍照上传
+                                </a>-->
+
+                                <div id="imageSource" class="np-avatar-original am-margin-top">
+                                    <span><img src="/common/img/header.png" id="target" alt="select" /></span>
+                                </div>
+                            </div>
+
+                            <div class="np-upload-avatar-scale imagesource">
+                                <h5 class="np-upload-avatar-notice" style="margin:0px">您上传的头像会自动生成三种尺寸，请注意中小尺寸的头像是否清晰，<br/>也可以通过手机端拍照上传</h5>
+                                <div class="am-margin-top previews">
+                                    <div class="np-avatar-scale np-avatar-scale-lg preview180">
+                                        <div id="preview180">
+                                        </div>
+                                        <p>大尺寸头像</p>
+                                        <p>180x180像素</p>
+                                    </div>
+
+                                    <div class="np-avatar-scale np-avatar-scale-sm preview50">
+                                        <div id="preview50"></div>
+                                        <p>中尺寸头像</p>
+                                        <p>50x50像素(自动生成)</p>
+                                    </div>
+
+                                    <div class="np-avatar-scale np-avatar-scale-xs preview30">
+                                        <div id="preview30"></div>
+                                        <p>小尺寸头像</p>
+                                        <p>30x30像素(自动生成)</p>
+                                    </div>
+                                </div>
+                                <div class="am-margin-top am-text-right">
+                                    <a href="javascript:void(0)" id="avatarSave" class="am-btn am-btn-primary disabled">保存</a>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+       </div>
+    </div>
+ </script>
+
+<script type="text/javascript" src="/design/js/teacherInfo/teacherInfo.js"></script>
+<script type="text/javascript" src="/common/js/Jcrop/jquery-Jcrop.js"></script>
+<script type="text/javascript" src="/common/js/avatarUpload/flash.js"></script>
+
+<!--内容右侧主体结束-->
+<!--#include file="/design/footer.html"-->

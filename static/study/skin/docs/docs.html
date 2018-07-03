@@ -1,0 +1,109 @@
+<!--#include virtual="/study/header2.html"-->
+
+<div id="docs_wrapper" class="am-panel am-panel-default">
+    <div class="am-panel-hd">
+        <h3 class="am-panel-title"><span class="am-icon am-icon-file-o"></span>授课资料</h3>
+        <div class="am-text-right"></div>
+    </div>
+
+    <div class="am-padding-xs">
+        <form id="docs_form">
+            <input type="hidden" name="parentId"/>
+            <input type="hidden" name="openClassId"/>
+            <input type="hidden" name="html_type" value="1" />
+             <div id="d_pan" class="d-pan">
+                <div class="pan-bar am-margin-bottom-sm">
+                    <div class="pan-search am-cf">
+                        <div class="am-input-group am-input-group-sm">
+                            <input type="text"  id="txt_search" name="title" class="am-form-field" placeholder="资料名称" style="width: 224px;">
+                            <span class="am-input-group-btn">
+                                <button type="button" id="btn_search" class="am-btn am-btn-default"><span class="am-icon-search"></span></button>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="am-dropdown" data-am-dropdown="{target: &quot;#am-dropdown-content&quot;}" id="div_orderby">
+                        <button class="am-btn am-btn-default am-dropdown-toggle" style="height:33px !important;padding-top:4px;">
+                            <span class="am-icon am-icon-arrow-down"></span>
+                            <label id="lbl_showorderby" class="am-text-xs" style="width: 60px" name="dateCreated">创建时间</label>
+                        </button>
+                        <ul class="am-dropdown-content" id="am-dropdown-content">
+                            <li><a href="#" data-orderby="docTitle">文件名</a></li>
+                            <li><a href="#" data-orderby="dateCreated">最近上传</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="toolbar" class="toolbar">
+                       <ol class="am-breadcrumb am-breadcrumb-slash" style="margin:0;text-align: left;"></ol>
+                  </div>
+                </div>
+
+                <div class="pan-action am-hide"></div>
+                <div class="pan-body" id="docs_container"></div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/html" id="item_html">
+    <style type="text/css">
+        .pan-item-action span {
+            cursor: pointer;
+        }
+    </style>
+    <div class="pan-horz-center">
+        <input type="hidden" name="courseOpenId" value="{{courseOpenId}}" />
+        {{if list.length>0}}
+          {{each list as item}}
+             <div class="pan-item">
+                <div class="pan-item-cover">
+                  <div class="pan-item-cover-thumb preview" style="width: 220px;" data-id="{{item.Id}}" data-title="{{item.docTitle}}" data-isdir="{{item.isDir}}">
+                    {{if item.isDir == 0 }}
+                          {{if item.status==2}}
+                            <img style="cursor:pointer;" src="/common/img/translating.jpg">
+                          {{else if item.status==3}}
+                           <img style="height: 180px; cursor:pointer;" src="{{item.thumbnail}}">
+                          {{else if item.status==4 || item.status==0}}
+                            <div>等待转换</div>
+                          {{else if item.status==-1}}
+                            <div>无法转换</div>
+                          {{else if item.status==-3}}
+                            <div>转换失败</div>
+                          {{/if}}
+                    {{else}}
+                       <img style="cursor:pointer;" src="/common/img/folder.png" class="pan-folder">
+                    {{/if}}
+                </div>
+                  <div class="pan-item-action">
+                    <div class="mask"></div>
+                     {{if item.isDir == 0}}
+                       <span class="download" data-id="{{item.Id}}"><span class="am-icon am-icon-download"></span>下载</span>
+                       <span class="preview" data-id="{{item.Id}}" data-isdir="{{item.isDir}}"><span class="am-icon am-icon-eye"></span>查看</span>
+                    {{/if}}
+                  </div>
+
+                  <div class="pan-item-checked" style="display: none">
+                    <input type="checkbox" class="am-checkbox item_check" data-id="{{item.Id}}">
+                </div>
+               </div>
+               {{if item.isDir==0}}
+                 <div class="pan-item-title" title="{{item.docTitle}}.{{item.docType}}">
+                   {{item.docTitle}}.{{item.docType}}
+                 </div>
+               {{else}}
+                 <div class="pan-item-title" title="{{item.docTitle}}">
+                   {{item.docTitle}}
+                 </div>
+               {{/if}}
+            </div>
+          {{/each}}
+          <div class="pagination ajax"></div>
+        {{else}}
+           <div style="margin: 15px 0 0 10px;text-align:center" >暂无数据</div>
+        {{/if}}
+    </div>
+</script>
+
+<script type="text/javascript" src="/study/js/docs/docs.js"></script>
+<!--内容右侧主体结束-->
+<!--#include virtual="/study/footer2.html"-->

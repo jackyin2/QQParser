@@ -1,0 +1,96 @@
+<!--#include virtual="/common/header.html"-->
+
+<div class="wrap_perInfo">
+    <form class="clearfix">
+        <div class="left">
+            <div class="bar">
+                <label><i class="iconfont "></i>真实姓名：</label>
+                <input type="text" name="displayName" />
+            </div>
+            <div class="bar">
+                <label><i class="iconfont "></i>性别：</label>
+                <select id="gender">
+                    <option value="男">男</option>
+                    <option value="女">女</option>
+                </select>
+            </div>
+            <div class="bar">
+                <label><i class="iconfont "></i>身份证号：</label>
+                <input type="text" name="sfz" />
+            </div>
+            <div class="bar">
+                <label><i class="iconfont "></i>手机号码：</label>
+                <input type="text" name="mobile" />
+            </div>
+            <div class="bar">
+                <label><i class="iconfont "></i>邮箱：</label>
+                <input type="text" name="email" />
+            </div>
+        </div>
+        <div class="right">
+            <img src="" id="avatorUrl" width="152px" height="152px" />
+        </div>
+    </form>
+    <div class="button">
+        <button class="save">保存</button>
+        <button class="cancel">取消</button>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(function () {
+        var info = {
+
+            init: function () {
+               
+                if (localStorage["user"] != "" && localStorage["user"] != undefined) {
+                    var user = JSON.parse(localStorage["user"]);
+                    $('input[name=displayName]').val(user.DisplayName);
+                    $('input[name=sfz]').val(user.CitizenID);
+                    $('input[name=mobile]').val(user.Mobile);
+                    $('input[name=email]').val(user.Email);
+                    $("#gender option[value='" + user.OrgId + "']").attr("selected", true);
+
+                    if (user.AvatorUrl == "" || user.AvatorUrl == null) {
+                        $('#avatorUrl').attr("src", "/common/img/icon.jpg");
+                    } else {
+                        $('#avatorUrl').attr("src", user.AvatorUrl);
+                    }
+                } else {
+                    location.href = "/mainsite/mainsite/index.html";
+                }
+            },
+        };
+
+        info.init();
+
+        $('.save').click(function () {
+
+            var data = {
+                displayName: $('input[name=displayName]').val(),
+                gender: $("#gender option:selected").val(),
+                mobile: $('input[name=mobile]').val(),
+                email: $('input[name=email]').val(),
+                sfz: $('input[name=sfz]').val()
+            }
+
+            _.ajax(urls2.common_changeInfo, data, function (r) {
+                if (r.code < 0) {
+                    $M().msg(r.msg).position('10%', '50%').time(3);
+                    return false;
+                }
+                if (r.code > 0) {
+                    $M().msg(r.msg).position('10%', '50%').time(3);
+                    localStorage["user"] = JSON.stringify(r.user);
+                }
+            }, "json");
+            return false;
+        });
+
+        $('.cancel').click(function () {
+            location.href = "/mainsite/mainsite/index.html";
+            return false;
+        });
+    });
+</script>
+<!--#include virtual="/common/footer.html"-->

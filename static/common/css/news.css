@@ -1,0 +1,37 @@
+/*新闻发布*/
+body{ color: #484848;}
+ .primary h2 a{ color: #484848;}
+ .primary h2 a:hover{ color: #4eb008;}
+ .primary h2 .floatRight{ float: right; margin-right: 30px;}
+ .primary h2 .iconfont{ margin-right: 5px;}
+.primary .main_content .priList{ margin-bottom: 15px;}
+ .primary .main_content .priList label .icon-xiaoxingxing{ color: red;}
+.primary .main_content .priList label{ width: 120px; display: inline-block; text-align: right;}
+.primary .main_content .priList input{ width: 80%; text-indent: 10px; height: 35px; border: 0 none; border: 1px solid #ddd;}
+ .primary .main_content .priList .bar{ display: inline-block;}
+ .primary .main_content .priList .bar select{ width: 120px; border: 0 none; border: 1px solid #ddd; color: #484848;}
+ .primary .main_content .priList .upSort{ display: inline-block; float: right; margin-right: 52px;}
+ .primary .main_content .priList .upSort span input{ width: 15px; height: 15px; vertical-align: middle;}
+ .primary .main_content .priList .upSort span input.sort{ width: 75px; height: 23px;}
+ .primary .main_content .priList textarea{ height: 70px; text-indent: 10px; width: 80%; padding: 10px 0px 10px 10px; border: 0 none; border: 1px solid #ddd;}
+ .primary .main_content .spacing label{ letter-spacing: 4px;}
+ .primary .main_content .align{ display: table;}
+ .primary .main_content .align label{ display: table-cell; vertical-align: middle;}
+ .primary .main_content .align textarea{ width: 686px;}
+.primary .main_content ul{ float: right; margin-right: 26px;}
+ .primary .main_content ul li{ float: left;}
+.primary .main_content ul li button{ width: 80px; height: 30px; border: 0 none; border: 1px solid #ddd; background: #fff; margin-right: 15px;}
+.primary .main_content ul li button:hover{ border: 1px solid #4eb008; background: #4eb008; color: #fff;}
+ .primary .main_content input,
+ .primary .main_content select,
+.primary .main_content textarea{ border-radius: 3px;}
+ .primary .main_content input:focus,
+.primary .main_content select:focus,
+.primary .main_content textarea:focus{ border-color: #4eb008; box-shadow: 0 0 3px #4eb008;}
+
+
+
+
+
+
+

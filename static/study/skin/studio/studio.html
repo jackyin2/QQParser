@@ -1,0 +1,80 @@
+<!--#include  file="/study/header3.html"-->
+<div id="right_content">
+    <div class="am-panel am-padding-sm" style="margin-bottom: 0;">
+        <div class="an-panel-bd">
+            <script type="text/html" id="stuInfo">
+              <div class="am-panel am-panel-default">
+                 <div class="am-g">
+                   <div id="info_resource" class="am-u-sm-6 info_resource">
+                      <div class="nameImg">
+                          <img src="{{if AvatorUrl == null}}/common/img/icon.jpg{{else}}{{AvatorUrl}}{{/if}}" alt="" width="100px" height="100px">
+                          <div class="name">
+                              <p>你好，{{stuName}}</p>
+                              <p>学号：{{stuNo}}</p>
+                          </div>
+                      </div>
+                      <table width="450" class="sort">
+                        <tbody>
+                          <tr>
+                            <td width="45%"><label>用户类型：</label><span>{{stu.CustomerType}}</span></td>
+                            <td width="55%"><label>证件类型：</label><span>{{stu.CertificateType}}</span></td>
+                          </tr>
+                          <tr>
+                            <td><label>联系电话：</label><span>{{stu.Mobile}}</span></td>
+                            <td><label>证件号码：</label><span>{{stu.CertificateCode}}</span></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                  </div>
+                   <div id="link_resource" class="am-u-sm-6 link_resource">
+                      <ul class="clearfix">
+                        <li>
+                          <a href="https://www.baidu.com/s?wd=chrome" target="_blank">
+                              <span class="stuIcon icon1"></span>
+                              <label>推荐浏览器下载</label>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="http://www.ouchn.cn/" target="_blank">
+                              <span class="stuIcon icon10"></span>
+                              <label>国开学习网</label>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="http://www.baidu.com" target="_blank">
+                              <span class="stuIcon icon11"></span>
+                              <label>我的百度</label>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/study/lunwen/lunwenplan.html" target="_blank">
+                              <span class="stuIcon icon12"></span>
+                              <label>我的论文</label>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/study/batch/batch.html" target="_blank">
+                              <span class="stuIcon icon13"></span>
+                              <label>我的考核</label>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="http://www.imrtvu.edu.cn/" target="_blank">
+                              <span class="stuIcon icon14"></span>
+                              <label>学校首页</label>
+                          </a>
+                        </li>
+                      </ul>
+                   </div>
+                </div>
+              </div>
+            </script>
+        </div>
+    </div>
+    <form id="fm_content" style="background: #fff;">
+    </form>
+</div>
+<script type="text/javascript" src="/study/js/studio/studio.js"></script>
+
+<!--内容右侧主体结束-->
+<!--#include file="/study/footer3.html"-->

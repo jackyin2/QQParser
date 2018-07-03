@@ -1,0 +1,6 @@
+﻿<div class="label">
+    <span class="g1">$!field.title</span>
+    <span class="g2"><input type="text" id="cm_$field.name" name="#if($!field.Ext)ext_#end$!field.name" $!field.props /></span>   
+$!{pre}!jc.include("$!{path}tokeninput.css")
+$!{pre}!jc.include("${path}tokeninput.js", "$('#cm_$!field.name').tokenInput('$!field.url', {theme:'$!field.theme' #if($!field.prePopulate),prePopulate: $!helper.remove_double_quotes($!field.prePopulate)#end#if($!field.resultsFormatter),resultsFormatter: $!field.resultsFormatter#end#if($!field.tokenLimit),tokenLimit: $!field.tokenLimit#end})")
+</div>

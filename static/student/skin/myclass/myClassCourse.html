@@ -1,0 +1,154 @@
+<!--#include file="/student/header.html"-->
+<style type="text/css">
+    .am-datepicker .am-datepicker-dow {
+        height: 32px;
+    }
+
+    .am-datepicker td.am-datepicker-day,
+    .am-datepicker td.am-datepicker-day:hover {
+        height: 22px;
+        width: 22px;
+    }
+
+    .am-datepicker-caret {
+        display: none !important;
+    }
+
+    .pagination ul {
+        position: relative;
+        top: -2px!important;
+    }
+
+    .pagination select {
+        display: inline-block;
+        width: 45px!important;
+        height: 32px!important;
+        padding: 0!important;
+        line-height: 32px!important;
+        padding-left: 5px!important;
+    }
+
+    .pagination input {
+        display: inline-block!important;
+        width: 45px!important;
+        height: 32px!important;
+    }
+
+    .pagination .go {
+        position: relative;
+        top: 0!important;
+    }
+</style>
+<link rel="stylesheet" type="text/css" href="/student/css/teastudio.css">
+
+<form class="am-form am-form-horizontal gform full">
+    <div id="right_content">
+        <div class="am-panel">
+            <div class="am-panel am-panel-default">
+                <div class="am-panel-hd am-cf">
+                    <h3 class="am-panel-title">
+                        <span class="am-icon am-icon-tasks"></span>&nbsp;我的课程
+                    </h3>
+                    <div class="am-text-right"></div>
+                </div>
+
+                <form id="fm_content">
+                    <div id="content_container" class="am-margin-top"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script id="table_html" type="text/html">
+    <input type="hidden" name="type" value="{{type}}" />
+    <div style="margin-right: 28px;" class="am-form-group">
+        <label class="am-form-label am-u-sm-1">班级名称：</label>
+        <div class="am-u-sm-2" style="padding-top: 8px;">{{projectClass.ClassName}}</div>
+
+        <label class="am-form-label am-u-sm-1">项目名称：</label>
+        <div class="am-u-sm-2" style="padding-top: 8px;">{{projectClass.ProjectType}}</div>
+
+        <label class="am-form-label am-u-sm-1">项目单价：</label>
+        <div class="am-u-sm-2" style="padding-top: 8px;">{{projectType.Price}}</div>
+
+        <label class="am-form-label am-u-sm-1"></label>
+        <div class="am-u-sm-2" style="padding-top: 8px;"></div>
+    </div>
+
+    <table id="table_info" class="am-table am-text-center">
+        <thead>
+            <tr>
+                <th width="7%" class="am-text-center">序号</th>
+                <th class="am-text-left" style="width: 20%">课程封面</th>
+                <th style="width: 15%" class="am-text-center">课程名称</th>
+                <th style="width: 15%" class="am-text-center">课程编码</th>
+                <th style="width: 10%" class="am-text-center">课程类型</th>
+                <th style="width: 10%" class="am-text-center">学时<br />(单位:小时)</th>
+                <th style="width: 10%" class="am-text-center">费用<br />(单位:元)</th>
+                <th style="width: 10%" class="am-text-center">状态</th>
+                <th style="width: 12%" class="am-text-center">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{if courseList && courseList.length > 0}}
+                {{each courseList as item i}}
+                <tr>
+                    <td class="am-text-center">{{if pagination.pageIndex>0}}{{(pagination.pageIndex - 1) * pagination.pageSize + i + 1}}{{else}}{{(pagination.pageIndex ) * pagination.pageSize + i + 1}} {{/if}}</td>
+                    <td class="am-text-center">
+                        <div class="am-inline-block am-text-middle">
+                            <img src="{{ if item.thumbnail}}{{item.thumbnail}}{{else}}/common/img/noCover.jpg{{/if}}" style="height: 75px; width: 120px">
+                        </div>
+                    </td>
+                    <td class="am-text-center">{{#item.courseName}}</td>
+                    <td class="am-text-center" title="{{htmlencode(item.courseCode)}}">{{#substring(item.courseCode,0,50)}}</td>
+                    <td class="am-text-center">{{if item.CourseType&& item.CourseType!=""}}{{item.CourseType}}{{else}}---{{/if}}</td>
+                    <td class="am-text-center">{{item.CourseHour}}</td>
+                    <td class="am-text-center"><span style="color: red">{{item.Money}}</span></td>
+                    <td class="am-text-center"><span style="color: red">{{if item.Money==0}}免费{{else}}{{if item.isCharge&& item.isCharge==1}}已缴费{{else if item.isCharge==0}}未缴费{{/if}}{{/if}}</span></td>
+                    <td class="am-text-center">
+                        {{if item.Money==0}}
+                            <a href="/study/process/process.html#courseOpenId={{item.courseOpenId}}&openClassId={{item.openClassId}}">开始学习</a>
+                        {{else}}
+                            <!--是否缴费-->
+                            {{if item.isCharge&& item.isCharge==1}}
+                                <a href="/study/process/process.html#courseOpenId={{item.courseOpenId}}&openClassId={{item.openClassId}}">开始学习</a>
+                             <!--购物车数据-->
+                            {{else if item.carId && item.carId!=""}}
+                                <a style="cursor:pointer;" href="/student/shopCar/shopCar.html">查看购物车</a>
+                            {{else}}
+                                {{if item.OrderID && item.OrderID!=""}}
+                                    <a href="/student/myorder/myorderList.html">查看订单</a>
+                                {{else}}
+                                    <a style="cursor:pointer;" class="addShopCar" data-id="{{item.CourseChooseId}}" data-cid="{{item.courseId}}">加入购物车</a>
+                                {{/if}}
+                            {{/if}}
+                        {{/if}}</td>
+                </tr>
+            {{/each}}
+                <tr>
+                    <td class="am-text-center">
+                        <label style="font-weight: bold;">汇总</label>
+                    </td>
+                    <td class="am-text-left" colspan="7">
+                        <label>总学时：<span style="color:red;">{{totalCourseHour}}</span>小时</label>&nbsp;&nbsp;
+                        <label>总费用：<span style="color:red;">{{totalCharge}}</span>元</label>&nbsp;&nbsp;
+                        <label>已缴费：<span style="color:red;">{{isCharge}}</span>元</label>&nbsp;&nbsp;
+                        <label>还需缴费：<span style="color:red;">{{needCharge}}</span>元</label>
+                    </td>
+                </tr>
+            {{else}}
+                <tr>
+                    <td colspan="8">
+                        <div class="am-text-center">暂无数据</div>
+                    </td>
+                </tr>
+            {{/if}}
+        </tbody>
+    </table>
+    <div class="pagination ajax"></div>
+</script>
+
+<!--#include file="/student/footer.html"-->
+
+<script type="text/javascript" src="/student/js/myclass/myClassCourse.js"></script>

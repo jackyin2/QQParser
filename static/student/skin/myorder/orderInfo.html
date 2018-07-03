@@ -1,0 +1,139 @@
+<!--#include virtual="/student/header.html"-->
+
+<div class="am-panel am-panel-default main_content">
+    <div class="am-panel-hd am-cf">
+        <h3 class="am-panel-title">
+            <span class="am-icon am-icon-tasks"></span>&nbsp;订单详情
+        </h3>
+        <div class="am-text-right">
+            <label class="am-form-label am-inline-block am-margin-top-xs">课程名称：</label>
+            <div class="am-inline-block cc_am_u am-text-middle" style="padding-left: 10px;">
+                <input type="text" name="key" class="am-form-field ui-widget-content ui-corner-all" style="width: 200px;">
+            </div>
+            <div class="am-inline-block am-text-left am-text-middle" style="padding-left: 10px;">
+                <button id="search" class="am-btn am-btn-success" type="button"><span class="am-icon am-icon-search"></span>查询</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="MyCourseList"></div>
+
+</div>
+
+<!--我的订单列表-->
+<script type="text/html" id="MyCourseListShow">
+    <style>
+        .pay-dv {
+            margin-right: 30px;
+        }
+
+        .pay, .refound {
+            float: right;
+            border: 1px solid #34c8d5;
+            margin-right: 15px;
+            padding: 8px 25px;
+            background: #34c8d5;
+            color: #FFF;
+        }
+    </style>
+    <div class="am-margin-top">
+        <table id="table_info" class="am-table am-text-center">
+            <thead>
+                <tr>
+                    <th width="5%">序号</th>
+                    <th class="am-text-center" style="width: 15%">课程封面</th>
+                    <th style="width: 10%" class="am-text-center">课程名称</th>
+                    <th style="width: 10%" class="am-text-center">课程类型</th>
+                    <th style="width: 10%" class="am-text-center">班级名称</th>
+                    <th style="width: 10%" class="am-text-center">项目名称</th>
+                    <th style="width: 10%" class="am-text-center">学时<br />
+                        (单位:小时)</th>
+                    <th style="width: 10%" class="am-text-center">价格<br />
+                        (单位:元)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{if orderList && orderList.length > 0}}
+                {{each orderList as item i}}
+                <tr id="{{item.Id}}">
+                    <td>{{if pagination.pageIndex>0}}{{(pagination.pageIndex - 1) * pagination.pageSize + i + 1}}{{else}}{{(pagination.pageIndex ) * pagination.pageSize + i + 1}} {{/if}}</td>
+                    <td class="am-text-center">
+                        <div class="am-inline-block am-text-middle">
+                            <img src="{{ if item.CoverUrl}}{{item.CoverUrl}}{{else}}/common/img/noCover.jpg{{/if}}" style="height: 75px; width: 120px">
+                        </div>
+                    </td>
+                    <td class="am-text-center">{{#item.CourseName}}</td>
+                    <td class="am-text-center">{{item.CourseType}}</td>
+                    <td class="am-text-center">{{item.ClassName}}</td>
+                    <td class="am-text-center">{{item.ProjectType}}</td>
+                    <td class="am-text-center">{{item.CourseHour}}</td>
+                    <td class="am-text-center"><span style="color: red">{{item.CourseTotalMoney}}</span></td>
+                </tr>
+                {{/each}}
+                     <tr>
+                         <td class="am-text-center" colspan="8">
+                            
+                             <div class="pay-dv">
+                                 {{if order.Status==0}}
+                                 <a class="pay" href="zfweixin.html?orderId={{order.Id}}" data-orderid="{{order.Id}}">微信付款</a>
+                                 <a class="pay" style="margin-right: 15px;" href="zfbao.html?orderId={{order.Id}}" data-orderid="{{order.Id}}">支付宝付款</a>
+
+                                 {{else if order.Status==1}}
+                                 <a class="refound" href="javascript:;" data-id="{{order.Id}}">申请退款</a>
+
+                                 {{else if order.Status==2}}
+                                 <a class="pay" href="javascript:;">退款中</a>
+
+                                 {{else if order.Status==3}}
+                                 <a class="pay" href="zfweixin.html?orderId={{order.Id}}" data-orderid="{{order.Id}}">微信付款</a>
+                                 <a class="pay" style="margin-right: 15px;" href="zfbao.html?orderId={{order.Id}}" data-orderid="{{order.Id}}">支付宝付款</a>
+
+                                 <span style="float: right; margin-right: 20px; padding-top: 10px; color: red;"><span class="money">退款成功</span></span>
+                                 <label style="font-weight: bold; float: right; padding-top: 10px;">订单状态：</label>
+                                 {{/if}}
+                                
+                                 <span style="float: right; margin-right: 20px; padding-top: 10px; color: red;">￥<span class="money">{{order.TotalMoney}}</span></span>
+                                 <label style="font-weight: bold; float: right; padding-top: 10px;">价格总计：</label>
+
+                                 <span style="float: right; margin-right: 20px; padding-top: 10px; color: red;"><span class="money">{{if order.Status!=0}}{{if order.zfType==0}}支付宝支付{{else if order.zfType==1}}微信支付{{else}}其他{{/if}}{{else}}未支付{{/if}}</span></span>
+                                 <label style="font-weight: bold; float: right; padding-top: 10px;">支付类型：</label>
+                             </div>
+                         </td>
+                     </tr>
+                {{else}}
+                        <tr>
+                            <td colspan="8">
+                                <span class="am-text-center">暂无数据</span>
+                            </td>
+                        </tr>
+                {{/if}}
+            </tbody>
+        </table>
+        <div class="pagination ajax"></div>
+    </div>
+</script>
+
+<script id="reason_html" type="text/html">
+    <div class="am-form am-form-horizontal sh-kp-form">
+        <div class="am-form-group am-input-group-sm">
+            <label class="am-u-sm-3 am-form-label"><span style="color: red">*</span>原因：</label>
+            <div class="am-u-sm-9 am-u-end">
+                <select id="reason" name="reason">
+                    <option value="">--请选择--</option>
+                    <option value="重复购买">重复购买</option>
+                    <option value="购买错误">购买错误</option>
+                </select>
+            </div>
+            <div id="ression" class="bar am-u-sm-12 am-u-end">
+                <label class="iconfont am-u-sm-3 am-form-label">备注 :&nbsp;</label>
+                <div class="am-u-sm-9 am-u-end" style="margin-top: 15px;">
+                    <textarea id="remark" cols="30" rows="6" style="vertical-align: middle; border-radius: 3px; min-height: 150px; max-height: 150px; resize: none;" class="am-textarea" name="AuditFailReason"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<!--内容右侧主体结束-->
+<script type="text/javascript" src="/student/js/myorder/orderInfo.js"></script>
+<!--#include file="/student/footer.html"-->

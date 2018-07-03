@@ -1,0 +1,151 @@
+<!--#include virtual="/study/header2.html"-->
+
+<div id="process_headshow"></div>
+ <script type="text/html" id="process_head">
+     <div class="am-panel am-panel-default">
+            <div class="am-panel-bd">
+                <div class="am-g">
+                    <div style="width: 938px;" class="am-inline-block am-text-bottom">
+                        <div class="am-text-left">
+                           {{if course}}
+                             <div id="div_video" data-video_url='{{course.videoUrl}}' style="width: 300px; height: 230px; background: #000; margin-right: 30px; position: relative; vertical-align: top; overflow: hidden; background: #000;" class="am-text-center am-inline-block">
+                                <img{{if course.videoPicUrl}} src="{{course.videoPicUrl}}"{{/if}} style="width: 100%; height: auto; vertical-align: bottom;">
+                                <a href="javascript:;" class="am-icon am-icon-play-circle-o am-text-center play_video" style="font-size: 86px; position: absolute; left: 0; top: 0; right: 0; bottom: 0; padding: 16% 20%; background: rgba(0,0,0,0.5); color: #fff;"></a>
+                             </div>
+
+                             <div class="am-inline-block" style="width: 600px; vertical-align: top; margin-top: 6px;">
+                                <div>
+                                    <h2 class="sh-course-title">《{{course.name}}》 {{courseCode}}</h2>
+                                     <p class="sh-course-integrity am-text-default">
+                                        主持教师： {{if mainTeacher && mainTeacher.Name!=""}} {{mainTeacher.Name}}  {{else}}暂无{{/if}}
+                                     </p>
+                                   <!-- <p class="sh-course-integrity am-text-default">
+                                        辅导教师： {{if assistTea && assistTea.CourseSpeaker!=""}} {{assistTea.CourseSpeaker}}  {{else}}暂无{{/if}}
+                                    </p>-->
+                                    <p class="sh-course-desc am-text-sm" style="margin-bottom: 5px;">课程简介：{{if Introduction != null}} {{Introduction}} {{else}} 无 {{/if}}</p>
+                                </div>
+
+                                <div class="am-inline-block am-text-bottom" style="width: 480px; padding-right: 20px;">
+                                    <div class="am-progress am-progress-striped am-progress-sm">
+                                        <div class="am-progress-bar am-progress-bar-success" style="width: {{sutdentStudyProgress}}%"></div>
+                                    </div>
+                                    <div style="padding: 5px 0 5px 0;">学习进度<b>{{sutdentStudyProgress}}%</b></div>
+                                </div>
+                                
+
+                            </div>
+                          {{/if}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="am-u-sm-12"></div>
+</script>
+
+<div id="d_coursetoc_t">
+    <div class="am-tabs" id="process" data-am-widget="tabs">
+        <div class="am-tabs-bd" style="touch-action: pan-y; -webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+            <div data-tab-panel-0 class="am-tab-panel am-fade am-in am-active" id="process_container"></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="process_table">
+    {{if process && process.length > 0}}
+        {{each process as proces}}
+            <div class="sh-toc-pd" data-index="{{proces.velocityCount}}" data-id="{{proces.id}}">
+               <span class="module">{{proces.velocityCount}}</span>
+               <span title="{{proces.name}}" class="name">{{proces.name}}</span>
+            </div>
+
+            <div class="sh-toc">
+             <table style="width:100%;">
+               <tbody>
+                 <tr>
+                    <th style="width: 60px;">&nbsp;</th>
+                    <th style="width:40px">&nbsp;</th>
+                    <th>
+                        <table class="sh-toc-acthead" style="width:100%; margin-left: 0px;">
+                            <tbody>
+                                <tr>
+                                    <td>名称</td>
+                                    <td style="width:9%">进度</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </th>
+                </tr>
+                {{each proces.topics as topic}}
+                    <tr class="dynamic_topic" data-sortorder="{{topic.sortOrder}}">
+                        <td class="sh-toc-topic" data-index="{{topic.sortOrder}}">{{topic.sortOrder}}</td>
+                        <td class="sh-toc-dot"><span class="am-icon am-icon-circle-o"></span></td>
+                        <td>
+                            <table class="sh-toc-act" style="width:100%;">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            {{if topic.cells.length>0}}
+                                                <span class="am-icon am-icon-caret-right sh-toc-expand topic_condensation" data-id="{{topic.id}}"></span>
+                                            {{/if}}
+
+                                            {{if proces.IsValid==true}}
+                                                <a title="{{topic.name}}" href="../directory/directory.html#courseOpenId={{courseOpenId}}&topicId={{topic.id}}">{{topic.name}}</a>
+                                            {{else}}
+                                                <a title="{{topic.name}}" onclick="alert('您的上一模块学习还没达到要求！')">{{topic.name}}</a>
+                                            {{/if}}
+                                        </td>
+                                        <td  style="width:10%;">
+                                            <div class="am-progress am-progress-striped">
+                                                <div class="am-progress-bar am-progress-bar-success" style="width: {{topic.percent}}%">{{topic.percent}}%</div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            {{if topic.cells.length>0}}
+                                <div class="sh-toc-expand-c showcell" id="{{topic.id}}" style="overflow: hidden;height:0">
+                                <div class="sh-toc-expand-c" style="height: auto; overflow: visible;">
+                                    <table class="sh-toc-act" style="width:100%;">
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="sh-toc-list">
+                                                        {{each topic.cells as cell}}
+                                                            <div class="sh-res">
+                                                                <div class="sh-res-h">
+                                                                    {{if proces.IsValid==true}}
+                                                                    <a href="../directory/directory.html#courseOpenId={{courseOpenId}}&cellId={{cell.Id}}" title="{{cell.Name}}">{{cell.Name}}</a>
+                                                                    {{else}}
+                                                                    <a onclick="alert('您的上一模块学习还没达到要求！')" title="{{cell.Name}}">{{cell.Name}}</a>
+                                                                    {{/if}}
+                                                                    {{if cell.SubName}}
+                                                                      <span class="sh-res-b">{{#cell.SubName}}</span>
+                                                                    {{/if}}
+                                                                </div>
+                                                            </div>
+                                                        {{/each}}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                          {{/if}}
+                        </td>
+                    </tr>
+                {{/each}}
+            </tbody>
+             </table>
+          </div>
+       {{/each}}
+     {{else}}
+        暂无数据
+    {{/if}}
+</script>
+
+<script type="text/javascript" src="/study/js/process/process.js"></script>
+
+<!--#include virtual="/study/footer2.html"-->

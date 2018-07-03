@@ -1,0 +1,102 @@
+﻿/* Common Features */
+.hidden { display: none; }
+.invisible { visibility: hidden; }
+
+/* fieldset-list */
+.fieldset-list { margin: 0px 20px; }
+.fieldset-list .form-group { margin: 0px 20px 10px; color: #666; _height: 34px; }
+.fieldset-list .form-group .control-label { float: left; width: 180px; text-align: right; font-size: 12px; }
+.fieldset-list .form-group .control-label span { display: block; padding: 7px 7px 0px; }
+.fieldset-list .form-group .control-label span em { color: red; padding-right: 5px; font-style: normal; }
+.fieldset-list .form-group .cols { position: relative; margin-left: 180px; }
+.fieldset-list .form-group .cols p { word-break: break-all; overflow: hidden; table-layout: fixed; padding: 6px 12px; }
+.fieldset-list .form-group .cols .text,
+.fieldset-list .form-group .cols .inputText,
+.fieldset-list .form-group .link-name .text,
+.fieldset-list .form-group .cols .textarea,
+.fieldset-list .form-group .cols .inputTextarea { font-family: "Microsoft Yahei", Airal; outline: none; padding: 6px 12px; color: #555; width: 50%; height: 20px; }
+.fieldset-list .form-group .cols .text.small,
+.fieldset-list .form-group .cols .inputText.small,
+.fieldset-list .form-group .cols .textarea.small,
+.fieldset-list .form-group .cols .inputTextarea.small { width: 20%; }
+.fieldset-list .form-group .cols .text.middle,
+.fieldset-list .form-group .cols .inputText.middle,
+.fieldset-list .form-group .cols .textarea.middle,
+.fieldset-list .form-group .cols .inputTextarea.middle { width: 75%; }
+.fieldset-list .form-group .cols .text.large,
+.fieldset-list .form-group .cols .inputText.large,
+.fieldset-list .form-group .cols .textarea.large,
+.fieldset-list .form-group .cols .inputTextarea.large { width: 90%; }
+.fieldset-list .form-group .cols .radio-inline,
+.fieldset-list .form-group .cols .checkbox-inline { zoom: 1; padding: 0px 10px; margin-bottom: 0; vertical-align: middle; font-weight: 400; cursor: pointer; line-height: 34px; }
+.fieldset-list .form-group .cols .radio-line,
+.fieldset-list .form-group .cols .checkbox-line { height: 30px; line-height: 30px; display: block; zoom: 1; overflow: hidden; padding-left: 10px; cursor: pointer; }
+.fieldset-list .form-group .cols .radio,
+.fieldset-list .form-group .cols .checkbox { position: relative; top: 3px; *top: 0px; }
+.fieldset-list .form-group .cols .textarea,
+.fieldset-list .form-group .cols .inputTextarea { height: 150px; }
+.fieldset-list .form-group .icon-color { position: absolute; display: block; width: 16px; height: 16px; top: 8px; left: 20%; background-position: -184px -426px; }
+
+/* form CSS */
+.red { color: red !important; }
+.control-w60 .form-group .control-label { width: 60px; }
+.control-w70 .form-group .control-label { width: 70px; }
+.control-w80 .form-group .control-label { width: 80px; }
+.control-w90 .form-group .control-label { width: 90px; }
+.control-w100 .form-group .control-label { width: 100px; }
+.control-w110 .form-group .control-label { width: 110px; }
+.control-w120 .form-group .control-label { width: 120px; }
+.control-w130 .form-group .control-label { width: 130px; }
+.control-w140 .form-group .control-label { width: 140px; }
+.control-w150 .form-group .control-label { width: 150px; }
+.control-w160 .form-group .control-label { width: 160px; }
+
+.text-h40 { height: 40px !important; }
+.text-h50 { height: 50px !important; }
+.text-h60 { height: 60px !important; }
+.text-h70 { height: 70px !important; }
+.text-h80 { height: 80px !important; }
+.text-h90 { height: 90px !important; }
+.text-h100 { height: 100px !important; }
+.text-h110 { height: 110px !important; }
+.text-h120 { height: 120px !important; }
+.text-h130 { height: 130px !important; }
+.text-h140 { height: 140px !important; }
+.text-h150 { height: 150px !important; }
+.text-h160 { height: 160px !important; }
+
+.control-w60 .form-group .cols { margin-left: 60px; }
+.control-w70 .form-group .cols { margin-left: 70px; }
+.control-w80 .form-group .cols { margin-left: 80px; }
+.control-w90 .form-group .cols { margin-left: 90px; }
+.control-w100 .form-group .cols { margin-left: 100px; }
+.control-w110 .form-group .cols { margin-left: 110px; }
+.control-w120 .form-group .cols { margin-left: 120px; }
+.control-w130 .form-group .cols { margin-left: 130px; }
+.control-w140 .form-group .cols { margin-left: 140px; }
+.control-w150 .form-group .cols { margin-left: 150px; }
+.control-w160 .form-group .cols { margin-left: 160px; }
+
+.tips-inline { padding: 0px 0px 0px 10px; color: #999; }
+.tips-line { display: block; width: 100%; padding: 5px 0px 0px 0px; color: #999; }
+
+.middle-list .form-group { margin: 0px 0px 10px; }
+
+.upload-form .fieldset-list { margin-bottom: 10px; text-align: left; padding-top: 10px; border-top: 1px solid #CCC; }
+
+.ico-number { background: #A0A8AD; display: inline-block; height: 20px; left: 4px; line-height: 20px; position: absolute; text-align: center; top: 10px; width: 20px; color: white; padding: 1px; }
+
+.fieldset-list .add-icon { position: relative; top: 8px; *top: 2px; border-radius: 4px; display: inline-block; zoom: 1; padding: 2px; width: 21px; height: 21px; background: #009999 url(img/add_icon.png) no-repeat 2px 2px; }
+.fieldset-list .type-list { display: inline-block; margin: 0 2px 2px 0; zoom: 1; height: 23px; line-height: 23px; background: #009999; color: #FFF; border-radius: 4px; }
+.fieldset-list .type-list span { margin-left: 5px; position: relative; top: 4px; *top: 0px; display: inline-block; zoom: 1; width: 18px; height: 18px; cursor: pointer; }
+.fieldset-list .type-list span { background: url(img/main.png) no-repeat -69px -396px; _background: url(img/main_8.png) no-repeat -69px -396px; }
+
+#dlg_custome_category { padding: 0; }
+.custome_category_left { float: left; width: 30%; border-right: 1px solid #DDD; height: 300px; overflow: auto; }
+.custome_category_right { float: left; width: 67%; height: 300px; padding-top: 10px; overflow: auto; }
+.custome_category_left ul { overflow: hidden; padding-top: 5px; }
+.custome_category_left li { margin-top: -1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; border-top: 1px solid #DDD; height: 30px; line-height: 30px; text-indent: 12px; cursor: pointer; }
+.custome_category_left li:hover { background: #EBEBEB; }
+.custome_category_left li.current { background: #009999; color: #FFF; }
+
+li.select2-search-choice div { word-break: break-all; }

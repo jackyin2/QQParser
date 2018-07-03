@@ -1,0 +1,39 @@
+﻿<!--#include virtual="/student/header.html"-->
+
+<style type="text/css">
+    .am-margin-top-xs img { width:50%}
+</style>
+
+<div class="am-panel am-panel-default" id="right_content">
+    <script type="text/html" id="view_html">
+        <div class="am-panel-hd clearfix" style="margin: 0px;">
+            <h3 class="am-panel-title"><span class="am-icon am-icon-tasks"></span>站内信查看</h3>
+            <div class="am-text-right">
+                {{if type == "1"}}
+                   <a href="reply.html#messageId={{Id}}" class="am-btn am-btn-success am-btn-default">回复</a>
+                {{/if}}
+            </div>
+        </div>
+        <div class="am-panel-bd">
+            <div class="am-form am-form-horizontal">
+                <div class="am-form-group ">
+                    <label for="" class="am-u-sm-1 am-form-label">主题:</label>
+                    <div class="am-u-sm-11">
+                        <div class="am-margin-top-xs">{{title}}</div>
+                    </div>
+                </div>
+                <div class="am-form-group">
+                    <label for="" class="am-u-sm-1 am-form-label">内容:</label>
+                    <div class="am-u-sm-11">
+                        <div class="am-margin-top-xs">{{#content}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+</div>
+
+<script type="text/javascript" src="/student/js/myMessage/view.js"></script>
+
+<!--内容右侧主体结束-->
+<!--#include virtual="/student/footer.html"-->

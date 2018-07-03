@@ -1,0 +1,43 @@
+﻿.cle { display: block; height: 0; overflow: hidden; clear: both; }
+.clefix:after { content: '\20'; display: block; height: 0; clear: both; }
+.clefix { *zoom: 1; }
+
+a { color: #666; text-decoration: none; }
+body { background: #FFF; font: 12px/1.5 tahoma,arial; color: #666; font-size: 12px; }
+
+.video-box { border: 1px solid #DDD; height: 100%; background: #EFEFEF; background: url(img/courseLearn_bg.jpg) repeat 0px 0px; overflow: hidden; }
+.video-play { width: 100%; height: 100%; position: relative; }
+.video-play div { position: absolute; display: block; left: 0px;}
+.video-play .video-inner { width: 68%; height: 100%; top: 0px; left: 0px; overflow: hidden; }
+
+.video-play .video-playBox { top: 0px; left: 0px; right: 0px; height: 100%; background: #000; }
+.video-play .video-list { left: 0px; right: 0px; bottom: 0px; height: 0%; display: none; background: #f5f7fa; }
+.video-play .video-list-inner { top: 0px; left: 0px; width: 100%; height: 100%; }
+.video-play .resizable-icon { display: none; cursor: w-resize; z-index: 1; top: 0px; left: 0px; width: 15px; height: 100%; }
+.video-play .video-button { border-left: 0 none; border-right: 0 none; height: 30px; line-height: 30px; width: 100%; overflow: hidden; top: 0px; left: 0px; text-align: center; background: #abadb0 url(img/resize.png) no-repeat center center; }
+
+.video-play .video-text { top: 30px; left: 0px; right: 0px; bottom: 0px; overflow: auto; }
+.video-play .video-text h3 { padding: 0px 20px; height: 30px; line-height: 30px; margin: 20px 0px 10px; font-size: 16px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.video-play .video-text h3 a:hover { text-decoration: underline; }
+.video-play .video-text p { padding: 0px 15px 10px; height: 20px; line-height: 180%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.video-play .video-text .video-desc { border-bottom: 1px solid #DDD; }
+.video-play .video-text .video-desc span { float: left; width: 33.3%; text-indent: 5px; height: 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.video-play .video-desc { top: 0px; left: 0px; right: 0px; height: 90px; }
+.video-play .video-catalog { top: 90px; left: 0px; bottom: 0px; right: 0px; }
+.video-play .video-catalog ul { padding-bottom: 10px; }
+.video-play .video-catalog ul li { text-indent: 25px; height: 36px; line-height: 36px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; background: url(img/catalog_icon.png) no-repeat 20px center; }
+.video-play .video-catalog ul li { cursor: pointer; padding: 0px 20px; }
+.video-play .video-catalog ul li span { float: right; }
+.video-play .video-catalog ul li:hover,
+.video-play .video-catalog ul li.current { background: #3a3e4a url(img/catalog_current.png) no-repeat 20px center; color: #FFF; }
+.video-play .video-catalog ul li:hover a,
+.video-play .video-catalog ul li.current a { color: #FFF; }
+
+.video-play .right { left: auto; width: 32%; right: 0px; }
+.video-play .right .video-playBox,
+.video-play .right .video-list { left: 15px; box-shadow: 0px 0px 5px rgba( 0,0,0,0.7 ); }
+.video-play .right .video-playBox { height: 50%; }
+.video-play .right .video-list { height: 50%; display: block; }
+.video-play .right .resizable-icon { z-index: 10; display: block; }
+
+.flowplayer { width: auto; }

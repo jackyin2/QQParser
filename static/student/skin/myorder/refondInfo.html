@@ -1,0 +1,56 @@
+<!--#include virtual="/student/header.html"-->
+<div class="am-panel am-panel-default main_content">
+    <div class="am-panel-hd am-cf">
+        <h3 class="am-panel-title">
+            <span class="am-icon am-icon-tasks"></span>&nbsp;退款记录
+        </h3>
+    </div>
+
+    <div id="MyRefoundList"></div>
+
+</div>
+
+<!--退款记录列表-->
+<script type="text/html" id="MyRefoundListShow">
+
+    <div class="am-margin-top">
+        <table id="table_info" class="am-table am-text-center">
+            <thead>
+                <tr>
+                    <th width="5%"  class="am-text-center">序号</th>
+                    <th width="15%" class="am-text-center">退款原因</th>
+                    <th width="15%" class="am-text-center">退款备注</th>
+                    <th width="10%" class="am-text-center">退款结果</th>
+                    <th width="15%" class="am-text-center">驳回原因</th>
+                    <th width="10%" class="am-text-center">申请时间</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{if refoundList && refoundList.length > 0}}
+                {{each refoundList as item i}}
+                <tr id="{{item.Id}}">
+                    <td>{{if pagination.pageIndex>0}}{{(pagination.pageIndex - 1) * pagination.pageSize + i + 1}}{{else}}{{(pagination.pageIndex ) * pagination.pageSize + i + 1}} {{/if}}</td>
+                    <td>{{item.RefoundReason}}</td>
+                     <td>{{if item.Remark}}{{item.Remark}}{{else}}---{{/if}}</td>
+                    <td>{{if item.RefuseReason!=null}}驳回{{else}}{{if order.Status==3}}同意{{else}}---{{/if}}{{/if}}</td>
+                    <td>{{if item.RefuseReason!=null}}{{item.RefuseReason}}{{else}}---{{/if}}</td>
+                    <td>{{item.DateCreated | dateFormat:'yyyy-MM-dd hh:mm:ss'}}</td>
+                    
+                </tr>
+                {{/each}}
+                {{else}}
+                        <tr>
+                            <td colspan="6">
+                                <span class="am-text-center">暂无数据</span>
+                            </td>
+                        </tr>
+                {{/if}}
+            </tbody>
+        </table>
+        <div class="pagination ajax"></div>
+    </div>
+</script>
+
+<!--内容右侧主体结束-->
+<script type="text/javascript" src="/student/js/myorder/myrefoundList.js"></script>
+<!--#include file="/student/footer.html"-->

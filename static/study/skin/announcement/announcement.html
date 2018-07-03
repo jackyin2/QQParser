@@ -1,0 +1,83 @@
+<!--#include virtual="/study/header2.html"-->
+
+<div id="d_coursetoc_t" class="am-panel am-panel-default"></div>
+
+<script type="text/html" id="announcementlist">
+    <style>
+        .pagination ul {
+        position: relative;
+        top: -2px!important;
+        }
+        .pagination select{
+            display: inline-block;
+            width: 45px!important;
+            height: 32px!important;
+            padding:0!important;
+            line-height:32px!important;
+            padding-left:5px!important;
+        }
+        .pagination input{
+             display: inline-block!important;
+            width: 45px!important;
+            height: 32px!important;
+            
+        }
+        .pagination .go {
+            position: relative;
+            top: 0!important;
+        }
+    </style>
+<div class="am-panel am-tabs">
+    <div class="am-panel-hd am-cf" data-am-tabs="{noSwipe: 1}" id="doc-tab-demo-1">
+       <ul class="am-tabs-nav am-nav am-nav-tabs">
+            <li {{if dataType==1}} class="am-active" {{/if}}data-type="1"><a href="javascript: void(0)">课程公告</a></li>
+            <!--<li {{if dataType==2}} class="am-active" {{/if}} data-type="2"><a href="javascript: void(0)">班级公告</a></li>-->
+        </ul> 
+     </div>
+
+    <form id="form_announcement" method="get" class="am-form am-form-horizontal">
+        <input type="hidden" name="courseOpenId" value="{{courseOpenId}}" />
+        <input type="hidden" name="openClassId" value="{{openClassId}}" />
+        <input type="hidden" name="dataType" value="{{dataType}}" />
+
+        <div class="am-form-group am-margin-top">
+            <label class="am-form-label am-u-sm-1" style="margin-left: -8px;">标题：</label>
+            <div class="am-u-sm-2">
+                <input type="text" class="am-form-field" name="title" value="{{title}}" />
+            </div>
+            <div class="am-u-sm-1 am-text-left am-text-middle am-u-end" style="padding-left: 20px;">
+                <button class="am-btn am-btn-success" type="button" id="btn_search"><span class="am-icon am-icon-search"></span>查询</button>
+            </div>
+        </div>
+        <table class="am-table am-text-center" style="border-top:1px solid #ccc;">
+            <thead>
+                <tr>
+                    <th style="width: 8%;" class="am-text-center">序号</th>
+                    <th>标题</th>
+                    <th style="width: 20%;" class="am-text-center">发布时间</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{if list && list.length > 0}}
+                    {{each list as item i}}
+                        <tr>
+                            <td style="text-align: center;">{{i+1}}</td>
+                            <td style="text-align: left;"><a href='/study/announcement/courseAnnouncementView.html#announcementId={{item.Id}}&courseOpenId={{courseOpenId}}&openClassId={{openClassId}}&dataType={{dataType}}' {{if item.isread==0}}style="color:red"{{/if}} data-id="{{item.Id}}" title="{{item.Title}}">{{item.Title}}</a></td>
+                            <td style="text-align: center;">{{dateFormat(item.DateCreated,"yyyy-MM-dd hh:mm:ss")}}</td>
+                            </tr>
+                    {{/each}}
+                {{else}}
+                    <tr>
+                        <td colspan="3"><div class="am-text-center">暂无数据</div></td>
+                    </tr>
+                {{/if}}
+            </tbody>
+        </table>
+        <div class="pagination ajax"></div>
+    </form>
+ </div>
+</script>
+
+<script type="text/javascript" src="/study/js/announcement/announcement.js"></script>
+<!--内容右侧主体结束-->
+<!--#include virtual="/study/footer2.html"-->

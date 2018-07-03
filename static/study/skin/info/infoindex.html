@@ -1,0 +1,30 @@
+<!--#include virtual="/study/header2.html"-->
+
+<link rel="stylesheet" type="text/css" href="/common/js/uploader/uploader.css">
+<div id="updata">
+    <script type="text/html" id="upfile">
+        <div id="d_coursedescription_t" data-columntype="{{list.columntype}}">
+            <div class="am-panel am-panel-default">
+                <div class="am-panel-hd clearfix">
+                    <h3 class="am-panel-title"><span class="am-icon am-icon-tasks"></span>{{list.columntitle}}</h3>             
+                    <div class="am-text-right">
+                        {{if list.downloadurl!=""}}
+                            <a href="{{list.downloadurl}}" target="_blank" class="am-btn am-btn-success " id="down_resource"><span class="am-icon am-icon-download"></span>下载</a>
+                        {{/if}}
+                    </div>
+                </div>
+                <div id="div_doc" data-doc_url='{{list.docurl}}' style="width: 100%; height: 500px;position: relative;">
+                    {{if  list.docurl==""}}
+                     暂无文件信息，请上传资源或者选择课程资料
+                   {{/if}}
+                </div>
+            </div>
+        </div>
+  </script> 
+</div>
+
+ <script type="text/javascript" src="/common/js/uploader/uploadFile.js"></script>
+ <script type="text/javascript" src="/study/js/info/infoIndex.js"></script>
+
+<!--内容右侧主体结束-->
+<!--#include virtual="/study/footer2.html"-->

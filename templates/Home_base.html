@@ -1,0 +1,188 @@
+<html lang="en">
+{% load  staticfiles %}
+<head>
+    <meta charset="UTF-8">
+    <style type="text/css">
+    .am-datepicker .am-datepicker-dow {
+        height: 32px;
+    }
+
+    .am-datepicker td.am-datepicker-day,
+    .am-datepicker td.am-datepicker-day:hover {
+        height: 22px;
+        width: 22px;
+    }
+
+    .am-datepicker-caret {
+        display: none !important;
+    }
+
+    .pagination ul {
+        position: relative;
+        top: -2px!important;
+    }
+
+    .pagination select {
+        display: inline-block;
+        width: 45px!important;
+        height: 32px!important;
+        padding: 0!important;
+        line-height: 32px!important;
+        padding-left: 5px!important;
+    }
+
+    .pagination input {
+        display: inline-block!important;
+        width: 45px!important;
+        height: 32px!important;
+    }
+
+    .pagination .go {
+        position: relative;
+        top: 0!important;
+    }
+</style>
+    {% block title %}<title>运营统计数据分析平台</title>{% endblock %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'study/css/jquery-ui.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static  'study/css/amazeui.upc.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'study/css/amazeui.datetimepicker.css' %}">
+    {% block css %}{% endblock %}
+    <link rel="stylesheet" type="text/css" href="{% static 'study/css/index.css' %}">
+   
+    <link rel="stylesheet" type="text/css" href="{% static 'study/css/index_jw.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'study/css/iconfont.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'study/font/iconfont.css' %}">
+
+
+
+    <script type="text/javascript" src="{% static 'common/js/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'common/js/amazeui/amazeui.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'common/js/jqueryui.js' %}"></script>
+    <script type="text/javascript" src="{% static 'common/js/MDialog.js' %}"></script>
+    <script type="text/javascript" src="{% static 'common/js/common.js' %}"></script>
+    <script type="text/javascript" src="{% static 'common/js/pagination.js' %}"></script>
+    <script type="text/javascript" src="{% static 'student/js/menu.js' %}"></script>
+    {% block jsscript %}{% endblock %}
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Datepicker - Default functionality</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+{#  <link rel="stylesheet" href="/resources/demos/style.css">#}
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script type="text/javascript">
+      $( function() {
+        $( "#datepicker1" ).datepicker({
+            dateFormat: "yy-mm-dd"
+        });
+        $( "#datepicker2" ).datepicker({
+            dateFormat: "yy-mm-dd"
+        });
+      } );
+
+  </script>
+
+</head>
+<body>
+        {% block content_top %}
+        <div class="top" style="margin-bottom: 20px;">
+            <div class="top_inner">
+{#                <img class="logo" src="{% static  'common/img/logo.png' %}" width="325px" height="100px">#}
+                <div class="top_nav">
+                    <a href="" style="font-size: 18px">运营统计分析平台</a>
+                </div>
+                <ul class="top_right">
+                </ul>
+            </div>
+        </div>
+        {% endblock %}
+
+        {% block content_left %}
+        <div class="am-u-sm-2 study" id="menu">
+        <div id="d_menu_course_t" class="d-menu">
+            <div class="menu-title am-text-lg plain">
+                <span class="am-icon am-icon-university"></span>运营协作平台
+            </div>
+            <nav class="menu-nav">
+                <div class="upc-menu-hover" id="upc_menu_hover" style="top: 50px;">
+                    <span class="upc-menu-in"></span></div>
+                <ul class="menu-ul">
+                    <li class="menu-nav-li"><a href="/qqhome/qqshow" class="menu-nav-btn">
+                        <i class="upc-icon upc-icon-homesmall"></i>QQ记录 </a> </li>
+                    <li class="menu-nav-li"><a href="/qqhome/qqparser" class="menu-nav-btn">
+                        <i class="upc-icon upc-icon-homesmall"></i>统计中心 </a> </li>
+                    <li class="menu-nav-li"><a href="/qqhome/upfiles" class="menu-nav-btn">
+                        <i class="upc-icon upc-icon-homesmall"></i>文件管理 </a> </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+        {% endblock %}
+
+        {% block content %}
+        <div class="gform full">
+    <div id="right_content" class="am-g am-g-collapse ">
+        <div class="am-panel">
+            <div class="am-panel am-panel-default">
+                <div class="am-panel-hd am-cf">
+                    <h3 class="am-panel-title">
+                        <span class="am-icon am-icon-tasks"></span>&nbsp;运营统计协作平台
+                    </h3>
+                    <div class="am-text-right"></div>
+                </div>
+                <div style="margin-right: 28px;" class="am-form-group am-margin-top-sm" id="searchInfo"></div>
+                <form id="fm_content"  class="am-form am-form-horizontal">
+                    <div id="content_container" class="am-margin-top">
+                            <div id="searchInfoTip" class="am-form-group">
+                                <label class="am-form-label am-u-sm-1" >班级筛选：</label>
+                                <div class="am-u-sm-5 am-u-end" style="width: 180px;">
+                                    <select id="classInfoId" name="classInfoId">
+                                        <option value="">—— 全部 ——</option>
+
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                            </div>
+                    </div>
+                </form>
+
+                <div id="table_html" >
+                    <input type="hidden" name="type" value="" />
+                    <table id="table_info" class="am-table am-text-center">
+                        <thead>
+                            <tr>
+                                <th style="width: 5%" class="am-text-center">序号</th>
+                                <th style="width: 20%" class="am-text-center">课程封面</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <tr>
+                                    <td class="am-text-center"><span style="color: red"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7">
+                                        <div class="am-text-center">暂无数据</div>
+                                    </td>
+                                </tr>
+                        </tbody>
+                    </table>
+                    <div class="pagination ajax"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+        {% endblock %}
+
+
+
+
+{#<--<script type="text/javascript" src="{% static 'student/js/learning/courseList.js' %}"></script>-->#}
+
+
+
+{% block footerscript %}{% endblock %}
+</body>
+</html>

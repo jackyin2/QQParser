@@ -1,0 +1,141 @@
+
+<!--上传文件弹框头部-->
+<script type="text/html" id="chooseFile">
+    <form id="upFile_form" class="am-form am-form-horizontal am-g-collapse" {{if tab==1}} action="/common/Ueditor/chooseFile?tab=1"{{else if tab==2}}action="/common/Ueditor/chooseFile?tab=2" {{else if tab==3}}action="/common/Ueditor/chooseFile?tab=3"{{/if}}>
+       <input type="hidden" name="courseOpenId" value="{{courseOpenId}}"/>
+        <ul class="am-tabs-nav am-nav am-nav-tabs">
+        <li {{if tab==1}} class="am-active"{{/if}} ><a href="javascript:;" id="upHistory">上传历史</a></li>
+         {{if userType==0 || userType==4}}
+            <li {{if tab==2}}class="am-active"{{/if}} ><a href="javascript:;" id="courseResouce">课程资源</a></li>
+            <!--<li {{if tab==3}}class="am-active"{{/if}} ><a href="javascript:;" id="myEdoc">我的网盘</a></li>-->
+        {{/if}}
+    </ul>
+        <div class="am-tab-panel am-active">
+            <div class="am-form-group am-margin-top-xs">
+                    <label class="am-form-label am-u-sm-1" style="width:auto">资源名称/类型:&emsp;</label>
+                    <div class="am-u-sm-4">
+                        <input type="text" name="Title" placeholder="输入资源名称/资源类型" onkeypress=" if(event.keyCode==13) {return false;}" value="{{Title}}">
+                    </div>
+
+                    <div class="am-u-sm-1 am-text-center am-u-end">
+                        <input type="button" value="查询" class="am-btn am-btn-success" id="btnDialogQuery">
+                    </div>
+                    {{if tab==1}}
+                        <div class="am-u-sm-2 am-text-center">
+                            <div id="uploader_choosefile" class="wu-example am-inline-block" data-file_system_url="{{fileSystemUrl}}">
+                                <div class="btns">
+                                    <div id="picker_choosefile" class="">上传文件</div>
+                                </div>
+                            </div>
+                        </div>    
+                    {{/if}}
+                </div>
+
+              {{ if tab==1}}
+                 <table class="am-table am-text-center " style="margin-top:0px" id="QuesionFile_table">
+                   <thead>
+                    <tr>
+                         <th  style="text-align: center;width:5%">
+                             <input type="checkbox" class="checkAll" name="checkAll" />
+                          </th>
+                         <th style="width:6%"> 序号</th>
+                         <th >标题</th>
+                         <th style="width:9%;text-align:center;">文件大小</th>
+                         <th style="width:8%;text-align:center;">资源类型</th>
+                         <th style="width:12%;text-align:center;">创建日期</th>
+                         <th style="width:13%;text-align:center;">操作</th>
+                        </tr>
+                 </thead>
+                       <tbody>
+                            {{if doc.length>0}}
+                                {{each doc as item i}}
+                                <tr id="{{item.Id}}">
+                                    <td><input type="checkbox" class="check" name="check" data-docid="{{item.Id}}" data-url="{{item.Url}}" data-doctitle="{{item.DocTitle}}" data-downloadurl="{{item.downloadurl}}" data-doctype="{{item.DocType}}" /></td>
+                                    <td style="text-align: left;"> {{pagination.pageSize*(pagination.pageIndex-1)+i+1}}</td>
+                                    <td class="am-text-left am-text-truncate" title="{{item.DocTitle}}">{{item.DocTitle}}</td>
+                                    <td title="{{b2other(item.DocSize)}}" style="text-align: center;">{{b2other(item.DocSize)}}</td>
+                                    <td title="{{item.DocType}}" style="text-align: center;">{{item.DocType}}</td>
+                                    <td title="{{dateFormat(item.dateCreated,"yyyy-MM-dd hh:mm")}}"  style="text-align: center;">{{dateFormat(item.dateCreated,"yyyy-MM-dd hh:mm")}}</td>
+                                    <td  style="text-align: center;">
+                                        <a data-preview_url_ueditor="{{item.Url}}" href="javascript:;">预览</a>&nbsp;
+                                         {{if tab==1}}
+                                          <a class="edit_doc_question" href="javascript::">编辑</a>&nbsp;
+                                          <a class="deleteQuestionFile" href="javascript::">删除</a>
+                                        {{/if}}
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            {{else}}
+                                <tr>
+                                    <td colspan="7">
+                                       <div class="am-text-center">暂无数据</div>
+                                    </td>
+                             </tr>
+                           {{/if}}
+                        </tbody>
+                    </table>
+
+              {{ else if tab==2}}
+                 <div id="toolbar" class="toolbar" style="margin-left:20px;">
+                   <ol class="am-breadcrumb am-breadcrumb-slash" style="margin:0;text-align: left;">
+                     <li data-parentid="0" class="first">课程资源</li>
+                   </ol>
+                </div>
+
+                 <div id="dataContainer" class="pan-horz-center" style="margin-left:50px;">
+                    <input type="hidden" name="parentId" value="{{parentId}}" />
+                    {{if doc.length>0}}
+                      {{each doc as item i}}
+                         <div class="pan-item">
+                            <div class="pan-item-cover">
+                              <div class="pan-item-cover-thumb preview" style="width: 180px;" data-id="{{item.Id}}" data-title="{{item.docTitle}}" 
+                                  data-isdir="{{item.isDir}}">
+                                {{if item.isDir == 0 }}
+                                   <a data-preview_url_ueditor="{{item.Url}}" href="javascript:;">
+                                       <img style="width: 180px; height: 200px; cursor:pointer;" src="{{item.thumbnail}}">
+                                    </a>
+                                {{else}}
+                                   <img style="cursor:pointer;" src="/common/img/folder.png" class="pan-folder">
+                                {{/if}}
+                            </div>
+
+                            {{if item.isDir == 0}}
+                              <a data-preview_url_ueditor="{{item.Url}}" href="javascript:;">
+                               <div class="pan-item-action">
+                                <div class="mask"></div>
+                                   <span class="preview" data-id="{{item.Id}}"><span class="am-icon am-icon-eye"></span>预览</span>
+                               </div>
+                              </a>
+                             {{/if}}
+
+                             {{ if item.isDir==0}}
+                              <div class="pan-item-checked" style="display: block;">
+                                <input type="checkbox" class="am-checkbox" data-docid="{{item.Id}}" data-url="{{item.Url}}" data-doctitle="{{item.docTitle}}" 
+                                    data-downloadurl="{{item.downloadurl}}" data-doctype="{{item.docType}}">
+                             </div>
+                            {{/if}}
+                           </div>
+
+                            {{if item.isDir==0}}
+                              <div class="pan-item-title" title="{{item.docTitle}}.{{item.docType}}">
+                               {{item.docTitle}}.{{item.docType}}
+                             </div>
+                           {{else}}
+                              <div class="pan-item-title" title="{{item.docTitle}}">
+                               {{item.docTitle}}
+                             </div>
+                           {{/if}}
+                        </div>
+                      {{/each}}
+                   {{else}}
+                     <div style="margin: 15px 0 0 10px;">暂无数据</div>
+                   {{/if}}
+                 </div>
+              {{/if}}
+          </div>
+        <div class="pagination ajax"></div>
+      </form>
+</script>
+
+<script type="text/javascript" src="/common/js/uploader/uploadFile.js"></script>
+<script type="text/javascript" src="/common/js/ueditor/choose/chooseFile.js"></script>

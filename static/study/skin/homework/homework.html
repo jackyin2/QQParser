@@ -1,0 +1,68 @@
+<!--#include file="/study/header2.html"-->
+
+  <form id="indexForm" style="position: relative;">
+    <div class="am-panel am-panel-default" >
+      <div class="am-panel-hd am-cf">
+         <h3 class="am-panel-title"><span class="am-icon am-icon-cube"></span>在线作业</h3>
+      </div>
+
+            <div class="am-form am-form-horizontal sh-kp-form">
+                <input type="hidden" name="courseOpenId" />
+                <input type="hidden" name="openClassId" />
+            </div>
+        <div id="container"></div>
+     </div>
+  </form>
+
+ <script id="table_html" type="text/html">
+    <div>
+         <table id="maintab" class="am-table" style="border-top:1px solid #ccc;">
+             <thead>
+                  <tr>
+                    <th style="text-align:left; width: 6%;">序号</th>
+                    <th style="text-align:left;">名称</th>
+                    <th style="text-align:center;width: 16%;">开始时间</th>
+                    <th style="text-align:center;width: 16%;">结束时间</th>
+                    <th style="text-align:center;width: 15%;">作答次数</th>
+                    <th style="text-align:center;width:10%;">操作</th>
+                  </tr>
+               </thead>
+             <tbody>
+                    {{ if list && list.length>0 }}
+                        {{each list as item i}}
+                           <tr data-id="{{item.Id}}" data-courseopenid="{{item.courseOpenId}}">
+                                <td style="text-align:left;">{{pagination.pageSize*(pagination.pageIndex-1)+i+1}}</td>
+                                <td style="text-align:left;">
+                                   {{substring(item.Title,0,30)}}
+                                 </td>
+                                <td style="text-align:center">{{if item.stuStartDate}}{{dateFormat(item.stuStartDate,"yyyy-MM-dd ")}}{{else}}---{{/if}}</td>
+                                <td style="text-align:center">{{if item.stuEndDate}}{{dateFormat(item.stuEndDate,"yyyy-MM-dd ")}}{{else}}---{{/if}}</td>
+                                <td style="text-align:center;">
+                                    {{item.stuHomeworkCount}} /
+                                    {{ if item.replyCount ==-1}}
+                                       <span style="color:red;">不限制</span>
+                                     {{else}}
+                                       <span style="color:red;">{{item.replyCount}}</span>
+                                    {{/if}}
+                                </td>
+                                <td style="text-align:center">
+                                    <a href="/study/homework/detail.html#courseOpenId={{item.courseOpenId}}&openClassId={{item.openClassId}}&homeworkId={{item.Id}}" target="_blank" style="outline:none;">查看</a>&nbsp;
+                                     </td>
+                              </tr>
+                        {{/each}}
+                    {{else}}
+                         <tr>
+                           <td style="text-align:center" colspan="6">
+                             <span >暂无数据</span></td>
+                         </tr>
+                    {{/if}}
+               </tbody>
+          </table>
+       </div>
+    <div class="pagination ajax"></div>
+  </script>
+
+
+ <script type="text/javascript" src="/study/js/homework/homework.js"></script>
+
+<!--#include file="/study/footer2.html"-->

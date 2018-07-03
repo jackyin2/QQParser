@@ -1,0 +1,135 @@
+<!--#include  virtual="/student/header.html"-->
+<form id="right_content" method="post" class="am-form am-form-horizontal gform full">
+    <div id="topic">
+        <div class="am-panel am-panel-default">
+            <div class="am-panel-hd am-cf">
+                <h3 class="am-panel-title">
+                    <span class="am-icon am-icon-tasks"></span>&nbsp;站内信
+                </h3>
+                <div class="am-text-right">
+                    <a id="btnSendMsg" class="am-btn am-btn-secondary am-btn-default am-padding-horizontal-lg add_btn">
+                        <span class="am-icon am-icon-plus"></span>发信</a>
+                    <a class="am-btn am-btn-secondary am-btn-default am-padding-horizontal-lg delete_btn">删除</a>
+                </div>
+            </div>
+
+            <div style="margin-left: 28px;" class="am-form-group am-margin-top-sm">
+                <label class="am-form-label am-u-sm-1" style="width: 45px;">主题：</label>
+                <div class="am-u-sm-3">
+                    <input type="text" name="msgTitle" class="am-input-field" placeholder="请输入信的主题" />
+                </div>
+                <label class="am-form-label am-u-sm-1" style="width: 55px;">时间：</label>
+                <div class="am-u-sm-5 am-u-end">
+                    <div class="am-u-sm-5 sh-kp-1">
+                        <div class="am-input-group am-input-group-sm">
+                            <input type="text" id="start_date" name="start_date" data-provide="datetimepicker" data-date-autoclose="true" data-min-view="2" data-date-format="yyyy-mm-dd" readonly="readonly" placeholder="请选择时间">
+                        </div>
+                    </div>
+                    <div class="am-u-sm-2 am-text-center am-margin-top-xs" style="margin-left: 0;">~</div>
+                    <div class="am-u-sm-5 sh-kp-1">
+                        <div class="am-input-group  am-input-group-sm">
+                            <input type="text" name="end_date" data-provide="datetimepicker" data-date-autoclose="true" data-min-view="2" data-date-format="yyyy-mm-dd" readonly="readonly" placeholder="请选择时间">
+                        </div>
+                    </div>
+                </div>
+                <div class="am-u-sm-1 am-text-left am-u-end" style="padding-left: 20px;">
+                    <a class="am-btn am-btn-secondary" id="btn_search">
+                        <span class="am-icon am-icon-search"></span>查询
+                    </a>
+                </div>
+            </div>
+
+            <div id="content_container">
+                <script id="table_html" type="text/html">
+                    <style>
+                        .pagination ul {
+                            position: relative;
+                            top: -2px!important;
+                        }
+
+                        .pagination select {
+                            display: inline-block;
+                            width: 45px!important;
+                            height: 32px!important;
+                            padding: 0!important;
+                            line-height: 32px!important;
+                            padding-left: 5px!important;
+                        }
+
+                        .pagination input {
+                            display: inline-block!important;
+                            width: 45px!important;
+                            height: 32px!important;
+                        }
+
+                        .pagination .go {
+                            position: relative;
+                            top: 0!important;
+                        }
+                    </style>
+                    <input type="hidden" name="type" value="{{type}}" />
+                    <div class="sortlist am-cf">
+                        {{if type == "1"}}
+                          <a href="#" data-type="1" class='quealltab active'>收信箱</a>
+                        <a href="#" data-type="2" class='quealltab'>发信箱</a>
+                        {{else}}
+                          <a href="#" data-type="1" class='quealltab'>收信箱</a>
+                        <a href="#" data-type="2" class='quealltab active'>发信箱</a>
+                        {{/if}}
+                    </div>
+                    <div class="am-margin-top">
+                        <table id="table_info" class="am-table am-text-center">
+                            <thead>
+                                <tr>
+                                    <th class="am-text-left" style="width: 3%">
+                                        <input type="checkbox" class="checkAll" /></th>
+                                    <th>主题</th>
+                                    <th style="width: 18%; text-align: center;">收件时间</th>
+                                    {{if type=="1"}}
+                                      <th style="width: 8%; text-align: center;">状态</th>
+                                    {{/if}}
+                                     <th style="width: 10%; text-align: center;">{{if type == "1"}}发送者{{else}}接收者{{/if}}</th>
+                                    {{if type=="1"}}
+                                      <th style="width: 8%; text-align: center;">操作</th>
+                                    {{/if}}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{if list.length > 0}}
+                                    {{each list as item }}
+                                        <tr id="{{item.Id}}">
+                                            <td class="am-text-left">
+                                                <input type="checkbox" class="check" /></td>
+                                            <td style="text-align: left;"><a href="view.html#messageId={{item.Id}}&type={{type}}" target="_blank">{{item.Title}}</a></td>
+                                            <td style="text-align: center;">{{dateFormat(item.DateCreated,"yyyy-MM-dd")}}</td>
+                                            {{if type=="1"}}<td style="text-align: center;">{{if item.IsRead =="True"}}已读{{else}}未读{{/if}} </td>
+                                            {{/if}}
+                                            <td style="text-align: center;">{{if type=="1"}}{{item.SendUserName}}{{else}}{{item.ReceiveUserName}}{{/if}}</td>
+                                            {{if type == "1"}}
+                                             <td style="text-align: center;">
+                                                 <a href="reply.html#messageId={{item.Id}}" target="_blank">回复</a>
+                                             </td>
+                                            {{/if}}
+                                        </tr>
+                                {{/each}}
+                                {{else}}
+                                    <tr>
+                                        <td colspan='{{if type=="1"}}6 {{else}} 4{{/if}}'>
+                                            <span class="am-text-center">暂无数据</span>
+                                        </td>
+                                    </tr>
+                                {{/if}}
+                            </tbody>
+                        </table>
+                        <div class="pagination ajax"></div>
+                    </div>
+                </script>
+            </div>
+        </div>
+    </div>
+</form>
+<script type="text/javascript" src="/student/js/myMessage/myMessage.js"></script>
+<script type="text/javascript" src="/common/js/amazeui/amazeui.datetimepicker.min.js"></script>
+
+<!--内容右侧主体结束-->
+<!--#include file="/student/footer.html"-->

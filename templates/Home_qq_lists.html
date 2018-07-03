@@ -1,0 +1,132 @@
+{% extends  'Home_base.html' %}
+{% load  staticfiles %}
+{% block content %}
+<script type="application/javascript">
+    $(document).on('click','.btn_submit',function(){
+{#        alert('a');#}
+        Search();
+});
+    //$('#btn_submit').click(function(){
+//      //  debugger;
+   //     Search();
+    //    debugger;
+  //    {)
+    function Search(){
+        debugger;
+        var keywords = $('#search_keywords').val();
+        var startdate = $('#datepicker1').val();
+        var enddate = $('#datepicker2').val();
+        request_url = '';
+
+        if(keywords == "" && startdate=="" && enddate=="" ){
+            return
+        }else {
+            request_url = "/qqhome/qqshow?keywords="+keywords+"&startD="+startdate+"&endD="+enddate
+        }
+        window.location.href = request_url
+    }
+</script>
+<div class="gform full">
+    <div id="right_content" class="am-g am-g-collapse ">
+        <div class="am-panel">
+            <div class="am-panel am-panel-default">
+                <div class="am-panel-hd am-cf">
+                    <h3 class="am-panel-title">
+                        <span class="am-icon am-icon-tasks"></span>&nbsp;聊天记录
+                    </h3>
+                    <div class="am-text-right"></div>
+                </div>
+                <div style="margin-right: 28px;" class="am-form-group am-margin-top-sm" id="searchInfo"></div>
+                <div id="fm_content"  class="am-form am-form-horizontal" >
+                    <div id="content_container" class="am-margin-top">
+                            <div id="searchInfoTip" class="am-form-group">
+                                <label class="am-form-label am-u-sm-1" >班级筛选：</label>
+                                <div class="am-u-sm-8 am-u-end" style="width: 200px;">
+                                    <select id="classInfoId" name="classInfoId">
+                                        <option id=""  value="">—— 全部 ——</option>
+                                        <option id=""  value="">2017</option>
+                                        <option  id=""  value="">2018</option>
+                                    </select>
+                                     <div id="SearchKey">
+                                         <input  id= 'search_keywords' type="text" name="name"  placeholder="输入名称"/>
+{#                                         <button>搜索记录</button>#}
+                                     </div>
+                                    <div >
+                                        <P><input type="text" id="datepicker1" placeholder="开始时间"></P>
+                                        <P><input type="text" id="datepicker2" placeholder="结束时间"></P>
+                                    </div>
+                                    <div><button type="submit" class="btn_submit"> submit </button></div>
+                                 </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+                <div id="table_html" >
+                    <input type="hidden" name="type" value="" />
+                    <p>总计：<span style="color: red; font-size: 20px">{{ contentslen }}</span></p>
+                    <table id="table_info" class="am-table am-text-center">
+                        <thead>
+                            <tr>
+                                <th style="width: 5%" class="am-text-center">序号</th>
+                                <th style="width: 20%" class="am-text-center">行号</th>
+                                <th style="width: 20%" class="am-text-center">名称</th>
+                                <th style="width: 20%" class="am-text-center">内容</th>
+                                <th style="width: 20%" class="am-text-center">时间</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                             {% for content in  all_contents.object_list%}
+                                <tr>
+                                    <td class="am-text-center">{{ forloop.counter }}</td>
+                                     <td class="am-text-center">{{ content.num }}</td>
+                                     <td class="am-text-center">{{ content.qqname }}</td>
+                                     <td class="am-text-center">{{ content.content }}</td>
+                                     <td class="am-text-center">{{ content.qqdate }}</td>
+                                </tr>
+                             {% endfor %}
+                             {% ifequal contentslen 0 %}
+                             <tr>
+                                    <td colspan="6">
+                                        <div class="am-text-center">暂无数据</div>
+                                    </td>
+                             </tr>
+                            {% endifequal %}
+                        </tbody>
+                    </table>
+                     {% load i18n %}
+                    <div class="pagination ajax" >
+                    <ul class="pagelist" >
+                      {# 上一页 #}
+                                    {%  if all_contents.has_previous %}
+                                    <li class="long" ><a href="?{{ all_contents.previous_page_number.querystring }}" class="prev">上一页</a></li>
+                                    {% endif %}
+                     {#  中间页码 #}
+                                    {% for page in all_contents.pages %}
+
+                                        {% if page %}
+                                            {% ifequal page all_contents.number %}
+                                                {#{{ all_orgs.number }}  该表示是前台页面中选中的page的页码 #}
+                                                <li class="active"><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
+                                            {% else %}
+                                                <li ><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
+                                            {% endifequal %}
+                                        {% else %}
+                                                <li class="none" ><a href="">...</a></li>
+                                        {% endif %}
+                                 {% endfor %}
+
+                    {#  下一页  #}
+                                    {% if all_contents.has_next %}
+                                    <li class="long"><a href="?{{ all_contents.next_page_number.querystring }}">下一页</a></li>
+                                    {% endif %}
+                    </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+

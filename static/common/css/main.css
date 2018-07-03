@@ -1,0 +1,385 @@
+﻿/*管理系统*/
+body{ background: #f4f4f4; font-size: 16px;}
+select{ cursor: pointer;}
+.iconfont{ height: 0; display: inline-block;}
+.top{ width: 100%; min-width: 1200px; background: #186ab7;}
+.top .top_inner{ width: 1200px; height: 95px; margin: 0 auto; position: relative;}
+.top .top_inner .nowTime{ position: absolute; right:105px; top: 40px;}
+.top .top_inner .nowTime h2{ color: #fff; font-size: 16px; font-weight: 400;}
+.top .top_inner .top_right {float: right;margin-top: 15px}
+.top .top_inner .top_right li.position {position: relative;cursor: pointer;margin-right: 0;}
+.top .top_inner .top_right li .userIcon {position: relative;width: 100px;}
+.top .top_inner .top_right li .icon_img { position: relative;}
+.top .top_inner .top_right li .icon_img .iconBg {position: absolute;}
+.top .top_inner .top_right li .icon_img img {display: block;}
+.top .top_inner .top_right li.position .icon-down1 {position: absolute;top: 22px;right: 0; color: #fff;font-size: 18px;}
+.top .top_inner .top_right li.position .down {display: none;position: absolute;right: 0;top: 85px;padding: 10px;width: 108px;background: #fff;box-shadow: 0px 0px 5px rgba( 0,0,0,0.2);}
+.top .top_inner .top_right li.position .down .icon-up {position: absolute;top: -18px;right: 52px;color: #fff;font-size: 24px;}
+.top .top_inner .top_right li.position .down a {display: block;color: #555;padding: 5px 20px;}
+.wrap{ width: 100%;}
+.wrap .wrap_inner{ width: 1200px; margin: 0 auto; overflow: hidden; padding-top: 20px;}
+.wrap .wrap_inner .sidebar{ float: left; width: 240px; text-align: center; background: #fff;}
+.wrap .wrap_inner .sidebar .menu{ height: 60px; line-height: 60px; background: #4eb008; color: #fff; font-size: 18px;}
+.wrap .wrap_inner .sidebar .menu .icon-liebiao{ font-size: 20px;}
+.wrap .wrap_inner .sidebar .submenu{ border: 1px solid #ddd; min-height: 440px;}
+.wrap .wrap_inner .sidebar .submenu li{ position: relative;}
+.wrap .wrap_inner .sidebar .submenu li a{ display: block; font-size: 16px; color: #484848; height: 50px; line-height: 50px;}
+.wrap .wrap_inner .sidebar .submenu li.current a{ background: #e9ffd9; color: #3d9300;}
+.wrap .wrap_inner .sidebar .submenu li.current .border{ position: absolute; top: 0; left: 0; display: block; height: 50px; border-left: 4px solid #4eb008;}
+.wrap .wrap_inner .primary{ margin-left: 260px; border: 1px solid #ddd; background: #fff; min-height: 510px;}
+.wrap .wrap_inner .primary .main_content .main_content_title{ background: #186ab7; padding: 0 20px; height: 45px; line-height: 45px;}
+.wrap .wrap_inner .primary .main_content .main_content_title .attr{ display: inline-block; color: #fff; font-size: 16px;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton{ float: right; font-size: 16px;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .add{ border-radius: 3px; cursor: pointer; border: 0 none; background: #fff; width: 98px; height: 30px; color: #484848; font-size: 16px;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .add:hover{ color: #fff;background:#4eb008;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .add:hover .icon-search{ color: #fff;}
+
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .table{ border-radius: 3px; cursor: pointer; border: 0 none; background: #186ab7; width: 98px; height: 30px; color: #484848; font-size: 16px;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .table:hover{ color: #484848;background:#186ab7;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .table:hover .icon-search{ color: #484848;}
+
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .zhexian{ border-radius: 3px; cursor: pointer; border: 0 none; background: #186ab7; width: 98px; height: 30px; color: #484848; font-size: 16px;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .zhexian:hover{ color: #484848;background:#186ab7;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .zhexian:hover .icon-search{ color: #484848;}
+
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .bing{ border-radius: 3px; cursor: pointer; border: 0 none; background: #186ab7; width: 98px; height: 30px; color: #484848; font-size: 16px;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .bing:hover{ color: #484848;background:#186ab7;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .bing:hover .icon-search{ color: #484848;}
+
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .delete{ border-radius: 3px; cursor: pointer; border: 0 none; background: #fff; width: 98px; height: 30px; color: #484848; font-size: 16px;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .delete:hover { color: #fff;background:#4eb008;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .adds{ border-radius: 3px; cursor: pointer; border: 0 none; background: #fff; width: 98px; height: 30px; color: #484848; font-size: 16px;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .adds:hover{ color: #fff;background:#4eb008;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .deletes{ border-radius: 3px; cursor: pointer; border: 0 none; background: #fff; width: 98px; height: 30px; color: #484848; font-size: 16px;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .deletes:hover { color: #fff;background:#4eb008;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .back{ border-radius: 3px; cursor: pointer; border: 0 none; background: #fff; width: 98px; height: 30px; color: #484848; font-size: 16px;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .back:hover { color: #fff;background:#4eb008;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .setRank{ border-radius: 3px; cursor: pointer; border: 0 none; background: #fff; width: 98px; height: 30px; color: #484848; font-size: 16px;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .setRank:hover { color: #fff;background:#4eb008;}
+
+
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .search{ border-radius: 3px; display: inline-block; position: relative; margin-left: 5px;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .search .dicSearch:hover .icon-search{ color: #fff;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .search .dicSearch .icon-search{ top: -4px; right: 2px;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .search input{ border-radius: 3px; border: 0 none; color: #484848; height: 30px; text-indent: 10px; background: #fff;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .search .icon-search{ cursor: pointer;font-size: 24px; color: #6b6767;}
+.wrap .wrap_inner .primary .main_content .shop{ }
+.wrap .wrap_inner .primary .main_content .shop .table{ text-align: center; border: 1px solid #ddd;}
+.wrap .wrap_inner .primary .main_content .shop .table tbody tr{ cursor: pointer; height: 45px; line-height: 45px;}
+.wrap .wrap_inner .primary .main_content .shop .table thead tr{ height: 45px; line-height: 45px;}
+.wrap .wrap_inner .primary .main_content .shop .table thead tr th{ background: #ededed;}
+.wrap .wrap_inner .primary .main_content .shop .table thead tr th,
+.wrap .wrap_inner .primary .main_content .shop .table tbody tr td{ border: 1px solid #ddd;}
+.wrap .wrap_inner .primary .main_content .shop .table tbody tr td.td_hover:hover{ color: #186ab7; text-decoration: underline;}
+.wrap .wrap_inner .primary .main_content .shop .table thead tr .chooseAll{ cursor: pointer; vertical-align: middle; color: #000; border: 0 none; border: 1px solid #ddd; width: 15px; height: 15px; margin-top: 0;}
+.wrap .wrap_inner .primary .main_content .shop .table tbody tr:hover{ background: #FFF9DE;}
+.wrap .wrap_inner .primary .main_content .shop .table tbody tr.current{ background: #e9ffd9;}
+.wrap .wrap_inner .primary .main_content .shop .table tbody tr .choose{ cursor: pointer; vertical-align: middle; color: #000; border: 0 none; border: 1px solid #ddd; width: 15px; height: 15px; margin-top: 0;}
+.wrap .wrap_inner .primary .main_content .shop .table tbody tr td a{ color: #186ab7; border: 1px solid #ddd; padding: 1px 14px; border-radius: 5px;}
+.wrap .wrap_inner .primary .main_content .shop .table tbody tr td a:hover{ color: red;}
+.wrap .wrap_inner .primary .main_content .shop .table tbody tr td a.current{ color: #fff; background: #4eb008;}
+.wrap .wrap_inner .primary .main_content .footer{ margin: 15px 10px; font-size: 14px; color: #1c568a;}
+.wrap .wrap_inner .primary .main_content .footer .{ margin-left: 5px;}
+.wrap .wrap_inner .primary .main_content .footer .choosePage{ display: inline-block; font-size: 14px; float: left; margin-right: 20px;}
+.wrap .wrap_inner .primary .main_content .footer select{ width: 45px; height: 21px;}
+.wrap .wrap_inner .primary .main_content .footer .page{ float: right;}
+.wrap .wrap_inner .primary .main_content .footer .page li{ float: left;}
+.wrap .wrap_inner .primary .main_content .footer .page li a{ display: inline-block; font-size: 14px; color: #1c568a; background: url(../img/pageIcon.png) no-repeat -35px -3px; width: 55px; height: 20px; line-height: 20px; margin-right: 5px; text-align: center;}
+.wrap .wrap_inner .primary .main_content .footer .page li .go{ width: 25px; background: url(../img/pageIcon.png) no-repeat -6px -3px; font-size: 12px;}
+.wrap .wrap_inner .primary .main_content .footer .page li a span{ display: inline-block; width: 12px; height: 12px; background: url(../img/pageIcon.png) no-repeat; position: relative; top: 1px;}
+.wrap .wrap_inner .primary .main_content .footer .page li a .left{ background-position: -132px -3px;}
+.wrap .wrap_inner .primary .main_content .footer .page li a .up{ background-position: -95px -3px;}
+.wrap .wrap_inner .primary .main_content .footer .page li a .next{ background-position: -110px -3px;}
+.wrap .wrap_inner .primary .main_content .footer .page li a .right{ background-position: -153px -3px;}
+.wrap .wrap_inner .primary .main_content .footer .page li input{ width: 25px; height: 18px; border: 0 none; border: 1px solid #7f9db9; text-align: center;}
+
+/*MDialog*/
+.ui-MDialog-table{ font-family: "Microsoft YaHei"; font-size: 18px;}
+.ui-MDialog-title{ color: #1c568a; font-size: 18px; text-indent: 10px;}
+.dialog_content{ background: #f5f5f5; border: 1px solid #ddd; text-align: center; color: #1c568a; padding: 50px 0;}
+.dialog_content form .bar{ margin: 20px 0;}
+.dialog_content form .bar label{ margin-right: 10px;}
+.dialog_content form .formbox label{ width: 170px; display: inline-block; text-align: right;}
+.dialog_content form .bar input{ width: 330px; border: 0 none; border: 1px solid #ddd; text-indent: 5px;}
+.dialog_content form .bar input:focus,
+.dialog_content form .bar select:focus{ border-color: #4eb008; box-shadow: 0 0 3px #4eb008;}
+.dialog_content form .bar .icon-xiaoxingxing{ color: #ff0600; margin-left: 5px; font-size: 18px;}
+.ui-MDialog-bottom button{ float: right;}
+.ui-MDialog-bottom .ui-MDialog-autofocus{ float: left;}
+.ui-MDialog-wrap .ui-MDialog-bottom button.ui-MDialog-autofocus{ background: #4eb008; border-color: #4eb008; font-size: 14px;}
+.ui-MDialog-wrap .ui-MDialog-bottom button.ui-MDialog-autofocus:hover{ background: #429706;}
+.ui-MDialog-wrap .ui-MDialog-bottom button{ font-size: 14px;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .search .position{ left: 0; width: 24px;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .search .buttonPosition{ position: absolute; top: 8px; right: 0; width: 32px; height: 30px; line-height: 30px;}
+.study{ height: 40px; line-height: 40px; margin: 10px;}
+.study .tabs{ height: 40px; border-bottom: 1px solid #ddd;}
+.study .tabs li{ float: left;}
+.study .tabs li a{ display: block; padding: 0 10px; text-align: center; color: #4eb008; border: 1px solid #fff; border-bottom: 0;}
+.study .tabs li a.current{ color: #484848; border: 1px solid #ddd; border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom: 0; background: #fff;}
+.main_content_tabs{ display: none;}
+.dialog_teacher{ padding: 10px 0;}
+.dialog_teacher form .formbox label{ width: 15%;}
+.dialog_teacher form .formbox input{ width: 45%;}
+.dialog_teacher form .formbox .laydate-icon{ height: 28px; line-height: 28px;}
+.dialog_teacher form .position{ position: relative; left: -14px;}
+.dialog_teacher form .formbox select{ width: 45%; height: 30px; border: 0 none; border: 1px solid #ddd;}
+.laydate-icon, .laydate-icon-default, .laydate-icon-danlan, .laydate-icon-dahong, .laydate-icon-molv{ padding-right: 0!important;}
+.ui-MDialog-body{ overflow-y: auto;}
+.upload-dialog-list .upload-dialog-primary .upload-form{ height: auto!important; padding-top: 0!important;}
+.upload-form .fieldset-list{ padding-top: 0!important;}
+.upload-dialog-list .upload-list{ height: 679px!important;}
+.upload-list .add-file{ background: #ddd; border: 1px solid #ddd; padding: 2px 0px;}
+.upload-list .add-file:hover{ background: #4eb008!important; border: 1px solid #4eb008; color: #fff;}
+.upload-dialog-list{ min-height: 450px!important;}
+.am-form{ margin: 0 10px 15px; }
+.am-form input{ text-indent: 10px; }
+.am-form input:focus,
+.am-form select:focus{ border-color: #4eb008; box-shadow: 0 0 3px #4eb008; }
+ .am-form .select2-container--default input:focus,
+ .am-form .select2-container--default select:focus {box-shadow: none;border-color: none;}
+.am-margin-top-xs{ margin: 10px;}
+.am-margin-top-xs button{ background: #ddd; border: 1px solid #ddd; padding: 0 10px; height: 27px; font-size: 16px; cursor: pointer;}
+.am-margin-top-xs button:hover{ background: #4eb008; border: 1px solid #4eb008; color: #fff;}
+.upload-list ul li .ico-close{ text-align: center; line-height: 18px;}
+.upload-list ul li .ico-close .icon-xiaochahao{ color: #555;}
+.upload-list ul li .ico-close .icon-xiaochahao:hover{ color: red;}
+.selectResource{ margin-bottom: 20px; font-size: 16px;}
+.selectResource select{ width: 200px; border: 0 none; border: 1px solid #ddd; height: 27px; font-size: 16px;}
+.file{ font-size: 16px;}
+.file .up_list{ margin-bottom: 10px; display: inline-block;}
+.file .code{ display: inline; margin-left: 20px;}
+.file .code input{ width: 60px;}
+.up_list span{ width: 110px; display: inline-block; text-align: right;margin-bottom: 10px; padding-bottom: 10px;}
+
+.file .up_list input{ width: 300px;}
+.file input{ font-size: 16px; border: 0 none; border: 1px solid #ddd; height: 27px;}
+.upload-list h3{ font-size: 16px!important;}
+.dialog_resource{ padding: 0;}
+.dialog_resource form .formbox label{ width: 15%;}
+.dialog_resource form .formbox span{ width: 70%; display: inline-block; height: 27px; text-align: left;}
+.dialog_resource form .formbox textarea{ padding: 5px; border: 0 none; border: 1px solid #ddd; resize: none;}
+.dialog_content textarea:focus{ border-color: #4eb008; box-shadow: 0 0 3px #4eb008;}
+.dialog_resource form .position label{ position: relative; top: -84px; left: 4px;}
+.resource_sort{ padding: 10px 0;}
+.dialog_content.resource_sort form .formbox label{ width: 22%;}
+.dialog_content.resource_sort form .formbox input{ width: 45%;}
+.siteCms .dialog_content form .bar .template{ display: inline-block; width: 350px; text-align: left;}
+.siteCms .dialog_content form .bar .template button{ padding: 1px 10px; cursor: pointer; color: #333; background: #ddd;}
+.siteCms .dialog_content form .bar .template button:hover{ background: #4eb008; color: #fff;}
+.siteCms .dialog_content form .bar .template span{ display: inline-block; margin-right: 25px;}
+.siteCms .dialog_content form .bar .template span input{ width: 15px; height: 15px; margin-right: 2px;}
+.siteCms .dialog_content form .bar .template span img{ width: 50px; height: 40px;}
+.siteCms .dialog_content form .bar .template span img{ width: 50px; height: 40px;}
+.siteCms .dialog_content form .siteSave{  margin: 20px 200px 0 0;}
+.siteCms .dialog_content form .siteSave a{ padding: 3px 15px; background: #ddd; float: right; color: #333; background: #ddd; border-radius: 3px;}
+.siteCms .dialog_content form .siteSave a:hover{ background: #4eb008; color: #fff;}
+.siteCms .dialog_content form .bar .div_pic{ display: inline-block; width: 262px;}
+.siteCms .dialog_content form .bar .webuploader-container{ display: inline-block; }
+.siteCms .webuploader-pick-hover .btns{ color: #4eb008;}
+.picker_pic:hover{ color: #4eb008; cursor: pointer;}
+.positionTop .webuploader-container{ display: inline-block;}
+.positionTop .webuploader-pick-hover .btns{ color: #4eb008;}
+.div_pic{ vertical-align: middle;}
+
+/*常见问题*/
+.dialog_content form.questionCommon .bar{ display: table;}
+.dialog_content form.questionCommon .bar label{ display: table-cell; vertical-align: middle;}
+.dialog_content form.questionCommon .bar textarea{ padding: 5px; margin-left: 10px; resize: none; border-radius: 5px;}
+
+/*学习空间*/
+.wrap .wrap_inner .primary .main_content .main_content_title .edit_personInfo{ float: right;}
+.wrap .wrap_inner .primary .main_content .main_content_title .edit_personInfo button{ border-radius: 3px; cursor: pointer; border: 0 none; background: #fff; width: 70px; height: 30px; color: #484848; font-size: 16px;}
+.wrap .wrap_inner .primary .main_content .main_content_title .edit_personInfo button:hover{ color: #fff; background: #4eb008;}
+.primary .main_content .personInfo{ padding: 30px; min-height: 210px; border-bottom: 1px solid #ddd;}
+.primary .main_content .personInfo strong{ font-size: 18px; color: #186ab7;}
+.primary .main_content .personInfo .iconImg{ float: left;}
+.primary .main_content .personInfo .iconImg .position{ height: 155px; width: 155px; position: relative; left: 120px; display: inline-block;}
+.primary .main_content .personInfo .iconImg .position img{ position: absolute;}
+.primary .main_content .personInfo .iconImg .position img.personImg{ z-index: 998;}
+.primary .main_content .personInfo .iconImg .position img.personImg_bg{ z-index: 999;}
+.primary .main_content .personInfo .iconImg a{ color: #868686; margin: 10px 0; display: block;}
+.primary .main_content .personInfo .iconImg .signName{ text-align: center; width: 400px;}
+.primary .main_content .personInfo .iconImg .signName label{ color: #186ab7;}
+.primary .main_content .personInfo form{ margin-top: 15px; margin-left: 450px;}
+.primary .main_content .personInfo form div{ margin: 10px 0;}
+.primary .main_content .personInfo form div label{ width: 110px; display: inline-block; text-align: right; color: #186ab7;}
+.primary .main_content .personInfo form div label .iconfont{ margin-right: 5px;}
+.primary.browse .main_content .shop table tr td img{ margin-right: 5px; vertical-align: middle;}
+.primary.browse .main_content .main_content_title .attr .icon-yanjing{ font-size: 20px;}
+.primary .main_content .mainInfo_spacing{ margin-left: 60px; margin-top: 35px;}
+.primary .main_content .mainInfo_spacing .bar{ margin-bottom: 10px;}
+.primary .main_content .mainInfo_spacing .bar label{ width: 100px; display: inline-block; text-align: right; margin-right: 5px; color: #186ab7;}
+.personal{ padding: 30px;}
+.personal .trueName{ color: #186ab7; font-size: 18px; float: left;}
+.primary .main_content .mainInfo_spacing .left{ float: left;}
+.primary .main_content .mainInfo_spacing .right{ float: left; margin-left: 80px;}
+.collectList{ padding: 10px;}
+.collectList .section{ width: 925px; overflow: hidden;}
+.collectList .section li{ float: left; margin: 0 9px 10px 0; position: relative;}
+.collectList .section li .check_collect{ position: absolute; right: 4px; top: 2px;}
+.collectList .section li .check_collect input{ width: 15px; height: 15px; cursor: pointer;}
+.coursetList .section{ width: 925px; overflow: hidden;}
+.coursetList .section li{ float: left; margin: 0 9px 10px 0; position: relative;}
+.coursetList .section li .check_collect{ position: absolute; right: 4px; top: 2px;}
+.coursetList .section li .check_collect input{ width: 15px; height: 15px; cursor: pointer;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .edit_collect,
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .delete_collect,
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .cancle_collect{ border-radius: 3px; cursor: pointer; border: 0 none; background: #fff; width: 70px; height: 30px; color: #484848; font-size: 16px;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .edit_collect:hover,
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .delete_collect:hover,
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .cancle_collect:hover{ color: #fff; background: #4eb008;}
+.collectList .section li a{ display: block; border: 1px solid #ddd;}
+.collectList .section li a img{ display: block; vertical-align: middle;}
+.collectList .section li a p{ font-size: 16px; color: #333; padding: 6px 10px; text-align: center;}
+.collectList .section li a:hover p{ color: #4eb008;}
+.collectList .section li a .nameSchool{ color: #8e8e8e; text-align: center; height: 30px; font-size: 14px;}
+.collectList .section li a .nameSchool .iconfont{ font-size: 14px;}
+.collectList .section li a .nameSchool span{ }
+.collectList .section li a .nameSchool .right{ float: right;}
+.coursetList .section li a{ display: block; border: 1px solid #ddd;}
+.coursetList .section li a img{ display: block; vertical-align: middle;}
+.coursetList .section li a p{ font-size: 16px; color: #333; padding: 6px 10px; text-align: center;}
+.coursetList .section li a:hover p{ color: #4eb008;}
+.coursetList .section li a .nameSchool{ color: #8e8e8e; text-align: center; height: 30px; font-size: 14px;}
+.coursetList .section li a .nameSchool .iconfont{ font-size: 14px;}
+.coursetList .section li a .nameSchool span{ }
+.coursetList .section li a .nameSchool .right{ float: right;}
+.noEditor{ border: 0 none; background: #fff;}
+.personinfoList input{ padding: 5px 5px 5px 8px; width: 200px; height: 18px; border-radius: 3px;}
+.personinfoList select{ padding-left: 8px; width: 215px; height: 30px; border-radius: 3px;}
+.personinfoList input.hover:hover{ box-shadow: 0 0 3px #4eb008; cursor: pointer;}
+.personinfoList select.hover:hover{ box-shadow: 0 0 3px #4eb008; cursor: pointer;}
+.addHobby{ margin-left: 5px; cursor: pointer;}
+.addHobby:hover{ color: #4eb008;}
+.ui-MDialog-content .hobby{ margin: 10px 20px;}
+.ui-MDialog-content .hobby ul{ width: 450px; margin-left: 10px;}
+.ui-MDialog-content .hobby ul li{ position: relative; border: 1px solid #ddd; border-left: 0 none; height: 20px; float: left; font-size: 14px; margin: 0 5px 10px 10px; padding: 0 15px; cursor: pointer; border-radius: 3px;}
+.ui-MDialog-content .hobby ul li .bg{ position: absolute; top: -3px; left: -7px; background: url(../img/icon_study.png) no-repeat -198px -2px; width: 10px; height: 25px; display: block;}
+.ui-MDialog-content .hobby ul li .iconfont{font-size: 14px; color: #ffa105;}
+.ui-MDialog-content .hobby ul li span.check{ color: #333;}
+.ui-MDialog-content .hobby ul li:hover{ background: #ddd;}
+.ui-MDialog-content .hobby ul li:hover .iconfont{ color: #333;}
+.ui-MDialog-content .hobby ul li:hover .bg{ background-position: -211px -2px;}
+.ui-MDialog-content .hobby ul li.current{ background: #ddd;}
+.ui-MDialog-content .hobby ul li.current .iconfont{ color: #333;}
+.ui-MDialog-content .hobby ul li.current .bg{ background-position: -211px -2px;}
+.dialog_content.changePassword{ padding: 0;}
+.dialog_content.changePassword form .formbox label{ width: 100px;}
+.dialog_content.changePassword form .formbox input{ width: 180px;}
+/*资源管理*/
+.picker_width .webuploader-pick{ background: #ddd; margin-top: 10px;}
+.picker_width .webuploader-pick:hover{ color: #fff; background: #4eb008;}
+.picker_width .webuploader-pick-hover{ color: #fff; background: #4eb008;}
+.ui-MDialog-content .checkResource{ margin: 0 30px;}
+.ui-MDialog-content .checkResource h3{ font-size: 18px; margin: 10px 0; text-indent: 15px;}
+.ui-MDialog-content .checkResource ul{ }
+.ui-MDialog-content .checkResource ul li{ margin: 10px 0; padding-bottom: 5px; border-bottom: 1px solid #ddd;}
+.ui-MDialog-content .checkResource ul li label{ width: 20%; text-align: right; display: inline-block; margin-right: 10px;}
+.ui-MDialog-content .editDocInfo{ margin: 10px 30px  30px;}
+.ui-MDialog-content .editDocInfo form{ }
+.ui-MDialog-content .editDocInfo form .bar{ margin-bottom: 15px;}
+.ui-MDialog-content .editDocInfo form .bar label{ width: 25%; text-align: right; display: inline-block; margin-right: 10px;}
+.ui-MDialog-content .editDocInfo form .bar .docName{ width: 292px; height: 41px; border-radius: 4px; padding: 0 5px;}
+.ui-MDialog-content .editDocInfo form .bar .docName.integral{ width: 50px;}
+
+/*用户管理*/
+.userRealname{ margin: 0 20px;}
+.userRealname .bar{ margin-bottom: 10px; padding-bottom: 5px; border-bottom: 1px solid #ddd;}
+.userRealname .bar label{ width: 150px; text-align: right; display: inline-block;}
+.userRealname .bar span{ }
+
+
+.search_selectInput{ background: #ddd; padding: 5px 30px;height:32px;}
+.search_selectInput .refresh{ display: inline-block; margin-right: 10px; background: #fff; width: 30px; height: 30px; text-align: center; border: 1px solid #c3c3c4; border-radius: 3px;cursor:pointer;}
+.search_selectInput select{ width: 150px; border: 1px solid #c3c3c4; border-radius: 3px; height: 30px; margin-right: 10px;}
+.search_selectInput .search{ float: right; border-radius: 3px; border: 1px solid #c3c3c4; display: inline-block; position: relative;}
+.search_selectInput .search .dicSearch:hover .icon-search{ color: #fff;}
+.search_selectInput .search .dicSearch .icon-search{ top: -4px; right: 2px;}
+.search_selectInput .search input{ border-radius: 3px; border: 0 none; color: #484848; height: 30px; text-indent: 10px; background: #fff;}
+.search_selectInput .search .icon-search{ cursor: pointer;font-size: 24px; color: #6b6767;}
+.search_selectInput .search .position{ left: 0; width: 24px;}
+.search_selectInput .search .buttonPosition{ border: 0 none; border-radius: 3px; background: #fff; position: absolute; top: 0; right: 0; width: 32px; height: 30px; line-height: 30px;}
+.search_selectInput .search .buttonPosition:hover{ color: #fff; background: #4eb008;}
+.search_selectInput .search .buttonPosition:hover .icon-search{ color: #fff;}
+
+/*common用户修改页面*/
+.wrap_perInfo { width: 1200px;margin: 20px auto;min-height: 600px;background: #fff;padding-top: 100px; }
+.wrap_perInfo form {margin: 0 auto; width: 700px;text-align: center;}
+.wrap_perInfo form .left {float: left; width: 450px;}
+.wrap_perInfo form .right {float: left;text-align: center; }
+.wrap_perInfo form .bar {margin-bottom: 15px;}
+.wrap_perInfo form .bar label {width: 150px;display: inline-block;text-align: right;font-size: 16px;}
+.wrap_perInfo form .bar input {width: 200px;border-radius: 3px;padding: 5px;height: 20px;}
+.wrap_perInfo form .bar select { width: 212px; border-radius: 3px;padding: 5px;height: 32px; }
+.wrap_perInfo .button {text-align: center;margin: 30px 0;}
+.wrap_perInfo .button button {margin-right: 10px; background: #3bcf00;color: #fff;font-size: 16px;padding: 2px 15px;border: 0 none;border-radius: 3px;}
+.wrap_perInfo .button button:hover {background: #32a604;}
+
+/*随学随考*/
+.subject_content{ margin-left: 230px; background: #fff; min-height: 600px; border: 1px solid #ddd;}
+.subject_content .subject_title{ height: 45px; line-height: 45px; font-size: 18px; padding: 0 20px; border-bottom: 1px solid #ddd;}
+.subject_content .subject_title label{ font-size: 14px; color: #aaa;}
+.subject_content .item{ margin: 10px 20px;}
+.subject_content .item .priList{ font-size: 16px; overflow: hidden; margin-bottom: 30px; padding-bottom: 10px; border-bottom: 1px dashed #ddd;}
+.subject_content .item .priList .choices{ margin: 15px 0 10px 18px;}
+.subject_content .item .priList .choices li{ float: left; margin: 10px 40px 10px 0;}
+.subject_content .item .priList .choices li input{ width: 15px; height: 15px; vertical-align: middle; margin: 0 10px 2px 0;}
+.subject_content .item .priList .choices li span.count{ margin-right: 10px;}
+.subject_content .item .priList .choices li span{ font-weight: bold; color: #666;}
+.subject_content .btn_back,
+.subject_content .btn_again,
+.subject_content .btn_submit{ margin: 20px 20px 10px 20px; display: inline-block; color: #fff; font-size: 16px; background: #3fdc00; padding: 3px 15px; border-radius: 3px;}
+.subject_content .btn_back:hover,
+.subject_content .btn_again:hover,
+.subject_content .btn_submit:hover{ background: #34b600;}
+.subject_content .subject_submit{ padding-bottom: 10px; text-align: right;}
+.subject_content .subject_submit .btn_submit{ margin: 0;}
+.subject_content .btn_back,
+.subject_content .btn_again{ float: right;}
+.subject_content .btn_again{ margin-right: 0;}
+.subject_content .btn_score{ float: left; margin: 20px; font-size: 18px; padding: 0 10px;}
+.subject_content .btn_score i{ font-weight: bold; color: #ea6922;}
+.dialog_content.edit_rule table .bar input{ width: 60px;}
+.dialog_content.edit_rule table .bar label{ width: 40%;}
+                        
+                    
+                    
+                   
+                    
+                    
+                    
+                    
+                    
+                
+                
+                
+            
+
+                       
+                       
+                        
+                        
+                   
+                        
+                        
+                        
+                        
+                    
+                        
+                        
+                        
+                        
+                    
+                    
+                
+                    
+                    
+               
+                    
+                   
+                
+                
+               
+                
+            
+       

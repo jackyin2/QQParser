@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <title>内蒙古终身教育网</title>
+    <script>
+        (function () {
+            var deviceWidth = parseInt(window.screen.width);
+            var deviceScale = deviceWidth / 1200;
+            var doc = window.document;
+            var ua = navigator.userAgent;
+            var metaEl = doc.querySelector('meta[name="viewport"]');
+            if (!metaEl) {
+                metaEl = doc.createElement('meta');
+                metaEl.setAttribute('name', 'viewport');
+                doc.head.appendChild(metaEl);
+            }
+            metaEl.setAttribute('content', 'width=device-width,initial-scale=' + deviceScale + ',minimum-scale=' + deviceScale);
+        }());
+    </script>
+    <link rel="stylesheet" type="text/css" href="/common/css/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="/common/css/amazeui.upc.min.css">
+    <link rel="stylesheet" type="text/css" href="/common/css/amazeui.datetimepicker.css">
+    <!-- <link rel="stylesheet" type="text/css" href="/common/css/index_teacher.css"> -->
+    <link rel="stylesheet" type="text/css" href="/common/css/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="/common/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/common/css/questionnaire.css">
+    <link rel="stylesheet" type="text/css" href="/common/css/select2.min.css">
+    <script type="text/javascript" src="/common/js/jquery.js"></script>
+    <script type="text/javascript" src="/common/js/amazeui.min.js"></script>
+    <script type="text/javascript" src="/common/js/amazeui.datetimepicker.min.js"></script>
+    <script type="text/javascript" src="/common/js/jqueryui.js"></script>
+    <script type="text/javascript" src="/common/js/app.js"></script>
+    <script type="text/javascript" src="/common/js/common.js"></script>
+    <script type="text/javascript" src="/common/js/select2.min.js"></script>
+    <script type="text/javascript" src="/common/js/pagination.js"></script>
+    <script type="text/javascript" src="/study/js/app.js"></script>
+
+</head>
+<body>
+    <div class="d-header">
+        <div class="am-topbar am-topbar-inverse">
+            <div class="am-g am-g-fixed am-g-collapse" id="top">
+                <script type="text/html" id="stuInfo">
+                    <div class="am-u-sm-6 am-text-left">
+                    <div class="sh-questionnaire-user">
+                        <span class="am-icon am-icon-user"></span>
+                        <span>{{stuInfo.Name}}<h2 class="sh-questionnaire-title">您好，欢迎填写！ </h2> </span>
+                    </div>
+                </div>
+                </script>
+            </div>
+        </div>
+    </div>
+    <!-- 主框架 -->
+    <div class="wrapper">
+        <div class="container">
+            <div class="content" id="questioncontent">
+                <script type="text/html" id="questionInfo">
+                   <div class="sh-questionnaire-wrap am-g">
+                        <div class="sh-questionnaire-inner">
+                            {{if list.length>0}}
+                               {{if isSubmit==1}}
+                                您已经提交过该问卷，不能重复作答
+                                {{/if}}
+                                {{if isSubmit==0}}
+                                <!-- <div class="sh-questionnaire-brconner"></div> -->
+                                <div class="sh-questionnaire-clip"></div>
+                                <div class="sh-questionnaire-name"><span class="sh-questionnaire-doc"></span>{{activity.Name}}</div>
+                                <div class="sh-questionnaire-container" data-courseopenid="{{courseOpenId}}" data-activityid="{{activityId}}">
+                                   {{each list as item i}}
+                                   {{if item.NairQuestionType==1}}
+                                    <div class="am-panel am-panel-default e-q-body" data-nairquestiontype="{{item.NairQuestionType}}" data-answertype="{{item.AnswerType}}"  >
+                                        <form  method="post">
+                                            <input type="hidden" value="{{item.Id}}" name="questionId" />
+                                            <input type="hidden" value="{{activityId}}" name="activityId" />
+                                            <input type="hidden" value="1" name="NairQuestionType" />
+                                            <input type="hidden" value="{{courseOpenId}}" name="courseOpenId" />
+                                            <input type="hidden" id="{{item.Id}}" value="{{item.studentExaminationId}}" name="studentExaminationId" />                                       
+                                            <input type="hidden" name="answers" />
+                                            <div class="am-panel-hd">
+                                                <div class="am-panel-title am-fl">
+                                                    <div class="sh-questionnaire-qno">{{i+1}}、</div>
+                                                    <div class="sh-questionnaire-qtypes">{{item.Title}}</div>
+                                                    <div class="sh-questionnaire-qdesc">(单选题，{{if (item.AnswerType==1)}}必答{{else}}选答 {{/if}})</div>
+                                                </div>
+                                                <div class="am-text-right">
+                                                    <a class="am-btn am-btn-default sou-questionnaire-open">
+                                                        <span class="am-icon am-icon-caret"></span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="am-panel-bd">
+                                                <div class="am-form am-form-horizontal" role="form">
+                                                    <div class="am-form-group">
+                                                        <div class="e-a-g e-choice-a">
+                                                          <ul>
+                                                              {{each item.answerList as item2 a }}
+                                                                        <li class="e-a" data-index="{{item2.SortOrder}}">
+                                                                            <span class="e-a-right"></span>{{item2.SortOrder |num2zimu}}.
+                                                                        <div class="ErichText">
+                                                                            <!-- P标签是富文本编辑器产生，不属于模板的一部分 -->
+                                                                          {{item2.Content}}
+                                                                        </div>
+                                                                        </li>
+                                                              {{/each}}
+                                                          </ul>
+                                                      </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </form>
+                                    </div>   
+                                    {{/if}}
+                                    {{if item.NairQuestionType==2}}
+                                    <div class="am-panel am-panel-default e-q-body" data-nairquestiontype="{{item.NairQuestionType}}" data-answertype="{{item.AnswerType}}" >
+                                        <form  method="post">
+                                            <input type="hidden" value="{{item.Id}}" name="questionId" />
+                                            <input type="hidden" value="{{activityId}}" name="activityId" />
+                                            <input type="hidden" value="2" name="NairQuestionType" />
+                                            <input type="hidden" value="{{courseOpenId}}" name="courseOpenId" />
+                                             <input type="hidden" id="{{item.Id}}" value="{{item.studentExaminationId}}" name="studentExaminationId" />
+                                            <input type="hidden" name="answers" />
+                                            <div class="am-panel-hd">
+                                                <div class="am-panel-title am-fl">
+                                                    <div class="sh-questionnaire-qno">{{i+1}}、</div>
+                                                    <div class="sh-questionnaire-qtypes">{{item.Title}}</div>
+                                                    <div class="sh-questionnaire-qdesc">(多选题，{{if (item.AnswerType==1)}}必答{{else}}选答 {{/if}})</div>
+                                                </div>
+                                                <div class="am-text-right">
+                                                    <a class="am-btn am-btn-default sou-questionnaire-open">
+                                                        <span class="am-icon am-icon-caret"></span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="am-panel-bd">
+                                                <div class="am-form am-form-horizontal" role="form">
+                                                    <div class="am-form-group">
+                                                        <div class="e-a-g e-choice-a">
+                                                          <ul>
+                                                              {{each item.answerList as item2 a }}
+                                                                        <li class="e-a" data-index="{{item2.SortOrder}}">
+                                                                            <span class="e-a-right"></span>{{item2.SortOrder |num2zimu}}.
+                                                                        <div class="ErichText">
+                                                                            <!-- P标签是富文本编辑器产生，不属于模板的一部分 -->
+                                                                          {{item2.Content}}
+                                                                        </div>
+                                                                        </li>
+                                                              {{/each}}
+                                                          </ul>
+                                                      </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </form>
+                                    </div>   
+                                    {{/if}}
+                                     {{if item.NairQuestionType==3}}
+                                    <div class="am-panel am-panel-default e-q-body" data-nairquestiontype="{{item.NairQuestionType}}" data-answertype="{{item.AnswerType}}" >
+                                        <form  method="post">
+                                            <input type="hidden" value="{{item.Id}}" name="questionId" />
+                                            <input type="hidden" value="{{activityId}}" name="activityId" />
+                                            <input type="hidden" value="3" name="NairQuestionType" />
+                                            <input type="hidden" value="{{courseOpenId}}" name="courseOpenId" />
+                                             <input type="hidden" id="{{item.Id}}" value="{{item.studentExaminationId}}" name="studentExaminationId" />
+                                            <input type="hidden" name="answers" />
+                                            <div class="am-panel-hd">
+                                                <div class="am-panel-title am-fl">
+                                                    <div class="sh-questionnaire-qno">{{i+1}}、</div>
+                                                    <div class="sh-questionnaire-qtypes">{{item.Title}}</div>
+                                                    <div class="sh-questionnaire-qdesc">(量表题，{{if (item.AnswerType==1)}}必答{{else}}选答 {{/if}})</div>
+                                                </div>
+                                                <div class="am-text-right">
+                                                    <a class="am-btn am-btn-default sou-questionnaire-open">
+                                                        <span class="am-icon am-icon-caret"></span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="am-panel-bd">
+                                                <div class="am-form am-form-horizontal" role="form">
+                                                    <div class="am-form-group">
+                                                        <div class="e-a-g e-choice-a">
+                                                          <ul>
+                                                              {{each item.answerList as item2 a }}
+                                                                        <li class="e-a" data-index="{{item2.SortOrder}}">
+                                                                            <span class="e-a-right"></span>{{item2.SortOrder |num2zimu}}.
+                                                                        <div class="ErichText">
+                                                                            <!-- P标签是富文本编辑器产生，不属于模板的一部分 -->
+                                                                          {{item2.Content}}
+                                                                        </div>
+                                                                        </li>
+                                                              {{/each}}
+                                                          </ul>
+                                                      </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </form>
+                                    </div>   
+                                    {{/if}}
+                                    {{if item.NairQuestionType==4}}
+                                     <div class="am-panel am-panel-default e-q-body" data-nairquestiontype="{{item.NairQuestionType}}" data-answertype="{{item.AnswerType}}">
+                                        <form  method="post">
+                                            <input type="hidden" value="{{item.Id}}" name="questionId" />
+                                            <input type="hidden" value="{{activityId}}" name="activityId" />
+                                            <input type="hidden" value="4" name="NairQuestionType" />
+                                            <input type="hidden" value="{{courseOpenId}}" name="courseOpenId" />
+                                           <input type="hidden" id="{{item.Id}}" value="{{item.studentExaminationId}}" name="studentExaminationId" />
+                                            <div class="am-panel-hd">
+                                                <div class="am-panel-title am-fl">
+                                                    <div class="sh-questionnaire-qno">{{i+1}}、</div>
+                                                    <div class="sh-questionnaire-qtypes">{{item.Title}}</div>
+                                                    <div class="sh-questionnaire-qdesc">(问答题，{{if (item.AnswerType==1)}}必答{{else}}选答 {{/if}})</div>
+                                                </div>
+                                                <div class="am-text-right">
+                                                    <a class="am-btn am-btn-default sou-questionnaire-open">
+                                                        <span class="am-icon am-icon-caret"></span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="am-panel-bd">
+                                                <div class="am-form am-form-horizontal" role="form">
+                                                    <div class="am-form-group">
+                                                        <div class="am-u-sm-11">
+                                                            <textarea id="" cols="30" rows="6" style="width: 100%;" class="am-textarea" name="answers">{{item.Answer}}</textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    {{/if}}               
+                                    {{/each}}
+                                </div>
+                                <div class="am-text-center am-margin-bottom">
+                                    <a class="am-btn am-btn-success am-margin-right-sm saveQuestion">完成答题</a>
+                                </div>
+                                {{/if}}
+                            {{else}}
+                            问卷还未设置，请等待！
+                            {{/if}}
+                        </div>
+                    </div>
+                </script>
+           </div>
+       </div>
+   </div>
+    <script type="text/javascript" src="/study/js/questionnaire/answerquestion.js"></script>
+</body>
+</html>

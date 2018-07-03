@@ -1,0 +1,114 @@
+<!--#include file="/student/header.html"-->
+<div class="am-panel" id="right_content">
+    <div class="am-panel-hd">
+        <span>
+            <i class="am-icon am-icon-calendar am-margin-right-xs"></i>个人信息中心
+        </span>
+    </div>
+
+    <div class="am-panel am-panel-default  am-u-sm-15 am-padding-right-0" style="padding-left: 20px;" id="content_container">
+        <div class="sortlist am-cf">
+            <a href="#" data-type="1" class='quealltab active'>基本信息</a>
+            <a href="#" data-type="2" class='quealltab '>账号安全</a>
+            <div style="text-align: right; margin: 1% -70%;">
+                <a class='quealltab_ am-btn am-btn am-btn-secondary am-btn-default am-padding-horizontal-lg' data-type="1" id="change">修改信息</a>
+                <a class='quealltab_ am-btn am-btn am-btn-secondary am-btn-default am-padding-horizontal-lg' data-type="1" id="back" style="display: none">取消修改</a>
+                <a class='quealltab_ am-btn am-btn am-btn-secondary am-btn-default am-padding-horizontal-lg' data-type="1" id="save" style="display: none">保存</a>
+            </div>
+        </div>
+        <div class="am-tabs" style="margin: 10px 0 0 10px;" id="content_stuInfo">
+            <script id="table_html" type="text/html">
+                <input type="hidden" name="type" value="{{type}}" />
+                <form id="stuInfo" class="am-form am-form-horizontal am-g-collapse gform" style="margin: 10px 0 0 10px;">
+                    <div class="tab_div">
+                        <div class="am-form-group">
+                            <label class="am-u-sm-1">姓名:</label>
+                            <div class="am-u-sm-3 am-u-end">
+                                {{if stu.Name=="" || stu.Name==null }}---- {{else}} {{ stu.Name}}{{/if}}
+                            </div>
+                            <label class="am-u-sm-1">学号:</label>
+                            <div class="am-u-sm-3">
+                                {{if stu.StuNo=="" || stu.StuNo==null }}---- {{else}} {{ stu.StuNo}}{{/if}}
+                                <input type="hidden" name="Id" value="{{stu.Id}}" />
+                            </div>
+                            <label class="am-u-sm-1">用户类型:</label>
+                            <div class="am-u-sm-3">
+                                {{if stu.CustomerType=="" || stu.CustomerType==null }}---- {{else}} {{ stu.CustomerType}}{{/if}}
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label class="am-u-sm-1">性别:</label>
+                            <div class="am-u-sm-3">
+                                {{if stu.Sex=="" || stu.Sex==null }}---- {{else}} {{ stu.Sex}}{{/if}}
+                            </div>
+                            <label class="am-u-sm-1">证件类型:</label>
+                            <div class="am-u-sm-3">
+                                {{if stu.CertificateType=="" || stu.CertificateType==null }}---- {{else}} {{ stu.CertificateType}}{{/if}}
+                            </div>
+                            <label class="am-u-sm-1">证件号:</label>
+                            <div class="am-u-sm-3">
+                                {{if stu.CertificateCode=="" || stu.CertificateCode==null }}---- {{else}} {{ stu.CertificateCode}}{{/if}}
+                            </div>
+                        </div>
+                        <div class="am-form-group">
+                            <label class="am-u-sm-1">移动电话:</label>
+                            <div class="am-u-sm-3">
+                                <div class="old" id="Mobile">{{if stu.Mobile=="" || stu.Mobile==null }} ---- {{else}} {{ stu.Mobile}} {{/if}}</div>
+                                <div class="new" style="display: none">
+                                    <input name="Mobile" maxlength="11" value="{{ stu.Mobile }}" onkeypress="if (event.keyCode < 48 || event.keyCode > 57) event.returnValue = false;" placeholder="请输入11位手机号" />
+                                </div>
+                            </div>
+                            <label class="am-u-sm-1">固定电话:</label>
+                            <div class="am-u-sm-3">
+                                <div class="old" id="Phone">{{if stu.PhoneNum=="" || stu.PhoneNum==null }}---- {{else}} {{ stu.PhoneNum}}{{/if}}</div>
+                                <div class="new" style="display: none">
+                                    <input name="Phone" maxlength="8" value="{{ stu.Phone}}" onkeypress="if (event.keyCode < 48 || event.keyCode > 57) event.returnValue = false;" placeholder="请输入7/8位的座机号" />
+                                </div>
+                            </div>
+                            <label class="am-u-sm-1">电子邮箱:</label>
+                            <div class="am-u-sm-3">
+                                <div class="old" id="Email">{{if stu.Email=="" || stu.Email==null }}---- {{else}} {{stu.Email}}{{/if}}</div>
+                                <div class="new" style="display: none">
+                                    <input name="Email" value="{{stu.Email}}" placeholder="E-mail地址" maxlength="20" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </script>
+        </div>
+
+        <form id="eidtPwdDiv" style="display: none" class="am-form am-form-horizontal">
+            <div class="tab_div am-margin-top-sm">
+                <div class="am-form-group">
+                    <label class="am-u-sm-2" style="width: 130px;"><span style="color: red;">*</span>请输入原始密码：</label>
+                    <div class="am-u-sm-4">
+                        <input type="password" name="oldPwd" class="am-input-field am-input-sm" />
+                    </div>
+                    <span class="Warm am-u-sm-4 am-u-end errorSpan"></span>
+                </div>
+                <div class="am-form-group">
+                    <label class="am-u-sm-2" style="width: 130px;"><span style="color: red;">*</span>请输入新密码：</label>
+                    <div class="am-u-sm-4">
+                        <input type="password" name="newPwd" />
+                    </div>
+                    <span class="Hard am-u-sm-4 am-u-end errorSpan"></span>
+                </div>
+                <div class="am-form-group">
+                    <label class="am-u-sm-2" style="width: 130px;"><span style="color: red;">*</span>再次输入新密码：</label>
+                    <div class="am-u-sm-4">
+                        <input type="password" name="confirmPwd" />
+                    </div>
+                    <span class="Same am-u-sm-4 am-u-end errorSpan"></span>
+                </div>
+                <div class="am-form-group">
+                    <button id="editPw" type="button" class="am-btn am-btn-secondary am-btn-default">确认</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!--#include file="/student/footer.html"-->
+
+<script type="text/javascript" src="/student/js/stuInfo/stuInfo.js"></script>

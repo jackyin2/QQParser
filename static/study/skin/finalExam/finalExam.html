@@ -1,0 +1,64 @@
+<!--#include file="/study/header2.html"-->
+<div >
+  <form id="finalExam_form" method="get" class="am-form am-form-horizontal">
+    <input type="hidden" name="courseopenid" value="">
+    <div class="am-panel am-panel-default">
+      <div class="am-panel-hd am-cf">
+         <h3 class="am-panel-title"><span class="am-icon am-icon-file-o"></span>在线考试</h3>
+      </div>
+      
+      <div class=" am-padding-horizontal-0">
+        <div id="mainContent"></div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script type="text/html" id="finalExamList_html">
+    <table class="am-table" style="border-top:1px solid #ccc;" id="finalExamList_table">
+     <thead>
+        <tr>
+            <th class="am-text-center" style="width:6%">序号</th>
+            <th class="am-text-left">考试名称</th>
+            <th class="am-text-center" style="width:15%">考试时长</th>
+            <th class="am-text-center" style="width:10%">得分</th>
+            <th class="am-text-center" style="width:12%">操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{if finalExamList && finalExamList.length>0}}
+           {{each finalExamList as item i}}
+              <tr id="{{item.Id}}">
+                <td class="am-text-center">{{i+1}}</td>
+                <td class="am-text-left " title="{{item.Title}}">{{substring(item.Title,0,40)}}</td>
+                <td class="am-text-center " title="{{item.ExamDuration}}">{{item.ExamDuration}} 分钟</td>
+                <td class="am-text-center">
+                    {{if (item.GiveScore || item.GiveScore ==0)}}
+                      {{item.GiveScore}}分
+                    {{else}}---{{/if}}</td>
+                <td class="am-text-center">
+                    {{if (!item.GiveScore && item.GiveScore !=0)}}
+                       <a href='/study/finalExam/preview.html#paperId={{item.Id}}&courseOpenId={{courseOpenId}}&openClassId={{openClassId}}' target="_blank">去考试</a>
+                    {{else if item.IsMarked==1 || item.IsMarked==2}}            
+                      <a href='/study/finalExam/history.html#studentWorkId={{item.HomeWorkId}}&courseOpenId={{courseOpenId}}' target="_blank">查看</a>
+                    {{else}}
+                            非考试期间   
+                    {{/if}}
+                </td>
+            </tr>
+           {{/each}}
+         {{else}}
+            <tr>
+              <td style="border: 1px solid #ddd;" colspan="7">
+                  <div class="am-text-center">暂无数据</div>
+              </td>
+           </tr>
+        {{/if}}
+    </tbody>
+</table>
+
+</script>
+<script type="text/javascript" src="/study/js/finalExam/finalExam.js"></script>
+
+
+<!--#include file="/study/footer2.html"-->

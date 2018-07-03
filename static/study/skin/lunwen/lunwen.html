@@ -1,0 +1,155 @@
+<!--#include virtual="/study/header3.html"-->
+
+<div class="am-panel am-panel-default main_content">
+    <div class="am-panel-hd am-cf">
+        <h3 class="am-panel-title">
+            <span class="am-icon am-icon-tasks"></span>&nbsp;论文管理
+        </h3>
+        <div class="am-text-right">
+            <a id="btnAddThesis" class="am-btn am-btn-secondary am-btn-default am-padding-horizontal-lg add_btn">
+                <span class="am-icon am-icon-plus"></span>选题</a>
+        </div>
+    </div>
+
+    <div id="thesisQuestionList"></div>
+
+</div>
+
+<!--论文选题后的列表-->
+<script type="text/html" id="thesisQuestionListShow">
+    <style>
+        #table_info thead tr th {
+            text-align: center!important;
+        }
+    </style>
+    <div class="am-margin-top">
+        <table id="table_info" class="am-table am-text-center">
+            <thead>
+                <tr>
+                    <th width="15%">论文编码</th>
+                    <th width="15%">论文题目</th>
+                    <th width="20%">选题开始时间</th>
+                    <th width="20%">选题截止时间</th>
+                    <th width="20%">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{if list && list.length > 0}}
+                {{each list as items i}}
+                <tr id="{{items.Id}}">
+
+                    <td>{{items.Code}}</td>
+                    <td title="{{items.Title}}">{{#substring(items.Title,0,10)}}</td>
+                    <td>{{items.ThesisStartTime | dateFormat:'yyyy-MM-dd'}}</td>
+                    <td>{{items.ThesisEndTime | dateFormat:'yyyy-MM-dd'}}</td>
+                    <td><a class="upload" href="doc.html#Id={{items.Id}}" data-id="{{items.Id}}">论文</a>
+                        <a class="del" href="javascript:;" data-id="{{items.Id}}">删除</a>
+                    </td>
+                </tr>
+                {{/each}}
+                {{else}}
+                        <tr>
+                            <td colspan="6">
+                                <span class="am-text-center">暂无数据</span>
+                            </td>
+                        </tr>
+                {{/if}}
+            </tbody>
+        </table>
+        <div class="pagination ajax"></div>
+    </div>
+</script>
+
+
+
+<!--论文选题列表-->
+<script type="text/html" id="addThesis">
+    <style>
+        .pagination ul {
+            position: relative;
+            top: -2px!important;
+        }
+
+        .pagination select {
+            display: inline-block;
+            width: 45px!important;
+            height: 32px!important;
+            padding: 0!important;
+            line-height: 32px!important;
+            padding-left: 5px!important;
+        }
+
+        .pagination input {
+            display: inline-block!important;
+            width: 45px!important;
+            height: 32px!important;
+        }
+
+        .pagination .go {
+            position: relative;
+            top: 0!important;
+        }
+    </style>
+    <form id="form_data" class="am-form full am-form-horizontal am-g-collapse" action="" method="get">
+        <input type="hidden" name="Id" value="{{Id}}" />
+        <style>
+            #table_info1 thead tr th {
+                text-align: center!important;
+            }
+        </style>
+        <div class="am-form-group" style="padding-top: 15px;">
+            <label for="" class="am-form-label am-u-sm-2">论文标题：</label>
+            <div class="am-u-sm-2 am-u-end">
+                <input type="text" id="title" name="name" data-clearable="true" class="am-form-field " style="padding-right: 26px;" value="{{name}}"/>
+            </div>
+            <div class="am-u-sm-2 am-text-right am-u-end" style="padding-left: 20px;">
+                <a class="am-btn am-btn-success" id="query_btn" style="color: #fff;">
+                    <span class="am-icon am-icon-search"></span>查询
+                </a>
+            </div>
+        </div>
+        
+        <div class="am-margin-top">
+            <table id="table_info1" class="am-table am-text-center">
+                <thead>
+                    <tr>
+                        <th width="3%">
+                            <input type="checkbox" class="checkAll" />
+                        </th>
+                        <th width="20%">论文编码</th>
+                        <th width="30%">论文标题</th>
+                        <th width="20%">选题开始时间</th>
+                        <th width="20%">选题截止时间</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{if list.length > 0}}
+                {{each list as item}}
+                <tr id="{{item.Id}}">
+                    <td>
+                        <input type="checkbox" class="check" />
+                    </td>
+                    <td>{{item.Code}}</td>
+                    <td title="{{item.Title}}">{{#substring(item.Title)}}</td>
+                    <td>{{item.ThesisStartTime | dateFormat:'yyyy-MM-dd'}}</td>
+                    <td>{{item.ThesisEndTime | dateFormat:'yyyy-MM-dd'}}</td>
+                </tr>
+                    {{/each}}
+                {{else}}
+                <tr>
+                    <td colspan="10" style="background-color: #fff;">
+                        <div>暂无数据</div>
+                    </td>
+                </tr>
+                    {{/if}}
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination ajax"></div>
+    </form>
+</script>
+
+
+<!--内容右侧主体结束-->
+<script type="text/javascript" src="/study/js/lunwen/lunwen.js"></script>
+<!--#include virtual="/study/footer3.html"-->

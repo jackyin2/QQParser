@@ -1,0 +1,135 @@
+<!--#include file="/study/header2.html"-->
+<style type="text/css">
+    .tdcontent p {
+        margin: 0!important;
+    }
+</style>
+  <form id="indexForm" style="position: relative;">
+    <input type="hidden" name="courseOpenId" />
+    <input type="hidden" name="homeworkId" />
+      <div id="headContainer" class="am-panel am-panel-default"></div>
+      <div id="container" class="am-panel am-panel-default"></div>
+  </form>
+
+  <script id="table_head" type="text/html">
+      <div class="am-panel-hd clearfix">
+          <h3 class="am-panel-title"><span class="am-icon am-icon-columns"></span>在线作业详情</h3>
+            <div class="am-text-right">
+              {{ if ((homework.ReplyCount==-1 || homework.ReplyCount> homework.stuWorkCount) && currentTime>=homework.stuStartDate && currentTime<= homework.stuEndDate && homework.candowork==1)}}
+                 <a class="am-btn am-btn-success" href="/study/homeWork/preview.html#courseOpenId={{courseOpenId}}&openClassId={{openClassId}}&homeWorkId={{homework.Id}}" target="_blank">做作业</a>&nbsp;
+              {{/if}}
+            </div>
+       </div>
+
+       <div class="am-panel-bd">
+          <table style="width:100%" class="activity_info">
+                    <tr>
+                        <td style="width:15%">在线作业名称：</td>
+                        <td>{{ if homework.Title}} {{#homework.Title}} {{else}} --- {{/if}}</td>
+                    </tr>
+                  <!--  <tr>
+                        <td>作答开始时间：</td>
+                        <td>{{dateFormat(homework.stuStartDate,"yyyy-MM-dd")}}</td>
+                    </tr>
+                    <tr>
+                        <td>作答结束时间：</td>
+                        <td> {{dateFormat(homework.stuEndDate,"yyyy-MM-dd")}}</td>
+                    </tr>-->
+                   
+                    <tr>
+                        <td>作答次数：</td>
+                        <td>
+                           {{ if homework.ReplyCount==-1}}
+                              无限制 
+                           {{else}}
+                              {{ homework.ReplyCount}}
+                          {{/if}}
+                     </td>
+                    </tr>
+                  
+                    <tr>
+                        <td>已作答次数：</td>
+                        <td>{{homework.stuWorkCount}} 次</td>
+                    </tr>
+
+                    <tr>
+                        <td>答题要求：</td>
+                        <td class="tdcontent">
+                           {{ if homework.Remark}}
+                             {{#homework.Remark}}
+                           {{else}}
+                              暂无
+                           {{/if}}
+                        </td>
+                    </tr>
+
+                    {{ if homework.candowork==0}}
+                     <tr>
+                        <td>注意事项：</td>
+                        <td>
+                            <span style="color: red; font-weight: bold">
+                                主观题作业，学生一旦提交，将无法再次作答，若要重新作答，请联系面授老师，将作业退回后，方可重做。
+                            </span>
+                        </td>
+                    </tr>
+                    {{/if}}
+                </table>
+       </div>
+  </script>
+
+  <script id="table_html" type="text/html">
+      <div>
+         <table id="maintab" class="am-table" style="border-top:1px solid #ccc;">
+             <thead>
+                  <tr>
+                    <th style="text-align:left; width: 6%;">序号</th>
+                    <th style="text-align:center;width: 18%;">提交时间</th>
+                    <th style="text-align:center;width: 12%;">用时</th>
+                    <th style="text-align:center;width: 15%;">批阅状态</th>
+                    <th style="text-align:center;width: 12%;">得分</th>
+                    <th style="text-align:center;width:10%;">操作</th>
+                  </tr>
+               </thead>
+             <tbody>
+                    {{ if list.length>0 }}
+                        {{each list as item i}}
+                           <tr data-id="{{item.Id}}" data-courseopenid="{{item.courseOpenId}}">
+                                <td style="text-align:left;">{{item.pageSize*(item.pageIndex-1)+i+1}}</td>
+                                <td class="am-text-center">
+                                   {{dateFormat(item.dateCreated,"yyyy-MM-dd hh:mm:ss")}}
+                                 </td>
+                                <td class="am-text-center">{{item.strUseTime}}</td>
+                                <td class="am-text-center">
+                                    {{if item.isMarked == 1}}
+                                          已批阅
+                                    {{ else if item.isMarked==2}}
+                                          待批阅
+                                     {{else}}
+                                          已退回
+                                     {{/if}}
+                                </td>
+                                <td class="am-text-center">{{item.giveScore}}分</td>
+                                <td class="am-text-center">
+                                    {{ if item.useTime &&  item.useTime>0 }}
+                                        <a href="/study/homeWork/history.html#courseOpenId={{item.courseOpenId}}&homeWorkId={{item.HomeWorkId}}&studentWorkId={{item.Id}}" target="_blank">查看</a>&nbsp;
+                                    {{else}}
+                                        --
+                                    {{/if}}
+                                </td>
+                              </tr>
+                        {{/each}}
+                    {{else}}
+                         <tr>
+                           <td style="text-align:center" colspan="6">
+                             <span >暂无数据</span></td>
+                         </tr>
+                    {{/if}}
+               </tbody>
+          </table>
+       </div>
+      <div class="pagination ajax"></div>
+   </script>
+
+ <script type="text/javascript" src="/study/js/homework/detail.js"></script>
+
+<!--#include file="/study/footer2.html"-->

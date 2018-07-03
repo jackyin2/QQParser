@@ -1,0 +1,61 @@
+<!--#include virtual="/study/header2.html"-->
+<form id="right_content"  method="get" class="gform full">
+    
+    <div id="topic">
+        <div class="am-panel am-panel-default" >
+            <div class="am-panel-hd am-cf" id="AddCouserOpenId">
+               <h3 class="am-panel-title"><span class="am-icon am-icon-file-o"></span>问卷调查列表</h3>
+          </div>
+            <div id="content_container"></div>
+        </div>
+   </div>
+</form>
+
+  <script id="table_html" type="text/html">
+        <input type="hidden" id="courseOpenId" name="courseOpenId" value="{{courseOpenId}}" />
+        <input type="hidden" name="openClassId" value="{{openClassId}}" />
+                <table id="table_info" class="am-table am-text-center" style="border-top: 1px solid #ddd;">
+                    <thead>
+                        <tr>
+                            <th class="am-text-left" style="width: 6%;">序号</th>
+                            <th class="am-text-left">问卷名称</th>
+                            <th class="am-text-center" style="width: 15%;">开始时间</th>
+                            <th class="am-text-center" style="width: 15%;">结束时间</th>
+                            <th class="am-text-left" style="width: 10%;">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{if list && list.length > 0}}
+                          {{each list as item i}}
+                            <tr id="{{item.Id}}">
+                                <td class="am-text-left">{{(pagination.pageIndex - 1) * pagination.pageSize + i + 1}}</td>
+                                <td class="am-text-left">{{item.ActivityName}}</td>
+                                <td class="am-text-center">{{if item.StuStartDate}}{{item.StuStartDate | dateFormat:'yyyy-MM-dd '}}{{else}}---{{/if}}</td>
+                                <td class="am-text-center">{{if item.StuEndDate}}{{item.StuEndDate | dateFormat:'yyyy-MM-dd '}} {{else}}---{{/if}}</td>
+                                <td class="am-text-left">
+                                    {{if item.TermId}}
+                                        {{if dateCompare(nowTime, dateFormat(item.StuStartDate,"yyyy/MM/dd hh:mm:ss"),"<")|| dateCompare(nowTime, dateFormat(item.StuEndDate,"yyyy/MM/dd hh:mm:ss"),">") }}
+                                        <span style="color:red">非活动期间</span>
+                                        {{else}}
+                                        <a href="activityInfo.html#courseOpenId={{courseOpenId}}&openClassId={{openClassId}}&activityId={{item.Id}}">查看</a>
+                                        {{/if}}
+                                    {{else}}
+                                        未设置
+                                    {{/if}}
+                                </td>
+                            </tr>
+                        {{/each}}
+                        {{else}}
+                            <tr>
+                                <td colspan="4">
+                                    <span>暂无数据</span></td>
+                            </tr>
+                        {{/if}}
+                    </tbody>
+                </table>
+         <div class="pagination ajax"></div>
+    </script>
+
+ <!--#include virtual="/study/footer2.html"-->
+
+ <script type="text/javascript" src="/study/js/questionnaire/questionnaire.js"></script>

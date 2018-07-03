@@ -1,0 +1,78 @@
+<!--#include virtual="/student/header.html"-->
+
+<div class="am-panel am-panel-default main_content">
+    <div class="am-panel-hd am-cf">
+        <h3 class="am-panel-title">
+            <span class="am-icon am-icon-tasks"></span>&nbsp;我的项目
+        </h3>
+        <div class="am-text-right">
+            <label class="am-form-label am-inline-block am-margin-top-xs">项目名称：</label>
+            <div class="am-inline-block cc_am_u am-text-middle" style="padding-left: 10px;">
+                <input type="text" name="key" class="am-form-field ui-widget-content ui-corner-all" style="width: 200px;">
+            </div>
+            <div class="am-inline-block am-text-left am-text-middle" style="padding-left: 10px;">
+                <button id="search" class="am-btn am-btn-success" type="button"><span class="am-icon am-icon-search"></span>查询</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="MyClassList"></div>
+
+</div>
+
+<!--我的项目列表-->
+<script type="text/html" id="MyClassListShow">
+    <style>
+        #table_info thead tr th {
+            text-align: center!important;
+        }
+    </style>
+    <div class="am-margin-top">
+        <table id="table_info" class="am-table am-text-center">
+            <thead>
+                <tr>
+                    <th class="am-text-left" style="width: 20%"></th>
+                    <th width="5%">序号</th>
+                    <th width="20%">项目名称</th>
+                    <th width="20%">项目时间</th>
+                    <th width="10%">课程数</th>
+                    <th width="20%">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{if list && list.length > 0}}
+                {{each list as item i}}
+                <tr id="{{item.Id}}">
+                    <td class="am-text-left">
+                        <div class="am-inline-block am-text-middle">
+                            <a href="/mainsite/train/training-course.html#Id={{item.ClassId}}">
+                                <img src="{{ if item.ClassCover}}{{item.ClassCover}}{{else}}/common/img/noCover.jpg{{/if}}" style="height: 75px; width: 120px">
+                            </a>
+                        </div>
+                    </td>
+                    <td>{{if pagination.pageIndex>0}}{{(pagination.pageIndex - 1) * pagination.pageSize + i + 1}}{{else}}{{(pagination.pageIndex ) * pagination.pageSize + i + 1}} {{/if}}</td>
+                    <td>{{item.ClassName}}</td>
+                    <td>{{item.DeptName}}</td>
+                    <td>{{if item.CourseCount}}{{item.CourseCount}} {{else}} 暂无 {{/if}}</td>
+                    <td>
+                        <a href="/student/learning/courseList.html" class="joincourse" data-id="{{item.Id}}">查看课程</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="javascript:;" class="del" data-id="{{item.Id}}" data-classid="{{item.ClassId}}">退出班级</a>
+                    </td>
+                </tr>
+                {{/each}}
+                {{else}}
+                        <tr>
+                            <td colspan="6">
+                                <span class="am-text-center">暂无数据</span>
+                            </td>
+                        </tr>
+                {{/if}}
+            </tbody>
+        </table>
+        <div class="pagination ajax"></div>
+    </div>
+</script>
+
+<!--内容右侧主体结束-->
+<script type="text/javascript" src="/student/js/myproject/myprojectList.js"></script>
+<!--#include file="/student/footer.html"-->

@@ -1,0 +1,68 @@
+<!--#include file="/study/header.html"-->
+<link rel="stylesheet" type="text/css" href="/common/css/upload.css" />
+<link rel="stylesheet" type="text/css" href="/common/css/upload_form.css" />
+<link rel="stylesheet" type="text/css" href="/common/css/uploader.css" />
+<div class="primary" id="activityinfo">
+            <div class="main_content">
+                <div class="main_content_title">
+                    <div class="attr">
+                        <i class="iconfont icon-shijian"></i>
+                        我的活动
+                    </div>
+                    <div class="inputOrbutton">
+                       <div class="search">
+                            <input name="search" type="text" placeholder="活动名称" />
+                            <button  id="search" class="add buttonPosition"><i class="iconfont icon-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="activityList" class="activityList"></div>
+
+                <script id="activityListShow" type="text/html">
+                    <div class="shop">
+                        <table class="table" id="table" border="1" width="938px">
+                            <thead>
+                                <tr>
+                                    <th width="15%">活动名称</th>
+                                    <th width="35%">内容</th>
+                                    <th width="11%">开始时间</th>
+                                    <th width="11%">结束时间</th>
+                                    <th width="8%">类型</th>
+                                    <th width="10%">地点</th>
+                                    <th width="10%">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{if list.length > 0}}
+                                {{each list as item}}
+                                <tr id="{{item.ActivityId}}">
+                                    <td title="{{item.Title}}">{{#substring(item.Title,0,5)}}</td>
+                                    <td title="{{htmldecode(item.Content)}}">{{subString_html(item.Content,0,15)}}</td>
+                                    <td>{{item.StartTime | dateFormat:'yyyy-MM-dd'}}</td>
+                                    <td>{{item.EndTime | dateFormat:'yyyy-MM-dd'}}</td>
+                                    <td>{{item.ActivitType}}</td>
+                                    <td title="{{item.Place}}">{{#substring(item.Place,0,4)}}</td>
+                                    <td>
+                                        <a href="doc.html#deId={{item.ActivityId}}" data-id="{{item.ActivityId}}">上报</a>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                                {{else}}
+                                <tr>
+                                    <td colspan="10" style="background-color: #fff;">
+                                        <div>暂无数据</div>
+                                    </td>
+                                </tr>
+                                {{/if}}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="footer pagination ajax">
+                </div>
+                </script>
+            </div>
+</div>
+<!--内容右侧主体结束-->
+<script type="text/javascript" src="/study/js/activity/activity.js"></script>
+<!--#include file="/study/footer.html"-->

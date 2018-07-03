@@ -1,0 +1,52 @@
+<!--#include virtual="/study/header2.html"-->
+<div id="d_coursetoc_t">
+    <div id="questionnaire_show"></div>
+    <script type="text/html" id="questionnairet">
+        <div class="am-panel am-panel-default">
+            <div class="am-panel-hd clearfix" style="margin: 0px;">
+                <h3 class="am-panel-title"><span class="am-icon am-icon-tasks"></span>活动信息</h3>
+                    <div class="am-text-right">
+                        <a class="am-btn am-btn-success am-btn-default" href="questionnaire.html#courseOpenId={{courseOpenId}}&openClassId={{openClassId}}"><span class="am-icon am-icon-reply"></span>返回</a>
+                         {{if isPass==1}}
+                        <a target="_blank" class="am-btn am-btn-success am-btn-default" href="answerquestion.html#courseOpenId={{courseOpenId}}&openClassId={{openClassId}}&activityId={{courseActivity.Id}}">进入</a>
+                        {{/if}}
+                        {{if isPass==2}}
+                        <a target="_blank" class="am-btn am-btn-success am-btn-default" href="/design/questionnaire/questionnairepreview.html#courseOpenId={{courseOpenId}}&openClassId={{openClassId}}&activityId={{courseActivity.Id}}">进入</a>
+                        {{/if}}
+                    </div>
+                </div>
+            <form id="questionContent" class="gform full">
+            <div class="am-panel-bd">
+                <table id="table_info" >
+                    <tbody>
+                        <tr>
+                            <td >名称：</td>
+                            <td>{{courseActivity.ActivityName}}</td>
+                        </tr>
+                    {{if courseActivity.ActivityType==7}}
+                      <tr>
+                        <td class="am-text-top">提交状态：</td>
+                        <td>
+                            {{if isSubmit==1}}
+                            <div class="am-text-left">已提交</div>
+                            {{/if}}
+                            {{if isSubmit==0}}
+                            <div class="am-text-left">未提交</div>
+                            {{/if}}
+                        </td>
+                    </tr>
+                    {{/if}}
+                        <tr>
+                            <td class="am-text-top">描述：</td>
+                            <td>{{# courseActivity.Description}}</td>
+                        </tr>
+                        </tbody>
+                </table>
+            </div>
+           </form>
+        </div>
+    </script>
+</div>
+<script type="text/javascript" src="/study/js/questionnaire/activityInfo.js"></script>
+<!--内容右侧主体结束-->
+<!--#include virtual="/study/footer2.html"-->

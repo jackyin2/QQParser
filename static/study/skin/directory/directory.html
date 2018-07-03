@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<title>内蒙古终身教育网</title>
+    <script>
+        (function () {
+            var deviceWidth = parseInt(window.screen.width);
+            var deviceScale = deviceWidth / 1200;
+            var doc = window.document;
+            var ua = navigator.userAgent;
+            var metaEl = doc.querySelector('meta[name="viewport"]');
+            if (!metaEl) {
+                metaEl = doc.createElement('meta');
+                metaEl.setAttribute('name', 'viewport');
+                doc.head.appendChild(metaEl);
+            }
+            metaEl.setAttribute('content', 'width=device-width,initial-scale=' + deviceScale + ',minimum-scale=' + deviceScale);
+        }());
+    </script>
+    <link rel="stylesheet" type="text/css" href="/study/css/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="/study/css/amazeui.upc.min.css">
+    <link rel="stylesheet" type="text/css" href="/study/css/amazeui.datetimepicker.css">
+    <link rel="stylesheet" type="text/css" href="/study/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/study/css/index_jw.css">
+    <link rel="stylesheet" type="text/css" href="/study/font/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="/study/css/iconfont.css">
+    <script type="text/javascript" src="/common/js/jquery.js"></script>
+    <script type="text/javascript" src="/common/js/amazeui/amazeui.min.js"></script>
+    <script type="text/javascript" src="/common/js/amazeui/amazeui.datetimepicker.min.js"></script>
+    <script type="text/javascript" src="/common/js/jqueryui.js"></script>
+    <script type="text/javascript" src="/common/js/common.js"></script>
+    <script type="text/javascript" src="/common/js/pagination.js"></script>
+    <script type="text/javascript" src="/study/js/app.js"></script>
+    <script type="text/javascript" src="/study/js/header2.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            //点击头像显示隐藏down内容
+            $('.userIcon').on('click', function () {
+                $('.down').fadeToggle('fast');
+            })
+        })
+    </script>
+</head>
+<body>
+    <div id="header_load"></div>
+    <div class="top" style="margin-bottom: 20px;">
+        <div class="top_inner">
+            <img class="logo" src="/common/img/logo.png" width="325px" height="100px">
+            <div class="top_nav">
+                <a href="/mainsite/mainsite/index.html">首页</a>
+                <a class="current"></a>
+                <!--<a href="/doc/resource/resource.html">资源平台</a>-->
+            </div>
+            <ul class="top_right">
+                <li style="display: none;">
+                    <button class="search"><i class="iconfont icon-search"></i></button>
+                </li>
+                <li style="display: none;">
+                    <div class="email">
+                        <i class="iconfont icon-email"></i>
+                        <div class="count">123</div>
+                    </div>
+
+                </li>
+                <li class="position">
+                    <div class="userIcon">
+                        <div class="icon_img">
+                            <img class="iconBg" src="/common/img/iconBg.png" width="70px" height="70px" />
+                            <img src="/common/img/icon.jpg" width="70px" height="70px" id="userImg" />
+                        </div>
+                        <i class="iconfont icon-down1"></i>
+                    </div>
+                    <div class="down" style="width: 128px; z-index: 999;">
+                        <i class="iconfont icon-up"></i>
+                        <a class="editPhoto" href="/common/uploadImg.html">修改头像</a>
+                        <a href="javascript:;" class="logOut">退出</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script id="header" type="text/html">
+    <div id="d_header_cw_s" class="d-header-cw">
+        <div class="am-topbar am-topbar-inverse" style="margin-bottom: 0;">
+            <div class="am-g am-g-collapse">
+                <h1 class="am-topbar-brand" style="padding-left: 10px;"><a href="/"></a>
+                </h1>
+                <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
+                    <ul class="am-nav am-nav-pills am-topbar-nav" style="float: left;">
+                        <li><span class="sh-nav-text" style="line-height: 68px;"></span>
+                            <span class="sh-nav-title" style="line-height: 68px;">
+                              <a href='/study/process/process.html#courseOpenId={{courseOpenId}}'>{{courseName}}</a>
+                            </span>
+                        </li>
+                    </ul>
+
+                    <div class="" style="margin-right: 50px;">
+                        <ul class="am-nav am-nav-pills am-topbar-nav">
+                            <li class="am-dropdown" data-am-dropdown>
+                                <a class="am-dropdown-toggle" href="javascript:;">{{userName}}
+                                    <span class="am-icon am-icon-caret-down"></span>
+                                </a>
+                                <ul class="am-dropdown-content">
+                                    <li id="exit"><a href='#'><span class="am-icon-power-off"></span>退出登录</a></li>
+                                </ul>
+                            </li>
+                            {{if userType == "0"}}
+                            <li class="am-dropdown">
+                                <a href='/edoc/myfile/myfile.html'>我的网盘</a>
+                            </li>
+                            {{/if}}
+                            <li class="am-dropdown">
+                                <a href='/help/menuManage/menuManage.html'>帮助文档</a>
+                            </li>
+                            <li class="am-dropdown">
+                                <a href='/common/downloadlink.html'>常用下载</a>
+                            </li>
+                            <li class="am-dropdown">
+                                {{if userType == "0"}}
+                                <a href="/teacher/homePage/homePage.html">返回首页</a>
+                                {{else if userType == "1"}}
+                                <a href="/student/studio/studio.html">返回首页</a>
+                                {{/if}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </script>
+
+    <div class="wrapper">
+        <div class="container">
+            <div class="content">
+
+                <div id="d_study_t">
+                    <div id="div_hide_log" class="am-hide">
+                        <input type="hidden" id="hide_cellId" value="" />
+                        <input type="hidden" id="hide_video_end_time" value="" />
+                    </div>
+                    <div class="content cell_content" style="padding-right: 340px;">
+                        <div class="cell_show" style="height:100%;">
+                        </div>
+                    </div>
+
+
+                    <div id="d_cwnav" class="d-cwnav" style="top: 120px;">
+                        <script type="text/html" id="catalog">
+                            <div class="tab-content">
+                                <div id="loginloaddivimg" style="position: absolute; width: 100%; text-align: center; top: 16%; z-index: 100; height: 100%; display: none;">
+                                    <img src="/common/css/images/loading.gif" style="width: 80px;" />
+                                </div>
+                                <div id="b_cw_toc" class="d-cw right_show_content" style="display: block; width: 290px;">
+                                    <div class="sh-cw-hd" style="width: 290px;">
+                                        <div class="sh-cw-title">课程目录</div>
+                                        <a href="javascript:void(0);" class="sh-cw-close">×</a>
+                                    </div>
+                                    <div class="sh-cw-bd" style="width: 290px;">
+                                      {{each module as item}}
+                                          <div class="sh-toc2-pd">
+                                            <span class="module">{{item.velocityCount}}</span>
+                                            <span title="{{item.name}}" class="name">{{item.name}}</span>
+                                          </div>
+
+                                          <div class="sh-toc3">
+                                            <table style="width:100%;" class="course_catalog">
+                                                <tbody>
+                                                   {{each item.topics as item2}}
+                                                       <tr data-id="{{item2.id}}" class="tr_topic">
+                                                         <td style="width:65px"><div class="sh-toc3-topic">{{item2.sortOrder}}</div></td>
+                                                         <td class="sh-toc3-dot" style="width:14px">
+                                                             <span class="am-icon am-icon-circle-o"></span>
+                                                         </td>
+                                                         <td title="{{item2.name}}">
+                                                          <div class="sh-toc3-desc show_topic" data-isvalid="{{if item.IsValid=="1"}}1{{/if}}">
+                                                             {{ if item2 && item2.cells.length>0}}
+                                                               <span class="am-icon am-icon-caret-right show_cell_list"></span>
+                                                              {{else}}
+                                                                &nbsp;
+                                                             {{/if}}
+                                                            <a title="{{item2.name}}">{{item2.name}}</a>
+                                                          </div>
+                                                          <div class="sh-toc3-children div_show_cell" data-isleaf="$topic.isLeaf" style="overflow: hidden; display: none;">
+                                                           <ul style="padding-left: 0px; margin-bottom: 0px;">
+                                                             {{each item2.cells as item3}}
+                                                                 <li class="cell_info" data-id="{{item3.Id}}" data-isvalid="{{if item.IsValid=="1"}}1{{/if}}">
+                                                                    <a href="javascript:void(0);" title="{{item3.Name}}">{{item3.Name}}</a>
+                                                                 </li>
+                                                                {{if !item3 || item3.length == 0}}
+                                                                 <li class="cell_info" data-id="" style="display: none;">
+                                                                     <a href="javascript:;" title=""></a></li>
+                                                                {{/if}}
+                                                              {{/each}}
+                                                           </ul>
+                                                        </div>
+                                                      </td>
+                                                     </tr>
+                                                   {{/each}}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                       {{/each}}
+                                    </div>
+                                </div>
+
+                                <div id="b_cw_faq" class="d-cw right_show_content" style="width: 0px;">
+                                    <div class="sh-cw-hd" style="width: 290px;">
+                                        <div class="sh-cw-title">课程问答</div>
+                                        <a href="javascript:void(0);" class="sh-cw-close">×</a>
+                                    </div>
+                                    <div class="sh-cw-bd course-problem-show" style="width: 290px;">
+                                        <div class="am-form video-cm video_question" data-courseopenid="" data-lessonid="" id="video_question">
+                                            <div class="video-main">
+                                                <div class="am-padding-xs" id="show">
+                                                    <div class="am-form-group">
+                                                        <span style="color: red;">*</span>&nbsp;内容：
+                                                        <textarea id="text_problem" style="height: 300px; width: 260px;" class="problem-area"></textarea>
+                                                    </div>
+                                                    <div class="am-form-group am-text-center">
+                                                        <a href="#" class="am-btn am-btn-success submit-problem am-margin-right-xs" id="submit_problem">提问</a>
+                                                        <a class="am-btn am-btn-success hide-area" id="cancel_problem">取消</a>
+                                                         <a id="more_question" href="javascript:;" target="_blank" data-usertype="9" class="am-btn am-btn-success am-margin-right-xs">查看更多
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="b_cw_nte" class="d-cw right_show_content" style="width: 0px;">
+                                    <div class="sh-cw-hd" style="width: 290px;">
+                                        <div class="sh-cw-title">课程笔记</div>
+                                        <a href="javascript:void(0);" class="sh-cw-close">×</a>
+                                    </div>
+                                    <div class="sh-cw-bd course-note-show" style="width: 290px;">
+                                        <div class="sh-nte am-margin-top-sm note-info" data-id="$!note.Id">
+                                             <span style="color: red;">*</span>&nbsp;内容：
+                                            <textarea class="note-content" cols="8" id="txt_note" style="width: 256px; height: 300px;"></textarea>
+                                        </div>
+                                        <div class="sh-nte-new">
+                                            <input type="checkbox" id="check_isopen" checked="checked" />
+                                            公开
+                                            <div style="display: none;" id="note_message" class="am-text-success">保存成功</div>
+                                            <button id="submit_note" class="am-btn am-btn-success am-btn-default" style="width: 85px;">记笔记</button>
+                                            <a href="javascript:;" id="more_note" target="_blank" data-usertype="{{userType}}" class="am-btn am-btn-success am-btn-default" style="width: 85px;">查看更多</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="b_cw_eva" class="d-cw right_show_content">
+                                    <div class="sh-cw-hd" style="width: 290px;">
+                                        <div class="sh-cw-title">我的评价</div>
+                                        <a href="javascript:void(0);" class="sh-cw-close">×</a>
+                                    </div>
+                                    <div class="sh-cw-bd" style="width: 290px;">
+                                        <div class="am-form">
+                                            <div class="am-form">
+                                                <div class="am-g course-doc-show">
+                                                    <style type="text/css">
+                                                        #form_rate {
+                                                            position: relative;
+                                                            margin-top: 5px;
+                                                            padding-left: 18px;
+                                                        }
+
+                                                        #rate_score {
+                                                            font-size: 20px;
+                                                            color: #F83D04;
+                                                            font-family: "Verdana";
+                                                            float: left;
+                                                            margin: 0px;
+                                                            line-height: 25px;
+                                                            padding: 0;
+                                                        }
+
+                                                        #rate_hint {
+                                                            float: right;
+                                                            width: 100px;
+                                                            position: absolute;
+                                                            _width: 70px;
+                                                            line-height: 25px;
+                                                        }
+
+                                                        #ratebox img {
+                                                            width: 15px;
+                                                            _margin-left: 0px;
+                                                            margin-bottom: 5px;
+                                                        }
+
+                                                        #ratebox {
+                                                            height: 25px;
+                                                            line-height: 25px;
+                                                            margin-left: 6px;
+                                                            cursor: default;
+                                                            width: 130px;
+                                                            float: left;
+                                                        }
+                                                    </style>
+                                                    <div class="am-form-group am-padding-xs am-margin-bottom-xs">
+                                                        <span style="color: red;">*</span>&nbsp;资源名称：<span id="cell_name"></span>
+                                                    </div>
+                                                    <div id="form_rate">
+                                                        <span id="rate_score"></span>
+                                                        <div id="ratebox"></div>
+                                                        <span id="rate_hint"></span>
+                                                    </div>
+                                                    <div class="am-form-group am-padding-xs"></div>
+
+                                                    <div class="am-form-group am-padding-xs am-margin-bottom-xs">
+                                                        <span style="color: red;">*</span>&nbsp;评价
+                                                    </div>
+
+                                                    <div class="am-g">
+                                                        <div class="am-u-sm-12 comment-info" data-id="">
+                                                            <textarea id="text_comment" class="commnet-content" name="txtcomment" style="height: 300px; width: 260px;margin-left:6px" ></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div id="comment_message" class="am-g" style="display: none;">
+                                                        <span class="am-text-success am-u-sm-12">评价成功。</span>
+                                                    </div>
+                                                    <div class="am-g am-margin-top-xs">
+                                                        <div class="am-u-sm-12 am-text-right">
+                                                            <button class="am-btn am-btn-success submit_comment">提交评价</button>
+                                                            <a id="more_comment" href="javascript:;" target="_blank" data-usertype="9" class="am-btn am-btn-success">查看更多</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="course-comment-show"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="b_cwfloat">
+                                <div id="btn_cw_toc" class="cw-btn active right_button">
+                                    <span class="am-icon am-icon-list-ul"></span>
+                                    目录
+                                </div>
+                                {{if userType == "9"}}
+                                <div id="btn_cw_faq" class="cw-btn right_button isHideButton">
+                                    <span class="am-icon am-icon-question-circle "></span>
+                                    问答
+                                </div>
+                                <div id="btn_cw_nte" class="cw-btn right_button isHideButton">
+                                    <span class="am-icon am-icon-pencil-square-o"></span>
+                                    笔记
+                                </div>
+                                <div id="btn_cw_eva" class="cw-btn right_button isHideButton">
+                                    <span class="am-icon am-icon-thumbs-o-up"></span>
+                                    评价
+                                </div>
+                                {{/if}}
+                            </div>
+                        </script>
+                    </div>
+                </div>
+
+                <script type="text/html" id="resourse">
+                    <div id="doc_box" class="resource-content d-player-content" style="margin-top: 10px;" data-url='{{src}}' data-id="{{cell.Id}}" data-type="{{courseDoc.DocType}}" style="height: {{if cell.IsAllowDownLoad == "1"}} 95% {{else}} 100% {{/if}}; position: relative; width:100%"></div>
+                    {{if cell.IsAllowDownLoad == "1"}}
+                      <a id="resoucedownload" class="am-btn am-btn-success am-btn-xs" style="margin-right: 15px;float: right;" href="{{downloadurl}}">下载</a>
+                    {{/if}}
+                </script>
+
+                <script type="text/html" id="external">
+                    <div class="d-player-content external-content " data-id="{{cell.Id}}" data-url="{{cell.ExternalLinkUrl}}" style="width: 100%; height: 504px;">
+                        <div class="d-souhw-content">
+                            <h2 class="am-text-center souhw-title">{{cell.Name}}</h2>
+                            <div style="margin: 0px auto; width: 300px; font-size: 16px;" class="am-g am-g-collapse am-text-right">
+                                <div class="am-u-sm-12">
+                                    <div class="am-u-sm-5">详情请点击：</div>
+                                    <div class="am-text-left am-u-sm-7">
+                                        <a target="_blank" href='{{cell.ExternalLinkUrl}}'>{{cell.Name}}</a>
+                                    </div>
+                                </div>
+                                <div class="am-u-sm-12" style="font-size: 12px; text-align:left;">
+                                  外部链接由主持老师设定，本学习平台不保证外部链接的准确性、有效性、安全性。若发现链接有问题（如不能访问），请及时联系主持老师
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <style>
+                        .d-souhw-content {
+                            background: url(/common/css/images/chain.png) no-repeat 16px -40px;
+                            min-height: 80%;
+                            margin-top: 90px;
+                        }
+
+                            .d-souhw-content .am-u-sm-5 {
+                                color: #333;
+                                margin-bottom: 4px;
+                            }
+
+                            .d-souhw-content .am-u-sm-7 {
+                                color: #888;
+                                margin-bottom: 4px;
+                            }
+                    </style>
+                </script>
+
+                <script id="download" type="text/html">
+                    <div class="d-player-content external-content " data-id="{{cell.Id}}" style="width: 100%; height: 504px;">
+                        <div class="d-souhw-content">
+                            <h2 class="am-text-center souhw-title" style="margin-top:150px">{{cell.Name}}</h2>
+                            <div style="margin: 0px auto; width: 300px; font-size: 16px;" class="am-g am-g-collapse am-text-right">
+                                <div class="am-u-sm-12" style="font-size: 18px;text-align: left;margin-top: 38px;">
+                                   <a target="_blank" style="cursor:pointer;" href='{{dwonlaodUrl}}'">资源无法预 点击下载</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <style type="text/css">
+                        .d-souhw-content {
+                            background: url(/common/css/images/download.png) no-repeat 16px -40px;
+                            min-height: 80%;
+                            margin-top: 90px;
+                        }
+
+                            .d-souhw-content .am-u-sm-5 {
+                                color: #333;
+                                margin-bottom: 4px;
+                            }
+
+                            .d-souhw-content .am-u-sm-7 {
+                                color: #888;
+                                margin-bottom: 4px;
+                            }
+                    </style>
+                </script>
+
+                <script id="question_show" type="text/html">
+                    {{if question != null}}
+                    <div id="question_view" data-isreplay="{{if IsReplay == 1}}true{{/if}} {{if IsReplay == 0}}false{{/if}}" data-replaytime="{{ReplayTime}}" data-answer='{{question.Answer}}' data-questiontype="{{question.QuestionType}}">
+                        <div>
+                            <label class="am-form-label e-exam-2 am-text-top">题干:</label>
+                            <span>{{#question.Title}}</span>
+                        </div>
+                        {{if question.QuestionType== "1" || question.QuestionType == "2"}}
+                        <div>
+                            <label for="" class="am-form-label e-exam-2 am-text-middle">选项 {{if question.QuestionType== "1"}}（单选） {{/if}}  {{if question.QuestionType== "2"}} （多选） {{/if}}:</label>
+                            <div class="e-exam-4 am-text-middle">
+                                {{each answerList as answer i}}
+                                <div class="am-cf">
+                                    <div>
+                                        <input type="checkbox" name="choice" class="checkbox" data-sortorder="{{answer.SortOrder}}" value="{{answer.SortOrder}" />&nbsp;({{sortorder[i]}})&nbsp;：&nbsp;{{answer.Content}}
+                                    </div>
+                                </div>
+                                {{/each}}
+                            </div>
+                        </div>
+                        {{else if question.QuestionType== "3"}}
+                        <div>
+                            <label for="" class="am-form-label e-exam-2 am-text-middle">选项（判断）:</label>
+                            <div class="e-exam-4 am-text-middle" style="padding-left: 10px;">
+                                <input type="checkbox" name="choice" class="answer_check" data-sortorder="1" />正确
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="checkbox" name="choice" class="answer_check" data-sortorder="0" />错误
+                            </div>
+                        </div>
+                        {{/if}}
+                    </div>
+                    {{else}}
+                    <div>
+                        暂无数据
+                    </div>
+                    {{/if}}
+                </script>
+
+                <script type="text/javascript" src="/common/js/dfs/viewer/jwplayer/jwplayer.js"></script>
+                <script type="text/javascript" src="/common/js/rate/jquery.raty.js"></script>
+                <script type="text/javascript" src="/common/js/ueditor/ueditor.config.js"></script>
+                <script type="text/javascript" src="/common/js/ueditor/ueditor.all.js"></script>
+                <script type="text/javascript" src="/study/js/directory/directory.js"></script>
+
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(function () {
+            // 设置 返回顶部 的高度
+            var fixbar = $('.fixed-sidebar');
+            var Timer = null;
+            // 初始化高度
+            var H = $(window).height() - 126;
+            fixbar.height(H < 260 ? 260 : H);
+            // 修改浏览器大小时，修改对应的高度
+            $(window).on('resize', function () {
+                if (Timer) {
+                    clearTimeout(Timer);
+                }
+                Timer = setTimeout(function () {
+                    var H = $(window).height() - 126;
+                    fixbar.height(H < 260 ? 260 : H);
+                }, 200);
+            });
+      
+            if (localStorage["user"] != "" && localStorage["user"] != "undefined") {
+
+                var user = JSON.parse(localStorage["user"]);
+                $(".teacherName").html(user.DisplayName);
+                if (user && user.AvatorUrl != "" && user.AvatorUrl != null) {
+                    $('#userImg').attr("src", user.AvatorUrl);
+                } else {
+                    $('#userImg').attr("src", "/design/images/icon.jpg")
+                }
+            } else {
+                location.href = "/mainsite/mainsite/index.html";
+            }
+
+            $('.logOut').click(function () {
+
+                _.ajax(urls.common_loginOut, function (r) {
+                    if (r.code < 0) {
+                        alert(r.msg);
+                        return false;
+                    }
+                    if (r.code > 0) {
+                        localStorage["user"] = "";
+                        $.cookie('token', "", { expires: -1, path: "/" });
+                        location.href = "/mainsite/mainsite/index.html";
+                    }
+                }, "json");
+                return false;
+            });
+        });
+    </script>

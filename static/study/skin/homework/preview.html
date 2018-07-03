@@ -1,0 +1,478 @@
+<!--#include file="/study/nomenuheader.html"-->
+<link rel="stylesheet" type="text/css" href="/study/css/index.css">
+<script type="text/javascript" src="/common/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="/common/js/ueditor/ueditor.all.js"></script>
+<div id="indexForm" style="position: relative;">
+    <div id="container"></div>
+</div>
+
+<script id="table_html" type="text/html">
+    <div class="wl_types am-cf">
+        <input type="hidden" name="courseOpenId" value="{{param.courseOpenId}}" />
+        <input type="hidden" name="openClassId" value="{{param.openClassId}}" />
+        <!--<input type="hidden" name="termId" value="{{param.termId}}"  />-->
+        <input type="hidden" name="homeworkId" value="{{homework.Id}}" />
+        <input type="hidden" name="ReplyTime" value="{{homework.ReplyTime}}" />
+        <input type="hidden" name="UseTime" value="" />
+        <input type="hidden" name="HomeWorkUniqueFlag" value="{{param.homeWorkUniqueFlag}}" />
+        <input type="hidden" name="paperStructUniqueFlag" value="{{param.paperStructUniqueFlag}}" />
+
+        <div class="e-b-g types-l">
+            {{ each bigQuestions as bigQuestion i}}
+         
+            <a href="javascript:void(0)" title="{{#bigQuestion.Title}}" class="e-b go_type q_type {{if i==0 }} active {{/if}}" data-type="{{i+1}}">{{num2hanzi(i)}}、{{#bigQuestion.Title}}
+          </a>
+            {{/each}}
+   
+        </div>
+
+        <div class="e-quest-p w_e-q-panel" id="review">
+            <div class="photo">
+                <div class="photo-time">
+                    <!--<p class="icon-photo">00: 00: 00</p>-->
+                </div>
+            </div>
+
+            <div class="e-quest-header">
+                <span class="right">已做<em></em></span>
+                <span class="not">未做<em style="background-color: #EAEAEA"></em></span>
+            </div>
+
+            <div class="e-selects-g">
+                <div style="display: none">{{sort_question=1}}</div>
+                {{ each bigQuestions as bigQuestion j}}
+              
+                <div class="e-single-s question_nums bigquesnums" data-bigquestionorder="{{j+1}}">
+                    <div class="e-select-i">
+                        {{#bigQuestion.Title}}
+                   
+                        <span class="e-i-desc"></span>
+                    </div>
+                    <div class="e-select-g">
+                        {{ each questions[bigQuestion.Id] as question m}}
+                     
+                        <a href="javascript:void(0)" data-id="{{question.Id}}" class="e-item notdo" data-num="{{sort_question}}">{{sort_question}}</a>
+                        <div style="display: none">{{sort_question=sort_question+1}}</div>
+                        {{/each}}
+               
+                    </div>
+                </div>
+                {{/each}}
+       
+            </div>
+            <div class="e-save">
+                <a href="javascript:;" id="submitHomeWork" class="e-save-b">提交</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="left-all">
+        <div class="e-q-panel">
+            <div class="ErichText" style="background-color: #eaeaea; margin-top: 0px;">
+                <span style="font-size: medium; font-weight: bold; float: left;">试卷要求 :</span>
+                <p style="float: left; margin-left: 30px;">{{#homework.Remark}}</p>
+            </div>
+        </div>
+
+        <div style="display: none">{{num=1}}</div>
+        {{ each bigQuestions as bigQuestion n}}
+            
+        <div class="e-q-panel e-q-panel-paper  typebox bigquestionblock" data-type="{{n+1}}" data-bigquestionorder="{{n+1}}">
+            <div class="e-q-header e-q-header-paper am-cf sildeblock">
+                <span class="e-text">{{bigQuestion.hzSort}}、{{#bigQuestion.Title}} </span>
+                <span class="e-close e-close-paper">&nbsp;</span>
+            </div>
+
+            <div class="ErichText" style="background-color: #eaeaea; margin-top: 0px;">
+                <span style="font-size: medium; font-weight: bold;">答题要求 :</span>
+                <p>{{#bigQuestion.Remark}}</p>
+            </div>
+
+
+            {{ each questions[bigQuestion.Id] as question q}}
+                   {{ if question.questionType==1 || question.questionType==2 }}
+                      
+            <div class="e-q-body" style="display: block;" data-id="{{question.Id}}" data-questionid="{{question.questionId}}" data-questiontype="{{question.questionType}}" data-num="{{num}}">
+                <form method="post">
+                    <input type="hidden" name="studentWorkId" value="{{question.Id}}" />
+                    <input type="hidden" name="online" value="1">
+                    <input type="hidden" name="answer" />
+
+                    <div class="e-q">
+                        <div class="e-q-t">
+                            <div class="e-q-l">
+                                <div class=""></div>
+                            </div>
+                            <div class="e-q-r">
+                                <span class="e-q-no">{{num}}.<em>({{question.totalScore}}分)</em></span>
+                                <div style="display: none">{{num=num+1}}</div>
+                                <div class="e-q-quest">
+                                    <div class="e-q-q">
+                                        <!-- P标签是富文本编辑器产生，不属于模板的一部分 -->
+                                        <div class="ErichText">
+                                            {{#question.allTitle}}
+                                       
+                                        </div>
+                                    </div>
+                                    <div class="e-a-g e-choice-a">
+                                        <ul>
+                                            {{ each question.answerList as answer p}}
+                                           
+                                            <li class="e-a" data-index="{{answer.SortOrder}}">
+                                                <span class="e-a-right"></span>{{num2zimu(p)}} 
+                                             
+                                                <div class="ErichText">
+                                                    <!-- P标签是富文本编辑器产生，不属于模板的一部分 -->
+                                                    {{#answer.Content}}
+                                            
+                                                </div>
+                                            </li>
+                                            {{/each}}
+                                       
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            {{ else if question.questionType==3}}
+                      
+            <div class="e-q-body" data-id="{{question.Id}}" data-questionid="{{question.questionId}}" data-questiontype="{{question.questionType}}" data-num="{{num}}">
+                <form method="post">
+                    <input type="hidden" name="studentWorkId" value="{{question.Id}}" />
+                    <input type="hidden" name="online" value="1" />
+                    <input type="hidden" name="answer" />
+                    <div class="e-q e-checking-q" id="2">
+                        <div class="e-q-t">
+                            <div class="e-q-l">
+                                <div class=""></div>
+                            </div>
+                            <div class="e-q-r">
+                                <span class="e-q-no">{{num}}.<em>({{question.totalScore}}分)</em></span>
+                                <div style="display: none">{{num=num+1}}</div>
+                                <div class="e-q-quest">
+                                    <div class="e-q-q">
+                                        <div class="ErichText">{{#question.allTitle}}</div>
+                                    </div>
+                                    <div class="e-a-g e-checking-a am-cf">
+                                        <ul>
+                                            <li class="e-a" data-index="1">
+                                                <span class="e-a-right"></span>A) 正确
+                                      </li>
+
+                                            <li class="e-a" data-index="0">
+                                                <span class="e-a-right"></span>B) 错误
+                                      </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            {{ else if question.questionType==4 || question.questionType==5}}
+                      
+            <div class="e-q-body" data-id="{{question.Id}}" data-questionid="{{question.questionId}}" data-questiontype="{{question.questionType}}" data-num="{{num}}">
+                <form method="post">
+                    <input type="hidden" name="studentWorkId" value="{{question.Id}}" />
+                    {{if question.questionType==4 }}
+                              
+                    <input type="hidden" name="online" value="1" />
+                    {{else}}
+                              
+                    <input type="hidden" name="online" value="0" />
+                    {{/if}}
+
+                           
+
+                    <div class="e-q e-choice-q">
+                        <div class="e-q-t">
+                            <div class="e-q-l">
+                                <div class=""></div>
+                            </div>
+                            <div class="e-q-r">
+                                <span class="e-q-no">{{num}}.<em>({{question.totalScore}}分)</em></span>
+                                <div style="display: none">{{num=num+1}}</div>
+                                <div class="e-q-quest">
+                                    <div class="e-q-q">
+                                        <div class="ErichText">{{#question.allTitle}}</div>
+                                    </div>
+                                    <div class="e-a-g e-blank-a">
+                                        <ul>
+                                            {{ each question.answerList as item p}}
+                                        
+                                            <li class="e-a am-cf">
+                                                <div class="e-blank-e">填空{{num2hanzi(p)}}</div>
+                                                <input type="text" name="answer" class="" placeholder="请输入答案" style="width: 600px; height: 36px;">
+                                            </li>
+                                            {{/each}}
+                                   
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            {{ else if question.questionType==6}}
+                     
+            <div class="e-q-body" data-id="{{question.Id}}" data-questionid="{{question.questionId}}" data-questiontype="{{question.questionType}}" data-num="{{num}}">
+                <form method="post">
+                    <input type="hidden" name="studentWorkId" value="{{question.Id}}" />
+                    <div class="e-q e-choice-q">
+                        <div class="e-q-t">
+                            <div class="e-q-l">
+                                <div class=""></div>
+                            </div>
+                            <div class="e-q-r">
+                                <span class="e-q-no">{{num}}.<em>({{question.totalScore}}分)</em></span>
+                                <div style="display: none">{{num=num+1}}</div>
+                                <div class="e-q-quest">
+                                    <div class="e-q-q">
+                                        <div class="ErichText">
+                                            <p>{{#question.allTitle}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="e-q-q">
+                                        <div class="e-textarea-a">
+                                            <textarea name="answer" id="ueditor{{q+1}}" placeholder="请输入答案" class="ui-widget-content ui-corner-all answerv ueditorArea"></textarea>
+                                            <button type="button" class="am-btn am-btn-success am-btn-default btn_save" style="margin-top: 15px;">确定</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            {{ else if question.questionType==7}}
+                     
+            <div class="e-q-body" data-id="{{question.Id}}" data-questionid="{{question.questionId}}" data-questiontype="{{question.questionType}}" data-num="{{num}}">
+                <div class="e-q e-choice-q">
+                    <div class="e-q-t">
+                        <div class="e-q-l">
+                            <div class="e-q-pass"></div>
+                        </div>
+                        <form method="post">
+                            <input type="hidden" name="studentWorkId" value="{{question.Id}}" />
+                            <div class="e-q-r">
+                                <span class="e-q-no">{{num}}.<em>({{question.totalScore}}分)</em></span>
+                                <div style="display: none">{{num=num+1}}</div>
+                                <div class="e-q-quest">
+                                    <div class="e-q-q am-cf">
+                                        <div class="ErichText">{{#question.allTitle}}</div>
+                                    </div>
+
+                                    <div class="e-a-g e-short-a">
+                                        <div class="am-g">
+                                            <div class="am-u-sm-5">
+                                                {{ each question.optionContentList as optionContent r}}
+                                                      
+                                                <div class="ErichText">
+                                                    {{r+1}}、{{optionContent}}
+                                                      
+                                                </div>
+                                                {{/each}}
+                                                  
+                                            </div>
+
+                                            <div class="am-u-sm-1">
+                                                {{ each question.optionSelectContentList as optionSelectContent s}}
+                                                      
+                                                <select name="answer" class="ui-widget-content">
+                                                    <option value="-1">-</option>
+                                                    {{ each question.optionAnswerContentList as optionAnswerContent t}}
+                                                           
+                                                    <option value="{{t}}">{{num2zimu(t)}} </option>
+                                                    {{/each}}
+                                                      
+                                                </select>
+                                                {{/each}}
+                                                 
+                                            </div>
+
+                                            <div class="am-u-offset-1 am-u-sm-5">
+                                                {{ each question.optionAnswerContentList as optionAnswerContent i }}
+                                                       
+                                                <div class="ErichText">
+                                                    {{num2zimu(i)}} 、{{#optionAnswerContent}}
+                                                       
+                                                </div>
+                                                {{/each}}
+                                                 
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            {{ else if question.questionType==8 || question.questionType==9 ||  question.questionType==11}}
+                      
+            <div class="e-q-body" data-id="{{question.Id}}" data-questionid="{{question.questionId}}" data-questiontype="{{question.questionType}}" data-num="{{num}}" data-isalldo="0">
+                <div class="e-q e-choice-q">
+                    <div class="e-q-t">
+                        <div class="e-q-l">
+                            <div class=""></div>
+                        </div>
+                        <div class="e-q-r">
+                            <span class="e-q-no">{{num}}.<em>({{question.totalScore}}分)</em></span>
+                            <div style="display: none">{{num=num+1}}</div>
+                            <div class="e-q-quest">
+                                <div class="e-q-q am-cf">
+                                    <div class="ErichText">{{#question.allTitle}}</div>
+                                </div>
+
+                                <div style="display: none">
+                                    {{subSort=1}}
+                                        {{if  subQuestions[question.Id].length>0}}
+                                                {{m=question.totalScore}}
+                                                {{n=subQuestions[question.Id].length}}
+                                                {{if (2*m)%n==0}}
+                                                {{a=0.5*((2*m)/n)}}
+                                                {{b=0}}
+                                                {{x=n}}
+                                                {{y=0}}
+                                                {{else}}
+                                                {{c=(2*m)%n}}
+                                                {{a=0.5*((2*m-c)/n)}}
+                                                {{b=a+0.5}}
+                                                {{y=(2*m)-(2*n*a)}}
+                                                {{x=n-y}}
+                                                {{/if}}
+                                        {{else}}
+                                                {{a=0}}
+                                                {{b=0}}
+                                                {{x=n}}
+                                                {{y=0}}
+                                        {{/if}}
+                                 
+                                </div>
+
+                                {{ each subQuestions[question.Id] as subQuestion j}}
+                                   
+                                <form method="post" data-isallowrequest="1">
+                                    <input type="hidden" name="studentWorkId" value="{{question.Id}}" />
+                                    <input type="hidden" name="subQuestionId" value="{{subQuestion.Id}}">
+                                    <input type="hidden" name="subStudentQuestionId" />
+                                    <input type="hidden" name="answer" />
+                                    <div style="display: none">
+                                        {{if subSort>x}}
+                                                    {{a=b}}
+                                                {{/if}}
+                                           
+                                    </div>
+
+                                    <input type="hidden" name="subScore" value="{{a}}" />
+                                    <span class="e-q-no">{{subSort}}、<em>({{a}}分)</em></span>
+                                    <div style="display: none">{{subSort=subSort+1}}</div>
+                                    <div class="e-q-quest">
+                                        <div class="e-q-q am-cf">
+                                            <div class="ErichText">
+                                                {{#subQuestion.title}}
+                                           
+                                            </div>
+                                        </div>
+                                        <div class="e-a-g e-choice-a">
+                                            {{ if subQuestion.subQuestionType==1|| subQuestion.subQuestionType==2 }}
+                                              
+                                            <ul>
+                                                {{each subQuestion.subAnswerList as answer k}}
+                                                  
+                                                <li class="e-a" data-index="{{answer.SortOrder}}" data-subquestiontype="{{subQuestion.subQuestionType}}">
+                                                    <span class="e-a-right"></span>{{num2zimu(k)}} 
+                                                    
+                                                    <div class="ErichText">{{#answer.Content}}</div>
+                                                </li>
+                                                {{/each}}
+                                           
+                                            </ul>
+                                            {{else}}
+                                              
+                                            <ul>
+                                                <li class="e-a" data-index="1" data-subquestiontype="{{subQuestion.subQuestionType}}">
+                                                    <span class="e-a-right"></span>A) 正确
+                                                  </li>
+
+                                                <li class="e-a" data-index="0" data-subquestiontype="{{subQuestion.subQuestionType}}">
+                                                    <span class="e-a-right"></span>B) 错误
+                                                  </li>
+                                            </ul>
+                                            {{/if}}
+                                         
+                                        </div>
+                                    </div>
+                                </form>
+                                {{/each}}
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{ else if question.questionType==10 }}
+                     
+            <div class="e-q-body" data-id="{{question.Id}}" data-questionid="{{question.questionId}}" data-questiontype="{{question.questionType}}" data-num="{{num}}">
+                <form method="post">
+                    <input type="hidden" name="studentWorkId" value="{{question.Id}}" />
+                    <div class="e-q e-choice-q">
+                        <div class="e-q-t">
+                            <div class="e-q-l">
+                                <div></div>
+                            </div>
+                            <div class="e-q-r">
+                                <span class="e-q-no">{{num}}.<em>({{question.totalScore}}分)</em></span>
+                                <div style="display: none">{{num=num+1}}</div>
+                                <div class="e-q-quest">
+                                    <div class="e-q-q">
+                                        <div class="ErichText">
+                                            <p>{{#question.allTitle}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="e-q-q e-exam-4">
+                                        <div class="wu-example am-inline-block uploader_preview" data-file_system_url="{{param.fileSystemUrl}}">
+                                            <div class="btns">
+                                                <div id="picker" class="">上传答案</div>
+                                            </div>
+                                        </div>
+                                        <div class="am-inline-block am-hide answer-content">
+                                            <input type="hidden" name="answer" />
+                                            <input type="hidden" name="MD5" />
+                                            <a href="#" class="" data-preview_url_ueditor="{{question.answer}}"
+                                                style="text-decoration: underline">我的答案(点击预览)</a>
+                                            <a href="#" style="color: blue" class="deleteAnswer">删除</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            {{/if}}
+                {{/each}}
+            
+        </div>
+        {{/each}}   
+    
+    </div>
+</script>
+
+<script type="text/javascript" src="/study/js/homework/preview.js"></script>
+<script type="text/javascript" src="/common/js/uploader/uploadFile.js"></script>
+<script type="text/javascript" src="/study/js/current_scroll.js"></script>
+<!--#include file="/study/nomenufooter.html"-->
+<!--#include file="/common/chooseFile.html"-->

@@ -1,0 +1,39 @@
+﻿#parse("$!jc.skinpath/prop_form.ascx")
+#parse("$!jc.skinpath/prop_title.ascx")
+#parse("$!jc.skinpath/prop_custom.ascx")
+<div class="gformbox">
+    <label>
+        <span class="g1">数据源URL</span>
+        <span class="g2">
+            <input type="text" name="ext_url" value="$!utils.str.htmlencode($!item.url)" maxlength="255" style="width: 400px;" />
+        </span>
+    </label>
+</div>
+<div class="gformbox">
+    <label>
+        <span class="g1">风格</span>
+        <span class="g2">
+            <select name="ext_theme" selected="$!item.theme">
+                <option value="">默认</option>
+                <option value="facebook">facebook</option>
+                <option value="mac">mac</option>
+            </select>
+        </span>
+    </label>
+</div>
+<div class="gformbox">
+    <label>
+        <span class="g1">输出格式</span>
+        <span class="g2">
+            <input type="text" name="ext_resultsFormatter" value="$!utils.str.htmlencode($!item.resultsFormatter)" maxlength="255" style="width: 400px;" />
+        </span>
+    </label>
+</div>
+<div class="gformbox">
+    <label>
+        <span class="g1">最大数量</span>
+        <span class="g2">
+            <input type="text" name="ext_tokenLimit" value="$!utils.str.htmlencode($!item.tokenLimit)" class="num" style="width: 400px;" />
+        </span>
+    </label>
+</div>

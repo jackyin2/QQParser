@@ -1,0 +1,55 @@
+<!--#include file="/student/header.html"-->
+<form id="thesisForm" method="post" class="gform full">
+    <div class="am-panel am-panel-default">
+        <div class="am-panel-hd am-cf">
+            <h3 class="am-panel-title">
+                <span class="am-icon am-icon-tasks"></span>&nbsp;我的论文
+            </h3>
+        </div>
+
+        <div id="content_container"></div>
+
+    </div>
+</form>
+
+<!--#include file="/student/footer.html"-->
+
+<script type="text/javascript" src="/student/js/thesis/myThesis.js"></script>
+<script type="text/javascript" src="/common/js/uploader/uploadFile.js"></script>
+
+
+<script type="text/html" id="thesis_info_html">
+    <div class="am-margin-top">
+        <table id="table_info" class="am-table am-text-center">
+            <thead>
+                <tr>
+                    <td style="width: 5%">序号</td>
+                    <td style="width: 40%">论文计划</td>
+                    <td style="width: 30%">编码</td>
+                    <td style="width: 30%">操作</td>
+                </tr>
+            </thead>
+            <tbody>
+                {{if list && list.length > 0}}
+                    {{each list as item i}}
+                        <tr id="{{item.Id}}">
+                            <td>{{i+1}}</td>
+                            <td>{{item.Title}}</td>
+                            <td>{{item.Code}}</td>
+                            <td><a href="thesis.html#thesisBatchId={{item.ThesisBatchId}}">论文计划详情</a></td>
+                        </tr>
+                    {{/each}}
+                    {{else}}
+                        <tr>
+                            <td colspan="3">
+                                <span class="am-text-center">暂无数据</span>
+                            </td>
+                        </tr>
+                {{/if}}
+            </tbody>
+        </table>
+        <div class="pagination ajax"></div>
+    </div>
+</script>
+
+

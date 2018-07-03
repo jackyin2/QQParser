@@ -1,0 +1,162 @@
+<!--#include virtual="/student/header.html"-->
+<link rel="stylesheet" type="text/css" href="/student/css/wechattrade.css">
+<div class="am-panel am-panel-default main_content">
+    <div class="am-panel-hd am-cf">
+        <h3 class="am-panel-title">
+            <span class="am-icon am-icon-tasks"></span>&nbsp;订单详情
+        </h3>
+        
+    </div>
+
+    <div id="Myinfo"></div>
+
+</div>
+
+<!--我的订单列表-->
+<script type="text/html" id="Mydingdan">
+
+   <form id="dialog_form" class="am-form am-form-horizontal">
+            <div class="tab_div am-margin-top-sm">
+                <div class="am-form-group">
+                    <label class="am-u-sm-2" style="width: 130px;padding-left: 20px;"><span style="color: red;">*</span>商户订单号：</label>
+                    <div class="am-u-sm-4">
+                        <input type="text" name="tbout_trade_no" class="am-input-field am-input-sm"  maxlength="32" value="{{Nmrandom}}" readonly="readonly"/>
+                    </div>
+                    <span class="Warm am-u-sm-4 am-u-end errorSpan">（长度32位）</span>
+                </div>
+                <div class="am-form-group">
+                    <label class="am-u-sm-2" style="width: 130px;padding-left: 20px;"><span style="color: red;">*</span>商品描述：</label>
+                    <div class="am-u-sm-4">
+                        <input type="text" name="tbbody" maxlength="127"  value="商品描述" readonly="readonly"/>
+                    </div>
+                    <span class="Hard am-u-sm-4 am-u-end errorSpan">（长度127位）</span>
+                </div>
+                <div class="am-form-group" style="display:none;">
+                    <label class="am-u-sm-2" style="width: 130px;padding-left: 20px;">附加信息：</label>
+                    <div class="am-u-sm-4">
+                        <input type="text" name="tbattach"  maxlength="128"/>
+                    </div>
+                    <span class="Same am-u-sm-4 am-u-end errorSpan">(长度128位)</span>
+                </div>
+                 <div class="am-form-group">
+                    <label class="am-u-sm-2" style="width: 130px;padding-left: 20px;"><span style="color: red;">*</span>总金额：</label>
+                    <div class="am-u-sm-4">
+                        <input type="text" name="tbtotal_fee"  value="{{total_fee*100}}" readonly="readonly"/>
+                    </div>
+                    <span class="Hard am-u-sm-4 am-u-end errorSpan">（单位：分 整形）</span>
+                </div>
+
+                  <div class="am-form-group">
+                    <label class="am-u-sm-2" style="width: 130px;padding-left: 20px;"><span style="color: red;">*</span>用户付款IP：</label>
+                    <div class="am-u-sm-4">
+                        <input type="text" name="tbmch_create_ip"  maxlength="16" value="{{userHostAddress}}" readonly="readonly"/>
+                    </div>
+                    <span class="Hard am-u-sm-4 am-u-end errorSpan">（长度16位）</span>
+                </div>
+                   <div class="am-form-group" style="display:none;">
+                    <label class="am-u-sm-2" style="width: 130px;padding-left: 20px;">订单生成时间：</label>
+                    <div class="am-u-sm-4">
+                        <input type="text" name="tbtime_start" />
+                    </div>
+                    <span class="Hard am-u-sm-4 am-u-end errorSpan">(长度14;yyyyMMddHHmmss 20180101010101)</span>
+                </div>
+                    <div class="am-form-group" style="display:none;">
+                    <label class="am-u-sm-2" style="width: 130px;padding-left: 20px;">订单超时时间：</label>
+                    <div class="am-u-sm-4">
+                        <input type="text" name="tbtime_expire" />
+                    </div>
+                    <span class="Hard am-u-sm-4 am-u-end errorSpan">(长度14;yyyyMMddHHmmss 20180101010101)</span>
+                </div>
+                <div class="am-form-group">
+                    <button id="btnok" type="button" class="am-btn am-btn-secondary am-btn-default">确认</button>
+                </div>
+            </div>
+        </form>
+</script>
+
+
+<script type="text/html" id="Mycode">
+
+  <div class="topwrap box-shadow-def">
+        <div class="innerwrap box-border-def hide-coupon">
+            <div class="innercnt">
+                <div class="innercnt-wrap clearfix">
+                    <div class="orders show-orders-single" id="order_wrap">
+                        <div class="orders-single">
+                            <h2 class="orders-title">
+                                支付宝支付</h2>
+                            
+                            <div class="orders-detail">
+                                <a href="#" class="js-detail">详情</a>
+                                <div class="layer-tips layer-tips-wide layer-tips-stress detail-layer-tips">
+                                    <span class="ico-direction-t">
+                                        
+                                    </span><a href="#none" class="btn-close js-close" title="关闭">关闭</a>
+                                    <div class="layer-tips-main">
+                                        <ul class="detail-list">
+                                            <li><span class="item-name">商户订单号：</span><span class="item-value">{{info.tbout_trade_no}}</span></li>
+                                            <li><span class="item-name">商品描述：</span><span class="item-value">{{info.tbbody}}</span></li>
+                                            <li><span class="item-name">附加信息：</span><span class="item-value">{{info.tbattach}}</span></li>
+                                            <li><span class="item-name">总 金 额：</span><span class="item-value">{{info.tbtotal_fee/100}}元</span></li>
+                                         <!--  <li><span class="item-name">订 单 号：</span><span class="item-value"></span></li>
+                                            <li><span class="item-name">交易金额：</span><span class="item-value"></span></li>-->
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="orders-money">
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="pay_total_money" class="pay-money">
+                <div class="money-line">
+                    应付：<strong id="total_fee_show" class="money">{{info.tbtotal_fee/100}}</strong>元</div>
+            </div>
+        </div>
+        <div id="payMsg">
+            <div class="area_bd" id="pay_succ" style="display:none">
+                <i class="icon110_msg pngFix"></i>
+                <h3 class="pay_msg_t">
+                    购买成功</h3>
+                
+               <p class="pay_msg_desc">
+                <span id="redirectTimer">8</span>秒后返回商户网页。
+               </p>
+            </div>
+            <div class="area_bd" id="pay_error" style="display:none">
+                <i class="icon60_msg pngFix"></i>
+                <h3 class="pay_msg_t">
+                    无法支付</h3>
+                <p class="pay_msg_desc">
+                    商品金额大于银行卡快捷支付限额</p>
+            </div>
+            <div class="area" id="qr_normal">
+                <span class="qr_img_wrapper">
+                    <img class="qrcode" alt="二维码" id="QRcode" src="{{info.code_img_url}}"/>
+
+                    <img class="guide " src="/student/image/paybao.png" alt="" id="guide" /></span>
+                <div class="msg_default_cg">
+                    <i class="icon60_qr pngFix"></i>
+                    <p>
+                        请使用支付宝扫码<br />
+                        二维码以完成支付</p>
+                    
+                </div>
+                <div><p style="color:red; padding:12px;">请注意！生成的二维码在30秒内未扫码，将自动跳转我的订单页面！</p></div>
+                <div class="msg_default_box" style="display:none">
+                    <i class="icon70_qr pngFix"></i>
+                    <p>
+                        <strong>扫描成功</strong><br />
+                        请在手机确认支付</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+
+<!--内容右侧主体结束-->
+<script type="text/javascript" src="/student/js/myorder/zfbao.js"></script>
+<!--#include file="/student/footer.html"-->

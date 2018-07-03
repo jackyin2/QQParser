@@ -1,0 +1,183 @@
+<!--#include file="/study/header3.html"-->
+<link rel="stylesheet" type="text/css" href="/common/css/upload.css" />
+<link rel="stylesheet" type="text/css" href="/common/css/upload_form.css" />
+<link rel="stylesheet" type="text/css" href="/common/css/uploader.css" />
+<link rel="stylesheet" type="text/css" href="/common/css/select2.min.css">
+<script type="text/javascript" src="/common/js/select2.min.js"></script>
+
+<div class="am-panel am-panel-default main_content">
+    <div class="am-panel-hd am-cf">
+        <h3 class="am-panel-title">
+            <span class="am-icon am-icon-tasks"></span>&nbsp;论文管理
+        </h3>
+        <div class="am-text-right">
+            <a id="upload" class="am-btn am-btn-secondary am-btn-default am-padding-horizontal-lg add_btn">
+                <span class="am-icon am-icon-plus"></span>论文上传</a>
+        </div>
+    </div>
+    <div id="table_html"></div>
+
+</div>
+
+<script type="text/html" id="pass">
+    <style>
+        #table_info thead tr th {
+            text-align: center!important;
+        }
+    </style>
+    <div class="am-margin-top">
+        <table id="table_info" class="am-table am-text-center">
+            <thead>
+                <tr>
+                    <th width="7%">序号</th>
+                    <th width="23%">文件名称</th>
+                    <th width="10%">论文类型</th>
+                    <th width="15%">参考资料</th>
+                    <th width="10%">状态</th>
+                    <th width="10%">评分等级</th>
+                    <th width="10%">备注</th>
+                    <th width="15%">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{if list.length > 0}}
+                                    {{each list as item i}}
+                                <tr id="{{item.Id}}">
+                                    <td>{{if pagination.pageIndex>0}}{{(pagination.pageIndex - 1) * pagination.pageSize + i + 1}}{{else}}{{(pagination.pageIndex ) * pagination.pageSize + i + 1}} {{/if}}</td>
+                                    <td title="{{item.Title}}" data-id="{{item.Id}}">{{#substring(item.Title,0,10)}}</td>
+                                    <td>{{item.DocType}}</td>
+                                    <td>{{if item.AuditStatus=="-1" && item.DocCount>0}} 
+                                            <a class="download" id="download" href="javascript:;" data-id="{{item.Id}}">资料下载</a>
+                                        {{else}} 
+                                                --- 
+                                        {{/if}}
+                                    </td>
+                                    <td>{{if item.AuditStatus=="0" || item.AuditStatus==""}} 待审核 {{else if item.AuditStatus=="1"}} 通过 {{else if item.AuditStatus=="-1"}} <span style="color: red;">未通过</span> {{/if}}</td>
+                                    <td>{{if item.Score}} {{if item.Score=="-1"}}不及格 {{else if item.Score=="0"}}及格 {{else if item.Score=="1"}}良好 {{else if item.Score=="2"}}优秀{{else}}--- {{/if}}{{/if}}</td>
+                                    <td><a class="remark" href="javascript:;" data-id="{{item.Id}}">查看</a></td>
+                                    <td>{{if item.AuditStatus=="0" || item.AuditStatus==""}}
+                                         <a class="preview" href="javascript:;" data-id="{{item.Id}}">预览</a>
+                                        <a class="delete" href="javascript:;" data-id="{{item.Id}}">删除</a>
+                                        {{else}}
+                                                ---
+                                        {{/if}}
+                                    </td>
+                                </tr>
+                {{/each}}
+                                {{else}}
+                                    <tr>
+                                        <td colspan="11">
+                                            <span>暂无数据</span></td>
+                                    </tr>
+                {{/if}}
+            </tbody>
+        </table>
+        <div class="pagination ajax"></div>
+    </div>
+</script>
+
+<script id="upload_html" type="text/html">
+    <div class="upload-dialog-list" id="upload_container" style="position: relative; height: 490px;">
+        <div class="upload-list">
+            <h3 style="display: none;" id="tip_selected">
+                <span style="float: right; padding-right: 5px; color: #44A2E3;"></span>已选择的文件
+            </h3>
+            
+            <ul id="files_queued">
+            </ul>
+            <div id="uploader" class="wu-example">
+                <!--用来存放文件信息-->
+                <div id="thelist" class="uploader-list"></div>
+                <div class="btns">
+                    <div id="picker" class="picker_width" class="add-file" title="选择要上传的文件" data-file_system_url="{{file_system_url}}"></div>
+                </div>
+            </div>
+        </div>
+        <div class="upload-dialog-primary">
+            <div class="upload-form" id="upload-form">
+                <div class="fieldset-list middle-list control-w110" style="border: none;">
+                    <div class="wrap_resource">
+                        <div class="content">
+                            <h3>上传须知</h3>
+                            <div class="section">
+                                <span>上传途径及大小</span>
+                                <p>1、网页版上传：为避免上传失败，仅允许上传单个最大300M的文件</p>
+                            </div>
+                            <div class="section">
+                                <span>上传格式要求</span>
+                                <p>1、office文档： doc  docx  xls  xlsx  wps  wpt  dps  pdf  rtf  txt ppt pptx</p>
+                                <p>2、音视频： epg, mp4, flv,mkv, rm, rmvb, asf, mpg, avi, wmv, mov,mts, 3gp, f4v, swf, dwg, mp3, aac, flac, ape, wav, wma amr,（三分频格式视频：zipx、rarx、csf）</p>
+                                <p>3、图片： jpg  jpeg  png  tif  tiff  bmp  gif</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="upload-button" style="display: none;">
+                <div class="am-margin-top-xs">
+                    <button type="button" class="am-btn am-btn-success submit am-margin-right-xs">保存并上传</button>
+                    <button class="am-btn am-btn-default cancel">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script id="upform_html" type="text/html">
+    <div class="am-form am-form-horizontal am-g-collapse {{fileId}}" data-id="{{fileId}}" style="position: relative;" data-index="{{index}}">
+        <div id="selectInfo"></div>
+        
+        <div class="remark">
+               <span style="font-size:16px;margin-left: 36px;">论文备注：</span>
+                 <div class="up_list" style="margin-top: 15px;padding-left: 40px;"><textarea class="remark-text" style="height:150px;"></textarea></div>
+                </div>
+        <div class="file">
+            <div class="up_list">
+                <span>{{index}}.<em class="red">*</em>&nbsp;资源名称：</span><input type="text" class="doc_title" maxlength="200" value="{{fileName}}">
+            </div>
+            {{inputHtml}}
+        </div>
+    </div>
+</script>
+
+
+<script id="remark_html" type="text/html">
+    <div class="am-form am-form-horizontal sh-kp-form">
+        <Strong>学生备注：</Strong>
+        <div class="am-form-group am-input-group-sm">
+            {{stuRemark}}
+        </div>
+         <Strong>老师备注：</Strong>
+         <div class="am-form-group am-input-group-sm">
+            <ul>
+                {{if list && list.length>0}}
+                    {{each list as item}}
+                {{if item.teaRemark}}
+                        <li style="color:red">附件意见：{{item.teaRemark}}</li>
+                {{else}}
+                <li></li>
+                {{/if}}
+                    {{/each}}
+                {{/if}}
+            </ul>
+        </div>
+         <div class="am-form-group am-input-group-sm">
+            <ul>
+                {{if list && list.length>0}}
+                    {{each list as item}}
+                {{if item.reason}}
+                        <li style="color:red">审核不通过原因：{{item.reason}}</li>
+                {{else}}
+                <li></li>
+                {{/if}}
+                    {{/each}}
+                {{/if}}
+            </ul>
+        </div>
+    </div>
+</script>
+
+<!--内容右侧主体结束-->
+<script src="/study/js/lunwen/idoc.js"></script>
+<script src="/study/js/lunwen/upload.js"></script>
+<!--#include file="/study/footer3.html"-->

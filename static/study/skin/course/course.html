@@ -1,0 +1,60 @@
+<!--#include file="/study/header.html"-->
+<div class="primary" id="courseinfo">
+            <div class="main_content">
+                <div class="main_content_title">
+                    <div class="attr">
+                        <i class="iconfont icon-kecheng"></i>
+                        我的课程
+                    </div>
+                    <div class="inputOrbutton">
+                       <div class="search">
+                            <input name="search" type="text" placeholder="课程名称" />
+                            <button  id="search" class="add buttonPosition"><i class="iconfont icon-search"></i></button>
+                        </div>
+                          <button class="add" id="restudyAll" type="button">全部重新学习</button>
+                    </div>
+                </div>
+                <div id="courseList" class="courseList"></div>
+                <script id="courseListShow" type="text/html">
+                    <div class="shop">
+                    <table class="table" id="table" border="1" width="938px">
+                        <thead>
+                            <tr>
+                                <th width="40%">课程代码</th>
+                                <th width="15%">课程名称</th>
+                                <th width="15%">开始时间</th>
+                                <th width="15%">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{if list.length > 0}}
+                            {{each list as item i}}
+                            <tr id="{{item.Id}}">
+                                <td>{{#substring(item.CourseCode,0,10)}}</td>
+                                <td>{{#substring(item.CourseName,0,10)}}</td>
+                                <td>{{item.DateCreated | dateFormat:'yyyy-MM-dd'}}</td>
+                                <td>
+                                    <!-- <a class="restudy"href="javascript:;" data-id="{{item.Id}}">重新学习</a>-->
+                                    <a class="" href="/study/process/process.html#courseId={{item.CourseId}}&courseOpenId={{item.CourseOpenId}}&openClassId={{item.CourseOpenClassId}}" data-id="{{item.CourseId}}">查看</a>
+                                </td>
+                            </tr>
+                            {{/each}}
+                            {{else}}
+                            <tr>
+                                <td colspan="10" style="background-color: #fff;">
+                                    <div>功能暂未开发</div>
+                                </td>
+                            </tr>
+                            {{/if}}
+                        </tbody>
+                    </table>
+
+                </div>
+                   <div class="footer pagination ajax">
+                   </div>
+                </script>
+            </div>
+</div>
+<!--内容右侧主体结束-->
+<script type="text/javascript" src="/study/js/course/course.js"></script>
+<!--#include file="/study/footer.html"-->

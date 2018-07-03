@@ -1,0 +1,308 @@
+{% extends  'Home_base.html' %}
+{% load  staticfiles %}
+
+{% block css %}
+      <style>
+    label, input { display:block; }
+    input.text { margin-bottom:12px; width:95%; padding: .4em; }
+    fieldset { padding:0; border:0; margin-top:25px; }
+    h1 { font-size: 1.2em; margin: .6em 0; }
+    div#users-contain { width: 350px; margin: 20px 0; }
+    div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+    div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+    .ui-dialog .ui-state-error { padding: .3em; }
+    .validateTips { border: 1px solid transparent; padding: 0.3em; }
+  </style>
+{% endblock %}
+
+{% block jsscript %}
+
+<script type="text/javascript">
+     $(document).on('click','.btn_submit',function(){
+        Search();
+});
+    //$('#btn_submit').click(function(){
+//      //  debugger;
+   //     Search();
+    //    debugger;
+  //    {)
+    function Search(){
+    var keywords = $('#search_keywords').val(),
+
+        request_url = '';
+    if(keywords == ""){
+        return
+    }else {
+        request_url = "/upfiles?keywords="+keywords
+    }
+    window.location.href = request_url
+    }
+
+    //分析扣扣记录文件
+
+</script>
+<script type="text/javascript">
+ $( function() {
+    var dialog, form,
+
+      // From http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#e-mail-state-%28type=email%29
+      emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+      url = $( "#file_url" ),
+{#      email = $( "#email" ),#}
+{#      password = $( "#password" ),#}
+      allFields = $( [] ).add( url ),
+      tips = $( ".validateTips" );
+
+    function updateTips( t ) {
+      tips
+        .text( t )
+        .addClass( "ui-state-highlight" );
+      setTimeout(function() {
+        tips.removeClass( "ui-state-highlight", 1500 );
+      }, 500 );
+    }
+
+    function checkLength( o, n, min, max ) {
+      if ( o.val().length > max || o.val().length < min ) {
+        o.addClass( "ui-state-error" );
+        updateTips( "Length of " + n + " must be between " +
+          min + " and " + max + "." );
+        return false;
+      } else {
+        return true;
+      }
+    }
+
+    function checkRegexp( o, regexp, n ) {
+      if ( !( regexp.test( o.val() ) ) ) {
+        o.addClass( "ui-state-error" );
+        updateTips( n );
+        return false;
+      } else {
+        return true;
+      }
+    }
+
+    function addUser() {
+      var valid = true;
+      allFields.removeClass( "ui-state-error" );
+
+      valid = valid && checkLength( name, "username", 3, 16 );
+      valid = valid && checkLength( email, "email", 6, 80 );
+      valid = valid && checkLength( password, "password", 5, 16 );
+
+      valid = valid && checkRegexp( name, /^[a-z]([0-9a-z_\s])+$/i, "Username may consist of a-z, 0-9, underscores, spaces and must begin with a letter." );
+      valid = valid && checkRegexp( email, emailRegex, "eg. ui@jquery.com" );
+      valid = valid && checkRegexp( password, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
+
+      if ( valid ) {
+        $( "#users tbody" ).append( "<tr>" +
+          "<td>" + name.val() + "</td>" +
+          "<td>" + email.val() + "</td>" +
+          "<td>" + password.val() + "</td>" +
+        "</tr>" );
+        dialog.dialog( "close" );
+      }
+      return valid;
+    }
+
+    function upLoadFile(){
+        debugger;
+        $('#submit1').submit();
+        dialog.dialog( "close" );
+{#        $.ajax({#}
+{#            cache: false,#}
+{#            type: "POST",#}
+{#            url:"{% url 'qqhome:upFiles' %}",#}
+{#            data:{"file_1":''},#}
+{#            async: true,#}
+{#            beforeSend:function(xhr, settings){#}
+{#                xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");#}
+{#            },#}
+{#            success: function(data) {#}
+{#                if(data == 'fail'){#}
+{#                    window.location.href="\\";#}
+{#                }else if(data == 'success'){#}
+{#                    window.location.reload();//刷新当前页面.#}
+{#                }#}
+{#            },#}
+{#        });#}
+
+    }
+
+    function FileUpload() {
+            var form_data = new FormData();
+            var file_info = $('#file_url')[0].files[0];
+            form_data.append('file',file_info);
+            //if(file_info==undefined)暂且不许要判断是否有附件
+                //alert('你没有选择任何文件');
+                //return false
+            //}
+
+            // 提交ajax的请求
+            $.ajax({
+                url:"{% url 'qqhome:upFiles' %}",
+                type:'POST',
+                data: form_data,
+                processData: false,  // tell jquery not to process the data
+                contentType: false, // tell jquery not to set contentType
+                success: function(callback) {
+
+                    console.log(order_id)
+                }
+            }); // end ajax
+        }
+
+    dialog = $( "#dialog-form" ).dialog({
+      autoOpen: false,
+      height: 400,
+      width: 350,
+      modal: true,
+      buttons: {
+        "UpFiles": FileUpload,
+        Cancel: function() {
+          dialog.dialog( "close" );
+        }
+      },
+      close: function() {
+        form[ 0 ].reset();
+        allFields.removeClass( "ui-state-error" );
+      }
+    });
+
+    form = dialog.find( "form" ).on( "submit", function( event ) {
+      event.preventDefault();
+      FileUpload();
+    });
+
+    $( "#uploadfile" ).button().on( "click", function() {
+      dialog.dialog( "open" );
+    });
+  } );
+</script>
+
+
+{% endblock %}
+
+
+
+
+{% block content %}
+<div class="gform full">
+    <div id="right_content" class="am-g am-g-collapse ">
+        <div class="am-panel">
+            <div class="am-panel am-panel-default">
+                <div class="am-panel-hd am-cf">
+                    <h3 class="am-panel-title">
+                        <span class="am-icon am-icon-tasks">文件记录</span>
+                    </h3>
+                    <div class="am-text-right"></div>
+                </div>
+                <div style="margin-right: 28px;" class="am-form-group am-margin-top-sm" id="searchInfo"></div>
+                <div id="fm_content"  class="am-form am-form-horizontal" >
+                    <div id="content_container" class="am-margin-top">
+                            <div id="searchInfoTip" class="am-form-group">
+                                <label class="am-form-label am-u-sm-1" >班级筛选：</label>
+                                <div class="am-u-sm-8 am-u-end" style="width: 200px;">
+                                    <select id="classInfoId" name="classInfoId">
+                                        <option id=""  value="">—— 全部 ——</option>
+                                        <option id=""  value="">2017</option>
+                                        <option  id=""  value="">2018</option>
+
+                                    </select>
+                                     <div id="SearchKey">
+                                         <input  id= 'search_keywords' type="text" name="name" />
+{#                                         <button>搜索记录</button>#}
+                                         <button type="submit" class="btn_submit"> 查询 </button>
+                                     </div>
+                                 </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+                <div id = 'uploads_ajax' >
+                    <button id="uploadfile">上传文件</button>
+                </div>
+
+                <div id="table_html" >
+                    <input type="hidden" name="type" value="" />
+                    <p>总计：<span style="color: red; font-size: 20px">{{ filecounts }}</span></p>
+                    {% csrf_token %}
+                    <table id="table_info" class="am-table am-text-center">
+                        <thead>
+                            <tr>
+                                <th style="width: 5%" class="am-text-center">序号</th>
+                                <th style="width: 20%" class="am-text-center">文件名称</th>
+                                <th style="width: 20%" class="am-text-center">文件时间</th>
+                                 <th style="width: 20%" class="am-text-center">是否分析</th>
+                                <th style="width: 20%" class="am-text-center">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                             {% for content in  all_files.object_list %}
+                                <tr >
+                                    <td class="am-text-center" > {{ content.id }}</td>
+                                     <td class="am-text-center">{{ content.filename }}</td>
+                                     <td class="am-text-center">{{ content.uptime }}</td>
+                                    <td class="am-text-center" >{{ content.get_isparser_display }}</td>
+                                    <td class="am-text-center"><button class="parserbutton" data-id="{{ content.id }}" data-isparser="{{ content.get_isparser_display }}">分析文件</button>{% csrf_token %}</td>
+                                </tr>
+                             {% endfor %}
+                             {% ifequal contentslen 0 %}
+                             <tr>
+                                    <td colspan="6">
+                                        <div class="am-text-center">暂无数据</div>
+                                    </td>
+                             </tr>
+                            {% endifequal %}
+                        </tbody>
+                    </table>
+                     {% load i18n %}
+                    <div class="pagination ajax" >
+                    <ul class="pagelist" >
+                      {# 上一页 #}
+                                    {%  if all_files.has_previous %}
+                                    <li class="long" ><a href="?{{ all_files.previous_page_number.querystring }}" class="prev">上一页</a></li>
+                                    {% endif %}
+                     {#  中间页码 #}
+                                    {% for page in all_files.pages %}
+
+                                        {% if page %}
+                                            {% ifequal page all_files.number %}
+                                                {#{{ all_orgs.number }}  该表示是前台页面中选中的page的页码 #}
+                                                <li class="active"><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
+                                            {% else %}
+                                                <li ><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
+                                            {% endifequal %}
+                                        {% else %}
+                                                <li class="none" ><a href="">...</a></li>
+                                        {% endif %}
+                                 {% endfor %}
+
+                    {#  下一页  #}
+                                    {% if all_files.has_next %}
+                                    <li class="long"><a href="?{{ all_files.next_page_number.querystring }}">下一页</a></li>
+                                    {% endif %}
+                    </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+<div id="dialog-form" title="上传文件">
+  <p class="validateTips">备注：上传QQ记录时，请将文件内容中的第一行默认显示的一个人员的聊天记录</p>
+
+  <form method="post" action="/upfiles/" enctype="multipart/form-data" >
+      {% csrf_token %}
+
+      <input type="file" name="name" id="file_url" value="file_url" class="text ui-widget-content ui-corner-all">
+     <!-- Allow form submission with keyboard without duplicating the dialog button -->
+      <input  id='submit1' type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+
+  </form>
+</div>
+
+
+{% endblock %}
+

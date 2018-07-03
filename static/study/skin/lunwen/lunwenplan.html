@@ -1,0 +1,71 @@
+<!--#include virtual="/study/header3.html"-->
+
+<div class="am-panel am-panel-default main_content">
+    <form id="main_content">
+        <div class="am-panel-hd am-cf">
+            <h3 class="am-panel-title">
+                <span class="am-icon am-icon-tasks"></span>&nbsp;论文管理
+            </h3>
+            <div class="am-text-right">
+                <label class="am-form-label am-inline-block am-margin-top-xs">论文计划名称：</label>
+                <div class="am-inline-block cc_am_u am-text-middle" style="padding-left: 10px;">
+                    <input type="text" name="key" class="am-form-field ui-widget-content ui-corner-all" style="width: 200px;">
+                </div>
+                <div class="am-inline-block am-text-left am-text-middle" style="padding-left: 10px;">
+                    <button id="search" class="am-btn am-btn-success" type="button"><span class="am-icon am-icon-search"></span>查询</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="thesisQuestionList"></div>
+    </form>
+</div>
+
+<!--论文计划列表-->
+<script type="text/html" id="thesisQuestionListShow">
+    <style>
+        #table_info thead tr th {
+            text-align: center!important;
+        }
+    </style>
+    <div class="am-margin-top">
+        <table id="table_info" class="am-table am-text-center">
+            <thead>
+                <tr>
+                    <th width="5%">序号</th>
+                    <th width="15%">论文计划</th>
+                    <th width="15%">论文批次</th>
+                    <th width="20%">论文开始时间</th>
+                    <th width="20%">论文截止时间</th>
+                    <th width="10%">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{if list && list.length > 0}}
+                {{each list as item i}}
+                <tr id="{{item.Id}}">
+                    <td>{{if pagination.pageIndex>0}}{{(pagination.pageIndex - 1) * pagination.pageSize + i + 1}}{{else}}{{(pagination.pageIndex ) * pagination.pageSize + i + 1}} {{/if}}</td>
+                    <td title="{{item.Title}}">{{#substring(item.Title,0,20)}}</td>
+                    <td>{{#substring(item.Batch,0,20)}}</td>
+                    <td>{{item.StartTime | dateFormat:'yyyy-MM-dd'}}</td>
+                    <td>{{item.EndTime | dateFormat:'yyyy-MM-dd'}}</td>
+                    <td><a href="lunwen.html#Id={{item.Id}}" data-id="{{item.Id}}">查看论文</a>
+                    </td>
+                </tr>
+                {{/each}}
+                {{else}}
+                        <tr>
+                            <td colspan="6">
+                                <span class="am-text-center">暂无数据</span>
+                            </td>
+                        </tr>
+                {{/if}}
+            </tbody>
+        </table>
+        <div class="pagination ajax"></div>
+    </div>
+</script>
+
+<!--内容右侧主体结束-->
+<script type="text/javascript" src="/study/js/lunwen/lunwenplan.js"></script>
+<!--#include virtual="/study/footer3.html"-->

@@ -1,0 +1,47 @@
+<!--#include virtual="/study/header2.html"-->
+<form id="right_content" method="get" class="gform full">
+<div id="d_coursetoc_t">
+    <div class="am-panel am-panel-default">
+        <div class="am-panel-hd clearfix">
+            <h3 class="am-panel-title"><span class="am-icon am-icon-tasks"></span>总复习</h3>
+            </div>
+            <div class="am-panel-bd" id="content_container"></div>
+        </div>
+    </div>
+
+    <script id="totalreview_table" type="text/html">
+       <input type="hidden" name="courseOpenId" value="{{courseOpenId}}" />
+       <input type="hidden" name="openClassId" value="{{openClassId}}" /> 
+        <table id="info_table" class="am-table am-text-center"  style="border-top:1px solid #ccc;">
+            <thead>
+                <tr>
+                    <th style="width:8%;" class="am-text-center">序号</th>
+                    <th>标题</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{if list && list.length > 0}}
+                    {{each list as item i}}
+                       <tr>
+                         <td style="text-align: center;">{{(pagination.pageIndex - 1) * pagination.pageSize + i + 1}}</td>
+                         <td style="text-align: left;">
+                             <a href="totalReviewView.html#courseOpenId={{courseOpenId}}&openClassId={{openClassId}}&Id={{item.Id}}" >{{item.Title}}</a>
+                         </td>
+                      </tr>
+                   {{/each}}
+                {{else}}
+                    <tr>
+                      <td colspan="2">
+                        <div class="am-text-center">暂无数据</div>
+                     </td>
+                 </tr>
+               {{/if}}
+            </tbody>
+        </table>
+        <div class="pagination ajax"></div>
+    </script>
+</form>
+<script type="text/javascript" src="/study/js/totalReview/totalReview.js"></script>
+
+<!--内容右侧主体结束-->
+<!--#include virtual="/study/footer2.html"-->

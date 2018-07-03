@@ -1,0 +1,67 @@
+<!--#include file="/study/header2.html"-->
+
+ <form id="right_content" method="get" class="gform full">
+    <div id="topic">
+        <div class="am-panel am-panel-default" >              
+                    <div class="am-panel-hd am-cf" id="getcourseId">
+                       <script type="text/html" id="courseId">
+                       <h3 class="am-panel-title"><span class="am-icon am-icon-file-o"></span>在线作业</h3>
+
+                         </script>
+                    </div>
+                    
+                    <div class="alert alert-info xk-info" id="stuinfo">
+                        <script type="text/html" id="stu">
+                            <strong>学生：</strong><span class="highlight">
+                            {{bstuinfo.Name}}</span>
+                            <strong>类型：</strong><span class="highlight">
+                            在线作业</span>
+                         </script>
+                    </div>
+            <div class="am-panel-bd" id="content_container"> </div>
+            <script type="text/html" id="homeworkinfo">
+                 <input type="hidden" name="courseOpenId" value="{{courseOpenId}}"/>
+                <input type="hidden" name="stuId" value="{{stuId}}"/>
+                <table class="am-table am-text-center" style="margin: 0px;">
+                    <thead>
+                        <tr>
+                            <th class="am-text-left" style="border-top: 1px solid #ddd;width:5%">序号</th>
+                            <th class="am-text-left" style="border-top: 1px solid #ddd;">名称</th>
+                            <th class="am-text-center" style="border-top: 1px solid #ddd;width:8%">得分</th>
+                            <th class="am-text-center" style="border-top: 1px solid #ddd;width:8%">权重</th>
+                            <th class="am-text-center" style="border-top: 1px solid #ddd;width:8%">权重分</th>
+                            <th class="am-text-center" style="border-top: 1px solid #ddd;width:16%">时间</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+      
+                    {{if list.length != 0}}
+                        {{each list as item i}}
+                        <tr>
+                            <td class="am-text-left">{{(pagination.pageIndex - 1) * pagination.pageSize + i + 1}}</td>
+                            <td class="am-text-left">{{item.Title}}</td>
+                            <td>
+                                <a target="_blank" href="stuScoreInfo.html#courseOpenId={{courseOpenId}}&openClassId={{openClassId}}&workId={{item.Id}}&stuId={{stuId}}">{{item.Score}}</a></td>
+                            <td>{{item.Weight}}%</td>
+                            <td>{{item.a}}</td>
+                            <td>{{item.datecreated |dateFormat:'yyyy/MM/dd hh:mm:ss'}}</td>
+                        </tr>
+                          {{/each}}
+                            {{else if list.length == 0}}
+                        <tr>
+                            <td colspan="6">
+                                <div class="e-nost">暂无数据</div>
+                            </td>
+                        </tr>
+                       {{/if}}
+                    </tbody>
+                </table>
+                <div class="pagination ajax"></div>
+            </script>
+        </div>
+    </div>
+</form>
+<script type="text/javascript" src="/study/js/viewScore/scoreInfo.js"></script>
+
+<!--内容右侧主体结束-->
+<!--#include file="/study/footer2.html"-->

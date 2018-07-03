@@ -1,0 +1,70 @@
+﻿<link rel="stylesheet" type="text/css" href="<%=playerCss%>" />
+<script src="<%=playerHtml%>.js"></script>
+<div class="video-box" id="video-box">
+    <div class="video-play">
+        <div class="video-inner position">
+            <div class="video-playBox position">
+                <div class="player_screen"></div>
+            </div>
+            <div class="video-list position" style="display: none;">
+                <div class="video-list-inner">
+                    <div class="video-button position" title="点击切换视频"></div>
+                    <div class="video-text position">
+                        <div class="video-desc">
+                            <h3><a href="#"><%if(directoryData.title) {%><%=directoryData.title.text%><%}else{%>没有标题<%}%></a></h3>
+                            <p class="clefix">
+                                <%if(directoryData.author) {%><span>主讲：<%=directoryData.author.text%></span><%}%>
+                                <%if(directoryData.copyright) {%><span>版权：<%=directoryData.copyright.text%></span><%}%>
+                                <%if(directoryData.description) {%><span>描述：<%=directoryData.description.text%></span><%}%>
+                            </p>
+                        </div>
+                        <div class="video-catalog position">
+                            <ul>
+                                <%if(directoryData) {%>
+                                    <%for(var i=0;i<(directoryData.indextree.length);i++){%>
+                                    <%var item = directoryData.indextree[i];%>
+                                        <li data-time="<%=item.time%>"><span><%=item.showTime%></span><a href="javascript:void(0)" title="<%=item.title%>"><%=item.title%></a></li>
+                                <%}%>
+                                <%}else{%>
+                                    <li>没有目录</li>
+                                <%}%>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="video-inner right position">
+            <div class="video-playBox position">
+                <div class="player_teachers"></div>
+            </div>
+            <div class="video-list position" style="display: none;">
+                <div class="video-list-inner">
+                    <div class="video-button position" title="点击切换视频"></div>
+                    <div class="video-text position">
+                        <div class="video-desc">
+                            <h3><a href="#"><%if(directoryData.title) {%><%=directoryData.title.text%><%}else{%>没有标题<%}%></a></h3>
+                            <p class="clefix">
+                                <%if(directoryData.author) {%><span>主讲：<%=directoryData.author.text%></span><%}%>
+                                <%if(directoryData.copyright) {%><span>版权：<%=directoryData.copyright.text%></span><%}%>
+                                <%if(directoryData.description) {%><span>描述：<%=directoryData.description.text%></span><%}%>
+                            </p>
+                        </div>
+                        <div class="video-catalog position">
+                            <ul>
+                                <%if(directoryData) {%>
+                                    <%for(var i=0;i<(directoryData.indextree.length);i++){%>
+                                    <%var item = directoryData.indextree[i];%>
+                                        <li data-time="<%=item.time%>"><span><%=item.showTime%></span><a href="javascript:void(0)" title="<%=item.title%>"><%=item.title%></a></li>
+                                <%}%>
+                                <%}else{%>
+                                    <li>没有目录</li>
+                                <%}%>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

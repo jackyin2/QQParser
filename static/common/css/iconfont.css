@@ -1,0 +1,73 @@
+
+@font-face {font-family: "upc-icon";
+  src: url('fonts/iconfont.eot'); /* IE9*/
+  src: url('fonts/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('fonts/iconfont.woff') format('woff'), /* chrome, firefox */
+  url('fonts/iconfont.ttf') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('fonts/iconfont.svg#upc-icon') format('svg'); /* iOS 4.1- */
+}
+
+.upc-icon {
+  font-family:"upc-icon" !important;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+.upc-icon-zfx:before { content: "\e600"; }
+.upc-icon-kecheng:before { content: "\e635"; }
+.upc-icon-ksxx:before { content: "\e601"; }
+.upc-icon-wdjc:before { content: "\e602"; }
+.upc-icon-zxzd:before { content: "\e604"; }
+.upc-icon-wyxk:before { content: "\e605"; }
+.upc-icon-youjian:before { content: "\e636"; }
+.upc-icon-wjdc:before { content: "\e606"; }
+.upc-icon-wyjf:before { content: "\e607"; }
+.upc-icon-kcbj:before { content: "\e608"; }
+.upc-icon-tzgg:before { content: "\e609"; }
+.upc-icon-mzsq:before { content: "\e60a"; }
+.upc-icon-zuoye:before { content: "\e60b"; }
+.upc-icon-zong:before { content: "\e60c"; }
+.upc-icon-kcgg:before { content: "\e60d"; }
+.upc-icon-xxdh:before { content: "\e60e"; }
+.upc-icon-duanxin:before { content: "\e60f"; }
+.upc-icon-kcxx:before { content: "\e610"; }
+.upc-icon-spdy:before { content: "\e611"; }
+.upc-icon-wdkc:before { content: "\e612"; }
+.upc-icon-cybk:before { content: "\e613"; }
+.upc-icon-kcfm:before { content: "\e614"; }
+.upc-icon-kclx:before { content: "\e615"; }
+.upc-icon-jxjh:before { content: "\e616"; }
+.upc-icon-daoshi:before { content: "\e617"; }
+.upc-icon-ryxx:before { content: "\e618"; }
+.upc-icon-zypj:before { content: "\e619"; }
+.upc-icon-phb:before { content: "\e61a"; }
+.upc-icon-home:before { content: "\e61b"; }
+.upc-icon-tkgl:before { content: "\e61c"; }
+.upc-icon-zxzy:before { content: "\e61d"; }
+.upc-icon-kaoshi:before { content: "\e61e"; }
+.upc-icon-sjgl:before { content: "\e61f"; }
+.upc-icon-zxks:before { content: "\e620"; }
+.upc-icon-kcxx1:before { content: "\e621"; }
+.upc-icon-lwtj:before { content: "\e622"; }
+.upc-icon-wdcj:before { content: "\e623"; }
+.upc-icon-tzgg1:before { content: "\e624"; }
+.upc-icon-khsz:before { content: "\e625"; }
+.upc-icon-kczy:before { content: "\e626"; }
+.upc-icon-kctx:before { content: "\e627"; }
+.upc-icon-dxgl:before { content: "\e628"; }
+.upc-icon-zxdy:before { content: "\e629"; }
+.upc-icon-kclx1:before { content: "\e62a"; }
+.upc-icon-homesmall:before { content: "\e62c"; }
+.upc-icon-spdy1:before { content: "\e62d"; }
+.upc-icon-dxzl:before { content: "\e62e"; }
+.upc-icon-ktbg:before { content: "\e62f"; }
+.upc-icon-bytb:before { content: "\e630"; }
+.upc-icon-kcbj1:before { content: "\e62b"; }
+.upc-icon-ktbgsh:before { content: "\e631"; }
+.upc-icon-zdjs:before { content: "\e632"; }
+.upc-icon-grxx:before { content: "\e637"; }
+.upc-icon-tjzy:before { content: "\e633"; }
+.upc-icon-lwsh:before { content: "\e634"; }
+.upc-icon-cuotiji:before { content: "\e603"; }
+.upc-icon-wdsy:before { content: "\e638"; }

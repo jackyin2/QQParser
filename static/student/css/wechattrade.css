@@ -1,0 +1,117 @@
+/* CSS Document */
+
+body,div,dd,ul,li,h1,h2,h3,h4,h5,form,fieldset,img,input,textarea,blockquote,th,td,button{	padding:0; margin:0; font-family:Arial,"宋体"; color:#535353; font-size:14px; border:none;}
+ul,li,ol,dl,dt,dd,p{list-style:none;padding:0;margin:0; border:none;}
+li{display:list-item;margin: 0;padding: 0;text-align: -webkit-match-parent; font-size:12px;}
+body{ background:#f8f8f8;}
+a{ text-decoration:none; color:#147abc;}
+a:hover{ text-decoration:underline;}
+
+/*******************错误提示开始*******************/
+#container{width:950px;margin:0 auto;padding-top:12px;}
+.n-error{ border:1px solid #f6c8b5; background-color:#FCEEE8; padding-top:20px; padding-bottom:16px;}
+.notice h3{font-size:14px;color:#000; padding-top:10PX;}
+.notice{margin-top: 13px; background:url(../image/1PYaY65kQn.gif) no-repeat scroll -510px -224px #FCEEE8;color: #333;min-height: 50px;line-height: 150%;border:1px solid #f6c8b5; padding-left: 102px;padding-right: 52px;}
+
+/******底部文字*******/
+.bottom{ background:#FFF; width:900px; height:40px; margin:0 auto; font-size:12px; text-align:center; display:block; padding-top:20px;}
+/*******************错误提示结束*******************/
+
+/******************页头开始*******************/
+.header{height:62px;margin-bottom:18px;border-bottom:2px solid #ea4b00;background-color:#FFF;min-width:996px;}
+.wrap{ width:996px;margin:0 auto;}
+.header .logo{float:left;margin-top:7px; width:172px;  }
+.header .partner-info{ float:right; color:#acacac; padding-top:10px;}
+.header .partner-info a{ padding:0 5px 0 5px; font-size:12px; color:#666;}
+/******************页头结束*******************/
+.area{text-align:center}
+.area_hd h2{display:none}
+.pay_bill .area_hd{border-bottom:3px solid #e0e3eb;padding-bottom:4px;height:60px}
+.pay_bill .area_hd .icon_wrapper{display:inline-block;*display:inline;*zoom:1;position:relative;top:34px;padding-left:12px;padding-right:14px;background-color:#fff}
+.area_bd{/*display:none*/ }
+.pay_bill .area_bd{display:block}
+
+#payMsg{border-top:1px solid #e2e2e2;border-right:1px solid #DBDCDC;border-bottom:1px solid #C8C8C9;border-left:1px solid #DBDCDC;}
+
+#pay_succ{ margin:0 auto; width:990px; height:250px;}
+#pay_error{ margin:0 auto; width:990px; height:300px;}
+.pay_msg_t{ text-align:center; font-size:26px; color:#000; display:block; padding-top:20px; line-height:22px;font-family: "Microsoft YaHei","微软雅黑"; font-weight:normal;}
+.vh{ text-align:center;}
+
+.icon60_msg{display:inline-block;width:110px;height:110px;vertical-align:middle; background: url(../images/icon110_msg15b813.jpg) no-repeat 0 0;text-align: center; margin:50px 0 0 440px;background-position: -110px 0px;}/***********支付失败图片***********/
+.icon110_msg{display:inline-block;width:110px;height:110px;vertical-align:middle; background: url(../image/icon110_msg15b813.jpg) no-repeat 0 0;text-align: center; margin:50px 0 0 440px;}/***********支付成功图片***********/
+.pay_msg_desc{ padding-top:10px;padding-bottom:4px;text-align:center; color:#666; font-size:12px;}
+.box-shadow-def{border-right:1px solid #EEEFF0;border-bottom:2px solid #EEEFF0;border-left:1px solid #EEEFF0;border-radius:3px;width:990px; margin:0 auto}
+.box-border-def{ margin-bottom:20px;border-top:1px solid #EEEFF0;border-right:1px solid #DBDCDC;border-bottom:1px solid #C8C8C9;border-left:1px solid #DBDCDC;}
+.act-tips-wrap:hover{text-decoration:none;}
+.act-tips-wrap:not(tid){line-height:20px;line-height:22px ;}
+.poplayer{z-index:910;position:absolute;border:1px solid #C2CFDD;background-color:#FFF;}
+.poplayer .btn-close{position:absolute;right:5px;top:5px;}
+.pay{background-color:#F4F4F4;}
+.topwrap .innercnt{width:736px;padding-left:24px;border-right:1px solid #F3F5F5;}
+.topwrap .innercnt-wrap{border-right:1px solid #DBDCDC;}
+.orders-detail{ float:left;z-index:19;position:relative;margin-left:8px; color:#0078b6;}
+
+.orders-detail .detail-layer-tips {top: 17px;left: -60px;width: 430px;}
+.layer-tips {position: absolute;padding: 6px;}
+.layer-tips .btn-close {position: absolute;right: 12px;top: 12px;}
+
+.btn-close {background: url(../image/global_png24.png) no-repeat;background-position: -233px -100px;width: 16px;height: 16px;text-indent: -99em;}
+.btn-close:hover{background-position: -249px -100px;}
+.layer-tips-stress .layer-tips-main {background-color: #F7F7F7;}
+.layer-tips-wide .layer-tips-main {border: 2px solid #A2B0C2;color: #666;}
+.layer-tips-main{padding: 8px 28px 8px 12px;border: 1px solid #6f859d;background-color: #fff;font: 12px/1.5 Tahoma,Arial,\5b8b\4f53;font-size:12px;}
+.orders-detail .detail-list {line-height:22px;}
+.layer-tips-stress .ico-direction-t {background-position: -171px -22px;}
+.layer-tips-wide .ico-direction-t{background: url(../image/pay.png?v=20131121b) no-repeat;display: inline-block;overflow: hidden;}
+.layer-tips-wide .ico-direction-t {background-position: -105px -6px;width: 11px;height: 8px;position: absolute;left:66px;top:0;line-height: 8px;}
+
+.orders-detail .detail-list .item-name {float: left;min-width: 60px;_width: 60px;white-space: nowrap;font-family: \5b8b\4f53;color: #666;}
+.orders-detail .detail-list .item-value {display:inline-block;overflow:hidden;zoom:1;word-break:break-all;word-wrap:break-word;font-family: 12px,Tahoma,Arial,\5b8b\4f53;color: #666;}
+.guide{position: absolute;top: 22px;left: 50%;opacity: 0;display: none;margin-left: -101px;}
+.area{ height:460px; text-align:center;}
+.qr_img_wrapper {display: block;position:relative;height:306px;}
+
+.msg_default_box{display: inline-block;width:258px;padding: 12px 0;border: 1px solid #259483;background-color: #4ca698;border-radius: 3px;-moz-border-radius: 3px;-webkit-border-radius: 3px;text-align: center;letter-spacing: 6px;color: #fff;/*二维扫描开始的背景*/}
+.icon60_qr{ float:left; display:inline-block;width: 60px;height: 60px;vertical-align:middle;background:transparent url(../image/icon60_qr15b813.png) no-repeat 0 0;background-position: 0 -60px;/*二维扫描开始显示图片*/}
+
+.msg_default_cg{display: inline-block;width: 258px;padding: 12px 0;border: 1px solid #2b4d69;background-color: #445f85;border-radius: 3px;-moz-border-radius: 3px;-webkit-border-radius: 3px;text-align: center;letter-spacing: 6px;color: #fff;/*二维扫描成功后的背景*/}
+.icon70_qr{ float:left; display:inline-block;width: 60px;height: 60px;vertical-align:middle;background:transparent url(../image/icon60_qr15b813.png) no-repeat 0 0;/*二维扫描成功后显示图片*/}
+
+.msg_default_box i{ margin-left:16px;}
+.msg_default_box p { float:left; padding:6px 0 0 10px; line-height:24px; display: inline-block; vertical-align: middle; letter-spacing: normal; text-align:left; font-size:16px;}
+.msg_default_cg i{ margin-left:16px;}
+.msg_default_cg p { float:left; padding:6px 0 0 10px; line-height:24px; display: inline-block; vertical-align: middle; letter-spacing: normal; text-align:left; font-size:16px;}
+
+
+.orders-single:after{content:".";clear:both;display:block;height:0;visibility:hidden;}
+.orders-single{zoom:1;padding:20px 0;}
+
+.orders{width:706px;}
+.orders-title{float:left;color:#333;font-size:16px;}
+.company{ float:left;color:#999;margin-left:20px; }
+.orders-money{float:right; font-size:14px;}
+.money{ color:#F63; font-weight:700;}
+
+/*****************应付金额开始*******************/
+.topwrap .innercnt-ico{background:url(../image/pay.gif) no-repeat;position:absolute; top:50%; left:759px;margin-top:-8px;width:10px;height:15px;}
+.topwrap .innerwrap{position:relative;z-index:911;zoom:1;background-color:#FFF;}
+.topwrap .pay-money{position:absolute;top:50%;right:0;margin-top:-25px;width:230px;}
+.topwrap .pay-money .money-line{text-align:center;}
+.topwrap .pay-money .money{position:relative;top:5px;font-size:32px;font-weight:600;margin:0 4px 0 2px;}
+/*****************应付金额结束*******************/
+
+.show-orders-single .orders-single{display:block;}
+.orders-multi{display:none;}
+.show-orders-multi .orders-multi{display:block;}
+.orders-multi .orders-list{display:none;}
+.show-orders-list .orders-list{display:block;}
+.show-orders-list .link-drop .ico-drop{background-position:-115px 0;}
+.orders .orders-detail .detail-layer-tips{display:none;}
+.orders .show-detail-layer-tips .detail-layer-tips{display:block;}
+.orders .show-detail-layer-tips{z-index:119;}
+.cashdrop{float:left;margin-right:30px;}
+.cashdrop .item:after{content:".";clear:both;display:block;height:0;visibility:hidden;}
+
+.topwrap .inner-loading{display:none;width:125px;margin:56px 0 0 306px;}
+/******************内容区结束*****************/

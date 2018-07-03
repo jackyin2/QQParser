@@ -1,0 +1,96 @@
+<!--#include virtual="/study/header2.html"-->
+<form id="topicForm" method="post" class="gform full">
+    <div id="topic">
+        <div class="am-panel am-panel-default">
+            <div class="am-panel-hd am-cf" id="bbs_headshow"></div>
+
+            <div class="am-panel-bd">
+                <div class="sou-bbs-r">
+                    <div class="am-form am-form-horizontal" style="width: 400px; position: absolute; right: 0px;">
+                        <div class="am-form-group">
+                            <div class="am-u-sm-9">
+                                <input type="text" class="" name="q">
+                            </div>
+                            <button class="am-u-sm-2 am-btn am-btn-success am-margin-left-sm" id="btn_search">查询</button>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="sortlist am-cf" id="dataload_show"></div>
+
+                <div id="content_container" class="sou-bbs"></div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script type="text/html" id="bbs_head">
+    <h3 class="am-panel-title">
+        <span class="am-icon am-icon-tasks"></span>
+        <a href="bbs.html#courseOpenId={{courseOpenId}}&openClassId={{openClassId}}&categoryType={{categoryType}}">{{if categoryType == "bbskcwd"}} 课程问答 {{else if categoryType == "bbskcbj"}} 课程笔记 {{else if categoryType == "bbskcpl"}} 资源评价 {{/if}}</a>
+    </h3>
+</script>
+
+<script type="text/html" id="dataload">
+    <a href="javascript:void(0)" class="quealltab  active">{{if categoryType == "bbskcwd"}} 全部问答 {{else if categoryType == "bbskcbj"}} 全部笔记 {{else if categoryType == "bbskcpl"}} 全部评价 {{/if}}</a>
+    <a href="javascript:void(0)" data-sort="-IsEssence" class="quealltab ">{{if categoryType == "bbskcwd"}} 精华问答 {{else if categoryType == "bbskcbj"}} 精华笔记 {{else if categoryType == "bbskcpl"}} 精华评价 {{/if}}</a>
+</script>
+
+<script id="bbs_table" type="text/html">
+    <input type="hidden" name="courseOpenId" value="{{courseOpenId}}" />
+    <input type="hidden" name="categoryType" value="{{categoryType}}" />
+    <input type="hidden" name="sort" value="{{sort}}" />
+    <input type="hidden" name="Condition" value="{{Condition}}" />
+    {{if list && list.length > 0}}
+        {{each list as item}}
+          <div class="course_quescon topicitem" data-topicid="{{item.Id}}">
+                        <div class="wenda-listcon am-cf">
+                            <div class="wendaslider am-fl" style="margin-left: 30px;">
+                                <a href="replyTopic.html#courseOpenId={{courseOpenId}}&openClassId={{openClassId}}&categoryType={{categoryType}}&topicId={{item.Id}}" class="replynumber noanswernum">
+                                    <div class="ys">
+                                        <div class="number padAjust">
+                                            <b class="numShow">{{item.replycount}}</b>
+                                        </div>
+                                        <div class="number">回复</div>
+                                    </div>
+                                    <div class="browsenum">
+                                        <div class="number padAjust">
+                                            <b class="numShow">{{item.viewcount}}</b>
+                                        </div>
+                                        <div class="number">浏览</div>
+                                    </div>
+                                </a>
+                                <h2 class="wendaquetitle">
+                                    <i class="nofinish"></i>
+                                    <div class="wendatitlecon">
+                                        <a href="replyTopic.html#topicId={{item.Id}}&courseOpenId={{courseOpenId}}&openClassId={{openClassId}}&categoryType={{categoryType}}" class="wendatitle">{{item.Title}}</a>
+                                    </div>
+                                </h2>
+                                <div class="replycont am-cf">
+                                    <i class="replyicon am-fl"></i>
+                                    <div class="am-fl replydes">
+                                        <div class="replydet">
+                                            {{#item.Content}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="replymegfooter am-cf">
+                                    <div class="wenda-time">
+                                        <em>时间：{{item.DateCreated}}</em>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+       {{/each}}
+    {{else}}
+       <div style="margin: 15px 0 0 10px;text-align:center" >暂无数据</div>
+    {{/if}}
+       <div class="pagination ajax"></div>
+</script>
+
+
+<script type="text/javascript" src="/study/js/bbs/topic/bbs.js"></script>
+<!--内容右侧主体结束-->
+<!--#include virtual="/study/footer2.html"-->

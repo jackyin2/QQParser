@@ -1,0 +1,139 @@
+<!--#include file="/study/header.html"-->
+<link rel="stylesheet" type="text/css" href="/common/css/upload.css" />
+<link rel="stylesheet" type="text/css" href="/common/css/upload_form.css" />
+<link rel="stylesheet" type="text/css" href="/common/css/uploader.css" />
+<link rel="stylesheet" type="text/css" href="/common/css/select2.min.css">
+<script type="text/javascript" src="/common/js/select2.min.js"></script>
+
+<div class="primary">
+    <form id="docfrom">
+        <div class="changeTabs">
+            <div class="study" id="localhost_doc">
+                <ul class="tabs clearfix">
+                    <li><a class="current" href='#'>材料上报</a></li>
+                </ul>
+            </div>
+
+            <div class="main_content main_content_tabs" style="display: block;" id="main_content">
+                <div class="main_content_title">
+                    <div class="inputOrbutton">
+                        <button class="add user_button" id="upload" type="button">上传资源</button>
+                    </div>
+                </div>
+                <div class="search_selectInput">
+                    <div id="selectStatus" style="height:30px;">
+                         <div class="search">
+                        <input class="inputSearch" type="text" name="name" placeholder="资源名称" onkeypress="if(event.keyCode==13) {search.click();return false;}" />
+                        <button id="search" type="button" class="add buttonPosition btn_search"><i class="iconfont icon-search"></i></button>
+                    </div>
+                    </div>
+                   
+                </div>
+                <div id="table_html"></div>
+            </div>
+
+            <script type="text/html" id="pass">
+
+                <div class="shop">
+                    <table class="table" id="table" border="1" width="938px">
+                        <thead>
+                            <tr>
+                                <th width="8%">序号</th>
+                                <th width="32%">资源名称</th>
+                                <th width="25%">资源类型</th>
+                                <th width="35%">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{if list.length > 0}}
+                                    {{each list as item i}}
+                                <tr id="{{item.Id}}">
+                                    <td>{{if pagination.pageIndex>0}}{{(pagination.pageIndex - 1) * pagination.pageSize + i + 1}}{{else}}{{(pagination.pageIndex ) * pagination.pageSize + i + 1}} {{/if}}</td>
+                                    <td title="{{item.Title}}"data-id="{{item.Id}}">{{#substring(item.Title,0,10)}}</td>
+                                    <td>{{item.DocType}}</td>
+                                    <td>
+                                        <a class="preview" href="javascript:;" data-id="{{item.Id}}">预览</a>
+                                        <a class="delete" href="javascript:;" data-id="{{item.Id}}">删除</a>
+                                        
+                                    </td>
+                                </tr>
+                            {{/each}}
+                                {{else}}
+                                    <tr>
+                                        <td colspan="11">
+                                            <span>暂无数据</span></td>
+                                    </tr>
+                            {{/if}}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="footer pagination ajax">
+                </div>
+            </script>
+            
+            <script id="upload_html" type="text/html">
+                            <div class="upload-dialog-list" id="upload_container" style="position: relative; height: 490px;">
+                                <div class="upload-list">
+                                    <h3 style="display: none;" id="tip_selected">
+                                        <span style="float: right; padding-right: 5px; color: #44A2E3;"></span>已选择的文件
+                                    </h3>
+                                    <ul id="files_queued">
+                                    </ul>
+                                    <div id="uploader" class="wu-example">
+                                        <!--用来存放文件信息-->
+                                        <div id="thelist" class="uploader-list"></div>
+                                        <div class="btns">
+                                            <div id="picker" class="picker_width" class="add-file" title="选择要上传的文件" data-file_system_url="{{file_system_url}}"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="upload-dialog-primary">
+                                    <div class="upload-form" id="upload-form">
+                                        <div class="fieldset-list middle-list control-w110" style="border: none;">
+                                            <div class="wrap_resource">
+                                                <div class="content">
+                                                    <h3>上传须知</h3>
+                                                    <div class="section">
+                                                        <span>上传途径及大小</span>
+                                                        <p>1、网页版上传：为避免上传失败，仅允许上传单个最大300M的文件</p>
+                                                    </div>
+                                                    <div class="section">
+                                                        <span>上传格式要求</span>
+                                                        <p>1、office文档： doc  docx  xls  xlsx  wps  wpt  dps  pdf  rtf  txt ppt pptx</p>
+                                                        <p>2、音视频： epg, mp4, flv,mkv, rm, rmvb, asf, mpg, avi, wmv, mov,mts, 3gp, f4v, swf, dwg, mp3, aac, flac, ape, wav, wma amr,（三分频格式视频：zipx、rarx、csf）</p>
+                                                        <p>3、图片： jpg  jpeg  png  tif  tiff  bmp  gif</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="upload-button" style="display: none;">
+                                        <div class="am-margin-top-xs">
+                                            <button type="button" class="am-btn am-btn-success submit am-margin-right-xs">保存并上传</button>
+                                            <button class="am-btn am-btn-default cancel">关闭</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </script>
+
+            <script id="upform_html" type="text/html">
+                            <div class="am-form am-form-horizontal am-g-collapse {{fileId}}" data-id="{{fileId}}" style="position: relative;" data-index="{{index}}">
+                                <div id="selectInfo">
+                                </div>
+                                <div class="file">
+                                    <div class="up_list">
+                                        <span>{{index}}.<em class="red">*</em>&nbsp;资源名称：</span><input type="text" class="doc_title" maxlength="200" value="{{fileName}}">
+                                    </div>
+                                    {{inputHtml}}
+                                </div>
+                            </div>
+                        </script>
+
+        </div>
+    </form>
+</div>
+<!--内容右侧主体结束-->
+<script src="/study/js/idoc/idoc.js"></script>
+<script src="/study/js/idoc/upload.js"></script>
+<!--#include file="/study/footer.html"-->

@@ -1,0 +1,1 @@
+from django import forms# class FileForm(forms.Form):#     filename = forms.FileField(required=True)

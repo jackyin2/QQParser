@@ -1,0 +1,239 @@
+<!--#include virtual="/study/header2.html"-->
+ 
+  <div id="reply">
+    <div class="am-panel am-panel-default">
+        <div class="am-panel-hd am-cf headTop" style="height:56px;" data-am-sticky>
+            <div id="reply_panel_head" class="am-cf"></div>
+        </div>
+        <div class="am-panel-bd" style="padding-top:0px;">
+            <div id="reply_headshow"></div>
+             <form>
+               <div class="qa-comments" id="qa-comments"></div>
+            </form>
+            <div id="reply_box_content"></div>
+        </div>
+    </div>
+</div>
+
+  <script type="text/html" id="reply_title_head">
+    <h3 class="am-panel-title">
+       <span class="am-icon am-icon-tasks"></span>
+        <a href="../topic/bbs.html#courseOpenId={{courseOpenId}}&categoryType={{categoryType}}">{{if categoryType == "bbskcwd"}} 课程问答 {{else if categoryType == "bbskcbj"}} 课程笔记 {{else if categoryType == "bbskcpl"}} 资源评价 {{/if}}</a>
+        {{if code==1}}
+         >
+         <a title="{{topic.Title}}">{{#topic.Title}}</a>
+         <a href="javascript:void(0)" data-type="1"  class="am-btn am-btn-xs go_type q_type"  style="color:#77b723;"><i class="am-icon am-icon-edit"></i> 
+           {{if categoryType=="bbskcwd"}}提问题{{else if categoryType=="bbskcbj"}}记笔记{{else if categoryType=="bbskcpl"}}写评价{{/if}}
+         </a>
+       {{/if}}
+    </h3>
+</script>
+
+  <script type="text/html" id="reply_head">
+    {{if code==1}}
+       <div class="sou-bbs-r sortlist am-cf am-margin-bottom">
+            <div class="am-form-group am-cf">
+                <a href="javascript:void(0)" class="active allbbs quealltab" data-courseopenid="{{courseOpenId}}" data-categorytype="{{categoryType}}"
+                    data-topicid="{{topic.Id}}">{{if categoryType=="bbskcwd"}}所有问题{{else if categoryType=="bbskcbj"}}所有笔记{{else if categoryType=="bbskcpl"}}所有评价{{/if}}
+                </a>
+                <a href="javascript:void(0)" class="mybbs quealltab" data-courseopenid="{{courseOpenId}}" data-categorytype="{{categoryType}}"
+                    data-topicid="{{topic.Id}}">{{if categoryType=="bbskcwd"}}我的问题{{else if categoryType=="bbskcbj"}}我的笔记{{else if categoryType=="bbskcpl"}}我的评价{{/if}}
+                </a>
+            </div>
+        </div>
+
+       <div class="sou-bbs">
+        <div class="qa-header am-cf">
+            <span class="js-qa-wenda-title qa-wenda-title" title="{{topic.title}}">{{#topic.Title}}</span>
+            <span class="qa-view-num am-fr">浏览：{{topic.ViewCount}}</span>
+            <span class="qa-total-comment am-fr">回复：<em class="replaycount" style="font-style: initial;">{{replyCount}}
+            </em>
+            </span>
+            <span class="qa-createtime am-fr">{{topic.DateCreated | dateFormat:'yyyy/MM/dd hh:mm:ss'}}</span>
+        </div>
+        <div class="qa-content">
+            <div class="qa-content-inner imgPreview">
+                <div id="Div1">
+                    <div id="Div2" class="qa-disscus rich-text">
+                        <p>
+                            {{#topic.Content}}
+                        </p>
+                    </div>
+                </div>
+                <div class="qa-content-addon am-cf">
+                </div>
+            </div>
+        </div>
+    </div>
+    {{else}}
+        <span style="color:red">该资源尚未添加{{if categoryType == "bbskcwd"}}课程问答{{else if categoryType == "bbskcbj"}}课程笔记{{else if categoryType == "bbskcpl"}}资源评价{{/if}}</span>
+    {{/if}}
+
+</script>
+
+  <script type="text/html" id="parent_reply">
+    <input type="hidden" name="ParentId" value="" />
+    <input type="hidden" name="ReplyContent" value="" />
+    <input type="hidden" name="courseOpenId" value="{{courseOpenId}}" />
+    <input type="hidden" name="categoryType" value="{{categoryType}}" />
+    <input type="hidden" name="topicId" value="{{topicId}}" />
+    <input type="hidden" name="condition" value="{{condition}}" />
+
+    {{if parentReplyList && parentReplyList.length > 0 }}
+         {{each parentReplyList as item i}}
+             <div class="qa-comment js-qa-comment parentReply">
+                <div class="qa-comment-wrap am-cf ">
+                    <div class="qa-comment-author">
+                        <span class="qa-comment-nick" title="{{item.UserName}}">{{item.UserName}}&nbsp; :</span>
+                    </div>
+                    <div class="qa-comment-d ">
+                        <div class="qa-comment-inner">
+                            <div class="qa-comment-c imgPreview">
+                                <div class="rich-text">
+                                    <div class="ratebox" data-rate="{{item.Rate}}" data-off="/common/css/images/star-off.png" data-on="/common/css/images/star-on.png" style="display: none;">
+                                        <img class="ratebox-1" src="/common/css/images/star-off.png" alt="1" title="很差">&nbsp;
+                                        <img class="ratebox-2" src="/common/css/images/star-off.png" alt="2" title="较差">&nbsp;
+                                        <img class="ratebox-3" src="/common/css/images/star-off.png" alt="3" title="一般">&nbsp;
+                                        <img class="ratebox-4" src="/common/css/images/star-off.png" alt="4" title="推荐">&nbsp;
+                                        <img class="ratebox-5" src="/common/css/images/star-off.png" alt="5" title="力荐">
+                                    </div>
+                                    <p>
+                                        {{#item.Content}}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="qa-comment-addon">
+                                <span class="qa-comment-time">{{item.DateCreated | dateFormat:'yyyy/MM/dd hh:mm:ss'}}</span>
+                                <div class="qa-comment-addon-r">
+                                    {{if userId == item.UserId}}
+                                    <span class="qa-total-reply js-reply-item-reply delReply" data-replyid="{{item.Id}}" data-userid="{{userid}}" data-userid2="{{item.UserId}}">
+                                        <i class="am-icon am-icon-remove"></i><span class="js-qa-tr-num">删除</span>
+                                    </span>
+                                    {{/if}}
+                                    <span class="qa-total-reply js-reply-item-reply addReply" data-replyid="{{item.Id}}" data-replyone="{{item.TopicUserId}}" data-replyname="{{item.UserName}}">
+                                        <i class="am-icon am-icon-reply"></i><span class="js-qa-tr-num">回复</span>
+                                    </span>
+                                    <span class="js-unlogin qa-comment-support  js-qacom-supported-user addPrase" data-replyid="{{item.Id}}">{{if item.PraseCount != 0}}
+                                        <i class="am-icon am-icon-thumbs-up"></i>
+                                        {{else}}
+                                        <i class="am-icon am-icon-thumbs-o-up"></i>
+                                        {{/if}}
+                                        <span class="prasecount">{{item.PraseCount}}</span>
+                                    </span>
+                                    <span class="reply-item-index am-fr">#{{(pagination.pageIndex - 1) * pagination.pageSize + i + 1}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="qa-reply">
+                    <div class="qa-replies">
+                        <div class="qa-reply-c sonReply" data-replyid="{{item.Id}}">
+                            <!--son_reply 子级回复-->
+                            {{if item.sonList.length > 0}}
+                            {{each item.sonList as sonItem s}}
+                            <style>
+                                .edui-body-container {
+                                    font-size: 14px;
+                                    background: #FFF;
+                                    max-height: 100px;
+                                    overflow: auto;
+                                    width: 497px;
+                                    min-height: 40px;
+                                    z-index: 0;
+                                    cursor: text;
+                                }
+                            </style>
+                            <div class="qa-reply-item sonReply">
+
+                                <div class="qa-reply-item-inner">
+                                    <p>
+                                        <a href="javascript:;" class="qa-reply-nick" title="{{sonItem.UserName}}">{{sonItem.UserName}} &nbsp; :</a>
+                                    </p>
+                                    <p class="q-reply-item-c">
+                                        {{#sonItem.Content}}
+                                    </p>
+                                    <div class="qa-reply-item-foot am-cf">
+                                        <span>{{sonItem.DateCreated | dateFormat:'yyyy/MM/dd hh:mm:ss'}}</span>
+                                        {{if userId == sonItem.UserId}}
+                                          <span class="qa-reply-item-reply js-reply-item-reply delReply" data-replyid="{{sonItem.Id}}"><i class="am-icon am-icon-remove"></i>删除</span>
+                                        {{/if}}
+                                          <span class="qa-reply-item-reply js-reply-item-reply addReply" data-replyid="{{item.Id}}"  data-replyname="{{sonItem.UserName}}"><i class="am-icon am-icon-reply"></i>回复</span>
+                                    </div>
+                                </div>
+                            </div>
+                            {{/each}}
+                            {{/if}}
+                        </div>
+                        <div id="{{item.Id}}">
+                            {{if item.sonReplyCount > 5 && item.sonReplyCount > item.sonList.length}}
+                            <a class="load_more" data-page="1" data-loadsize="5" data-replyid="{{item.Id}}">还有{{item.sonReplyCount - item.sonList.length}}条回复，点击加载更多...</a>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    {{/if}}
+    <div class="pagination ajax"></div>
+</script>
+
+  <script type="text/html" id="son_reply">
+     {{each sonReplyist as item}}
+        <div class="qa-reply-item sonReply">
+                <div class="qa-reply-item-inner">
+                    <p>
+                        <a href="javascript:;" class="qa-reply-nick">{{item.UserName}} &nbsp; :</a>
+                    </p>
+                    <p class="q-reply-item-c">
+                        {{#item.Content}}
+                    </p>
+                    <div class="qa-reply-item-foot am-cf">
+                        <span>{{item.DateCreated | dateFormat:'yyyy/MM/dd hh:mm:ss'}}</span>
+                        {{if userId == item.UserId}}
+                        <span class="qa-reply-item-reply js-reply-item-reply delReply" data-replyid="{{item.Id}}"><i class="am-icon am-icon-remove"></i>删除</span>
+                        {{/if}}
+                        <span class="qa-reply-item-reply js-reply-item-reply addReply" data-replyid="{{replyId}}" data-replyname="{{item.UserName}}"><i class="am-icon am-icon-reply"></i>回复</span>
+                    </div>
+                </div>
+            </div>
+     {{/each}}
+   
+     {{if sonReplyCount > 0}}
+       <a class="load_more" data-page="{{page}}" data-loadsize="5" data-replyid="{{replyId}}" >还有{{sonReplyCount}}条回复，点击加载更多...</a>
+     {{/if}}
+</script>
+
+  <script type="text/html" id="reply_box">
+    <div id="js-qa-comment-input"  class="qa-comment-input js-msg-context am-cf typebox" data-type="1">
+            <div class="qa-ci-avator am-fl">
+                回复：
+            </div>
+            <div class="qa-ci-wrap">
+                <div id="js-reply-editor-box" class="wd-comment-box  js-ci-unlogin am-form" style="position: relative;">
+                    <textarea id="Content" name="Content" maxlength="2000" cols="20" rows="10"></textarea>
+                    <div id="js-qa-ci-footer" class="qa-ci-footer am-cf">
+                        <div class="qa-ci-footright am-fr">
+                            <span class="qa-tips"></span>
+                            <button type="button" id="btn_reply" class="am-btn am-btn-secondary am-btn-default am-padding-horizontal-lg add_btn">回复</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</script>
+
+
+<script type="text/javascript" src="/common/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="/common/js/ueditor/ueditor.all.js"></script>
+<script type="text/javascript" src="/study/js/bbs/topic/replyTopic.js"></script>
+
+<!--
+       $(function () {
+        $.gotop();
+    })
+    -->
+<!--内容右侧主体结束-->
+<!--#include virtual="/study/footer2.html"-->
+<!--#include file="/common/chooseFile.html"-->

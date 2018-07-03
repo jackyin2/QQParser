@@ -1,0 +1,81 @@
+﻿<!--#include file="/student/header.html"-->
+<div class="am-panel am-panel-default" id="right_content">
+    <div class="am-panel-hd clearfix" style="margin: 0px;">
+        <h3 class="am-panel-title"><span class="am-icon am-icon-tasks"></span>添加选题</h3>
+        <div class="am-text-right">
+            <a class="am-btn am-btn-success am-btn-default" id="preLink"><span class="am-icon am-icon-reply"></span>返回</a>
+        </div>
+    </div>
+        <div class="am-panel-bd">
+            <div class="am-form am-form-horizontal">
+                <form id="title_container">
+
+                </form>
+
+            </div>
+        </div>
+</div>
+
+
+<!--#include file="/student/footer.html"-->
+
+<script type="text/javascript" src="/student/js/thesis/addThesisTitle.js"></script>
+
+<script type="text/html" id="title_list_html">
+    <input type="hidden" name="thesisBatchId"value="{{thesisBatchId}}">
+    <input type="hidden" name="stuThesisId"value="{{stuThesisId}}">
+    <div class="am-padding-sm" style="height: 45px">
+        <div class="am-form am-form-horizontal sh-kp-form">
+            <div class="am-form-group am-input-group-sm">
+                <label class="am-u-sm-1 am-form-label" style="width: 72px;">选题名称：</label>
+                <div class="am-u-sm-5 am-u-end" style="width: 200px">
+                    <input type="text" name="q"/>
+                </div>
+                <label class="am-u-sm-1 am-form-label" style="width: 72px; margin-left: 20px">适用专业：</label>
+                <div class="am-u-sm-5 am-u-end" style="width: 200px">
+                    <select id="major">
+                        <option value="">全部</option>
+                        {{each majorList as item i}}
+                            <option value="{{item.Id}}">{{item.Name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                &nbsp;&nbsp;
+                     <input type="button" value="查询" class="am-btn am-btn-success btn-search-cd" id="btnQuery">
+                <input style="margin-left: 200px" type="button" value="确定" class="am-btn am-btn-success btn-search-cd" id="saveTitle">
+            </div>
+        </div>
+    </div>
+
+    <div class="am-margin-top">
+        <table class="am-table" id="tableInfo" style="border-top: 1px solid #ccc;">
+            <thead>
+                <tr>
+                    <th style="width: 5%; text-align: left">选择</th>
+                    <th style="width: 5%; text-align: left">序号</th>
+                    <th style="text-align: left; width: 30%;">选题名称</th>
+                    <th style="text-align: left">选题要求</th>
+                    <th style="width: 20%; text-align: left">适用专业</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{if titleList && titleList.length>0}}
+                {{each titleList as item i}}
+                <tr data-titleid="{{item.Id}}">
+                    <td style="text-align: left"><input type="radio" name="selectedTitle"/></td>
+                    <td style="text-align:left">{{pagination.pageSize*(pagination.pageIndex-1)+i+1}}</td>
+                    <td style="text-align: left">{{item.title}}</td>
+                    <td style="text-align: left">{{item.request}}</td>
+                    <td style="text-align: left" data-applymajorid="{{item.applyMajorId}}">{{item.applyMajorTitle}}</td>
+                </tr>
+                {{/each}}
+                {{else}}
+                <tr>
+                    <td colspan="5">暂无数据</td>
+                    </tr>
+                {{/if}}
+            </tbody>
+        </table>
+    </div>
+
+</script>

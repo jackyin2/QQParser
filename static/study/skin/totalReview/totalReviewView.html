@@ -1,0 +1,36 @@
+<!--#include virtual="/study/header2.html"-->
+<div id="d_coursetoc_t">
+    <div class="am-panel am-panel-default">
+        <div id="totalreview_show"></div>
+
+        <script id="totalreview_view" type="text/html">
+            <input type="hidden" name="courseOpenId" value="{{courseopenid}}" />
+            <div class="am-panel-hd clearfix" style="margin: 0px;">
+                <h3 class="am-panel-title"><span class="am-icon am-icon-tasks"></span>总复习查看</h3>
+                <div class="am-text-right">
+                    <a class="am-btn am-btn-success am-btn-default" href="totalReview.html#courseOpenId={{courseOpenId}}&openClassId={{openClassId}}"><span class="am-icon am-icon-reply"></span>返回</a>
+                </div>
+            </div>
+            <div class="am-panel-bd">
+                <div class="am-form am-form-horizontal">
+                    <!-- am-form-group 的基础上添加了 am-form-group-sm -->
+                    <div class="am-form-group ">
+                        <label for="" class="am-u-sm-1 am-form-label">标题:&nbsp;&nbsp;</label>
+                        <div class="am-u-sm-11" style="margin-top: 8px;">
+                            {{if TotalReview}}{{TotalReview.Title}}{{/if}}
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <label for="" class="am-u-sm-1 am-form-label">内容:&nbsp;&nbsp;</label>
+                        <div class="am-u-sm-11" style="margin-top: 8px;">
+                            {{if TotalReview}}{{#TotalReview.Content}}{{/if}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </script>
+    </div>
+</div>
+<script type="text/javascript" src="/study/js/totalreview/totalreviewview.js"></script>
+<!--内容右侧主体结束-->
+<!--#include virtual="/study/footer2.html"-->

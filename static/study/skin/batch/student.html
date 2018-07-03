@@ -1,0 +1,99 @@
+<!--#include virtual="/study/header3.html"-->
+
+<div class="am-panel am-panel-default">
+    <form id="studentForm">
+    <div class="am-panel-hd am-cf">
+        <h3 class="am-panel-title">
+            <span class="am-icon am-icon-tasks"></span>&nbsp;考试课程
+        </h3>
+        <div class="am-text-right">
+            <label class="am-form-label am-inline-block am-margin-top-xs">课程名称：</label>
+            <div class="am-inline-block cc_am_u am-text-middle" style="padding-left: 10px;">
+                <input type="text" name="key" class="am-form-field ui-widget-content ui-corner-all" style="width: 200px;">
+            </div>
+            <div class="am-inline-block am-text-left am-text-middle" style="padding-left: 10px;">
+                <button id="search" class="am-btn am-btn-success" type="button"><span class="am-icon am-icon-search"></span>查询</button>
+            </div>
+        </div>
+    </div>
+    <div id="admissionmajor" class="courseList"></div>
+    </form>
+</div>
+
+
+<script id="admissionmajorListShow" type="text/html">
+    <style>
+        #table_info thead tr th {
+            text-align: center!important;
+        }
+    </style>
+    <input type="hidden" name="batchId" value="{{batchId}}"/>
+    <div class="am-margin-top">
+        <table id="table_info" class="am-table am-text-center">
+            <thead>
+                <tr>
+                    <th width="15%">考试课程</th>
+                    <th width="8%">试卷号</th>
+                    <th width="15%">作业一</th>
+                    <th width="15%">作业二</th>
+                    <th width="15%">作业三</th>
+                    <th width="15%">考试</th>
+                    <th width="8%">当前得分</th>
+                    <th width="8%">课程成绩</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{if list.length > 0}}
+            {{each list as item}}
+            <tr id="{{item.Id}}">
+                <td>{{item.CourseName}}</td>
+                <td>{{item.PaperCode}}</td>
+                <td>{{if item.PaperWeight !=100}}
+                    <a href="/study/batch/paper.html#scsId={{item.SxskCourseId}}&batchId={{item.BatchId}}&type=1">进入</a>
+                    ({{item.Work1Score}})
+                    {{else}}
+                     无
+                    {{/if}}
+                </td>
+                <td>{{if item.PaperWeight !=100}}
+                    <a href="/study/batch/paper.html#scsId={{item.SxskCourseId}}&batchId={{item.BatchId}}&type=2">进入</a>
+                    ({{item.Work2Score}})
+                    {{else}}
+                     无
+                    {{/if}}
+                </td>
+                <td>{{if item.PaperWeight !=100}}
+                    <a href="/study/batch/paper.html#scsId={{item.SxskCourseId}}&batchId={{item.BatchId}}&type=3">进入</a>
+                    ({{item.Work3Score}})
+                   
+                    {{else}}
+                     无
+                    {{/if}}
+                </td>
+                <td>{{if item.PaperWeight !=0}}
+                    <a href="/study/batch/paper.html#scsId={{item.SxskCourseId}}&batchId={{item.BatchId}}&type=4">考试</a>
+                    ({{item.ExamScore}})
+                     {{else}}
+                     无
+                    {{/if}}
+                </td>
+                <td>{{item.NewScore}}</td>
+                <td>{{item.CourseScore}}</td>
+
+            </tr>
+                {{/each}}
+            {{else}}
+            <tr>
+                <td colspan="10">暂无数据</td>
+            </tr>
+                {{/if}}
+            </tbody>
+        </table>
+    </div>
+    <div class="pagination ajax"></div>
+</script>
+
+<!--内容右侧主体结束-->
+<script type="text/javascript" src="/study/js/batch/student.js"></script>
+
+<!--#include virtual="/study/footer3.html"-->

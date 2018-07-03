@@ -1,0 +1,167 @@
+{% extends  'Home_base.html' %}
+{% load  staticfiles %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'calendar/simple-calendar.css' %}" />
+{% endblock %}
+
+{% block footerscript %}
+ <script type="application/javascript">
+    $(document).on('click','.btn_submit2',function(){
+        Search();
+});
+    function Search(){
+        debugger;
+        var year = $('#yearId option:selected').val();
+        var month = $('#monthId option:selected').val();
+        request_url = '';
+        if(year == "" && month=="" ){
+            return
+        }else {
+            request_url = "/qqhome/qqparser/month?year="+year+"&month="+month
+        }
+        window.location.href = request_url
+    }
+</script>
+
+<script type="text/javascript" src="{% static 'calendar/simple-calendar.js'  %}"></script>
+
+<script type="application/javascript">
+    var myCalendar = new SimpleCalendar('#container');
+    myCalendar.updateSize('1100px', '800px');
+</script>
+
+<script type="application/javascript">
+$('#freshbutton').on('click', function(){
+    dateO= $(".day");
+    var lista=new Array()
+    var partTInfStr = {};
+    year = $('.sc-select-year').val();
+{#    month = $('.sc-select-month').val();#}
+   for (var i=0,len=dateO.size(); i<len; i++){
+       var date = $('.day')[i].innerText;
+{#       lista[i] = date;#}
+       lista.push(date);
+   }
+   // 通过Json发送string类型的数据给后台，后台无法直接接收数组
+    listb = JSON.stringify(lista);
+ $.ajax({
+            type: "POST",
+            url:"{% url 'qqhome:month' %}",
+            data:{"listb":listb, 'year':year},
+            dataType:'json',
+            async: true,
+            beforeSend:function(xhr, settings){
+                xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+            },
+            success: function(data) {
+                if(data.status=="fail"){
+                       alert('没有数据');
+                    if(data.msg == '没有数据'){
+                        window.location.href="\\qqhome\\qqparser\\";
+                    }else{
+                        alert(data.msg)
+                    }
+                }else if(data.status == "success"){
+{#                    window.location.reload();//刷新当前页面.#}
+
+                        tongji = $('.tongji')
+                        var listc=new Array()
+                        listc = data.a_count;
+                        debugger;
+                        for (var i=0,len=tongji.size(); i<len; i++) {
+                              for (var j=0,len=tongji.size(); j<len; j++) {
+
+                                  if (i == j){
+                                      $('.tongji')[i].innerText=listc[j];
+{#                                      if(listc[j]>data.avg_count){#}
+{#                                       $('.tongji').css("color",'red') ;#}
+{#                                       }#}
+                                      continue;
+                                  }
+
+
+                              }
+                        }
+
+                }
+            },
+        });
+});
+$('#clearbutton').on('click', function(){
+    $('.tongji').text('');
+});
+</script>
+{% endblock %}
+
+{% block content %}
+
+<div class="gform full">
+    <div id="right_content" class="am-g am-g-collapse ">
+        <div class="am-panel">
+            <div class="am-panel am-panel-default">
+                <div class="am-panel-hd am-cf">
+                    <h3 class="am-panel-title">
+                        <span class="am-icon am-icon-tasks">QQ统计</span>&nbsp;
+                    </h3>
+                    <div class="am-text-right"></div>
+                </div>
+                <div style="margin-right: 28px;" class="am-form-group am-margin-top-sm" id="searchInfo"></div>
+
+{#                            <div id="searchInfoTip" class="am-form-group">#}
+{#                                <label class="am-form-label am-u-sm-1" >月份：</label>#}
+{#                                <div class="am-u-sm-5 am-u-end" style="width: 180px;">#}
+{#                                    <select id="monthId" name="classInfoId">#}
+{#                                        <option value="">—— 全部 ——</option>#}
+{#                                        <option value="1">1</option>#}
+{#                                        <option value="2">2</option>#}
+{#                                        <option value="3">3</option>#}
+{#                                        <option value="4">4</option>#}
+{#                                        <option value="5">5</option>#}
+{#                                        <option value="6">6</option>#}
+{#                                        <option value="7">7</option>#}
+{#                                        <option value="8">8</option>#}
+{#                                        <option value="9">9</option>#}
+{#                                        <option value="10">10</option>#}
+{#                                        <option value="11">11</option>#}
+{#                                        <option value="12">12</option>#}
+{#                                    </select>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                    </div>#}
+{#                </form>#}
+{#                <button type="submit" class="btn_submit2"> 查询 </button>#}
+                <div><button id="freshbutton">查看数据</button> <button id="clearbutton">清空数据</button> </div>
+                <div id="container" style="float:none;margin: 0px auto;"></div>
+{#                <div id="table_html"  class="'day_">#}
+{#                     <p align="center">}周期教师访问频度统计</p>#}
+
+{#                    <table id="table_info" class="am-table am-text-center">#}
+{#                        <tbody>#}
+{#                                <tr>#}
+{#                                    <td class="am-text-center" style=" {% if row.1 > avg_day %}color: red{% endif %}">星期一</td>#}
+{#                                    <td class="am-text-center" style=" {% if row.1 > avg_day %}color: red{% endif %}">星期二</td>#}
+{#                                    <td class="am-text-center" style=" {% if row.1 > avg_day %}color: red{% endif %}">星期三</td>#}
+{#                                    <td class="am-text-center" style=" {% if row.1 > avg_day %}color: red{% endif %}">星期四</td>#}
+{#                                    <td class="am-text-center" style=" {% if row.1 > avg_day %}color: red{% endif %}">星期五</td>#}
+{#                                    <td class="am-text-center" style=" color: red">星期六</td>#}
+{#                                    <td class="am-text-center" style=" color: red">星期日</td>#}
+{#                                </tr>#}
+{#                                <tr>#}
+{##}
+{#                                     {% for row in rows_day %}#}
+{#                                         <td class="am-text-center" >#}
+{#                                           <span style=" {% if row.1 > avg_day %}color: red{% endif %}"> {{ row.1 }}</span>#}
+{#                                         </td>#}
+{#                                      {% endfor %}#}
+{#                                </tr>#}
+{#                        </tbody>#}
+{#                    </table>#}
+
+{#                </div>#}
+
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

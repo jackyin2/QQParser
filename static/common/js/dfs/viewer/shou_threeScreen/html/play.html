@@ -1,0 +1,80 @@
+﻿<style>
+    .player_screen .fp-ui, .fp-embed, .fp-context-menu { display: none !important; }
+    .flowplayer .fp-time { bottom: 0px; right: 0px; }
+    .flowplayer .fp-volume { right: 93px; }
+    .flowplayer .fp-volumeslider { left: 10px; top: 0px; }
+    .flowplayer .fp-time em { color: #FFF; }
+    .flowplayer .fp-waiting { position: static; }
+</style>
+<link rel="stylesheet" type="text/css" href="<%=playerCss%>" />
+<script src="<%=playerHtml%>.js"></script>
+<div class="video-box" id="video-box">
+    <div class="video-play">
+        <div class="video-inner">
+            <div class="resizable-icon"></div>
+            <div class="video-playBox">
+                <img src="" class="player_screen"/>
+            </div>
+            <div class="video-list" style="display: none;">
+                <div class="video-list-inner">
+                    <div class="video-button"></div>
+                    <div class="video-text">
+                        <div class="video-desc">
+                            <h3><a href="#"><%if(directoryData.title) {%><%=directoryData.title%><%}else{%>没有标题<%}%></a></h3>
+                            <p class="clefix">
+                                <%if(directoryData.author) {%><span>主讲：<%=directoryData.author%></span><%}%>
+                                <%if(directoryData.copyright) {%><span>版权：<%=directoryData.copyright%></span><%}%>
+                                <%if(directoryData.description) {%><span>描述：<%=directoryData.description%></span><%}%>
+                            </p>
+                        </div>
+                        <div class="video-catalog">
+                            <ul>
+                                <%if(directoryData) {%>
+                                    <%for(var i=0;i<(directoryData.indextree.length);i++){%>
+                                    <%var item = directoryData.indextree[i];%>
+                                        <li data-time="<%=item.time%>" data-url="<%=item.url%>"><span><%=item.showTime%></span><a href="javascript:void(0)"><%=item.title%></a></li>
+                                <%}%>
+                                <%}else{%>
+                                    <li>没有目录</li>
+                                <%}%>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="video-inner right">
+            <div class="resizable-icon"></div>
+            <div class="video-playBox">
+                <div class="player_teachers"></div>
+            </div>
+            <div class="video-list" style="display: none;">
+                <div class="video-list-inner">
+                    <div class="video-button"></div>
+                    <div class="video-text">
+                        <div class="video-desc">
+                            <h3><a href="#"><%if(directoryData.title) {%><%=directoryData.title%><%}else{%>没有标题<%}%></a></h3>
+                            <p class="clefix">
+                                <%if(directoryData.author) {%><span>主讲：<%=directoryData.author%></span><%}%>
+                                <%if(directoryData.copyright) {%><span>版权：<%=directoryData.copyright%></span><%}%>
+                                <%if(directoryData.description) {%><span>描述：<%=directoryData.description%></span><%}%>
+                            </p>
+                        </div>
+                        <div class="video-catalog">
+                            <ul>
+                                <%if(directoryData) {%>
+                                    <%for(var i=0;i<(directoryData.indextree.length);i++){%>
+                                    <%var item = directoryData.indextree[i];%>
+                                        <li data-time="<%=item.time%>" data-url="<%=item.url%>"><span><%=item.showTime%></span><a href="javascript:void(0)"><%=item.title%></a></li>
+                                <%}%>
+                                <%}else{%>
+                                    <li>没有目录</li>
+                                <%}%>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

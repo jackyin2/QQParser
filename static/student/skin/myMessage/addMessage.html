@@ -1,0 +1,47 @@
+﻿<!--#include file="/student/header.html"-->
+<link rel="stylesheet" type="text/css" href="/common/js/TokenInput/tokeninput.css" />
+<script type="text/javascript" src="/common/js/TokenInput/tokeninput.js"></script>
+
+<style type="text/css">
+    ul.token-input-list-facebook { width: 100%; }
+    li.token-input-token-facebook { height: 36px !important; line-height: 36px; }
+</style>
+
+<div id="right_content" class="am-panel am-panel-default">
+    <div class="am-panel-hd clearfix" style="margin: 0px;">
+        <h3 class="am-panel-title"><span class="am-icon am-icon-tasks"></span>&nbsp;发信</h3>
+    </div>
+    <form id="dataForm"  method="post">
+        <div class="am-panel-bd">
+            <div class="am-form am-form-horizontal">
+                <div class="am-form-group ">
+                    <label for="" class="am-u-sm-1 am-form-label">发送至:&nbsp;&nbsp;&nbsp;</label>
+                    <div class="am-u-sm-11">
+                        <input type="text" id="UserNum" name="userId" value="" class="am-form-field ui-widget-content ui-corner-all" maxlength="200" placeholder="输入学号或者工号">
+                    </div>
+                </div>
+                <div class="am-form-group ">
+                    <label for="" class="am-u-sm-1 am-form-label"><span style="color:red;">*</span>主题:&nbsp;&nbsp;&nbsp;</label>
+                    <div class="am-u-sm-11">
+                        <input type="text" name="Title" class="am-form-field ui-widget-content ui-corner-all" maxlength="500" placeholder="填写主题">
+                    </div>
+                </div>
+                <div class="am-form-group ">
+                    <label for="" class="am-u-sm-1 am-form-label">内容:&nbsp;&nbsp;&nbsp;</label>
+                    <div class="am-u-sm-11">
+                        <textarea id="cm_content" name="content" cols="30" rows="10" maxlength="5000"></textarea>
+                    </div>
+                </div>
+                <div class="am-form-group">
+                    <div class="am-u-sm-1"></div>
+                    <div class="am-u-sm-11">
+                        <button type="button" id="btn_send" class="am-btn am-btn-default am-btn-success">发送</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript" src="/student/js/myMessage/addMessage.js"></script>
+<!--#include file="/student/footer.html"-->

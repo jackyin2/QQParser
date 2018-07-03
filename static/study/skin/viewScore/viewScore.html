@@ -1,0 +1,154 @@
+<!--#include file="/study/header2.html"-->
+
+ <form id="indexForm"  class="gform full">
+    <div class="am-panel am-panel-default" >
+        <div class="am-panel-hd clearfix">
+            <h3 class="am-panel-title">
+              <span class="am-icon am-icon-tasks"></span>排行榜
+              <span id="labClassInfo" style="margin-left:20px;"></span>
+            </h3>
+        </div>
+
+        <div id="tabList" class="am-padding-horizontal-sm am-padding-top-sm"></div>
+        <div id="content_container" style="margin-top:50px;"></div>
+    </div>
+</form>
+
+  <script type="text/html" id="couser">
+     <ul class="am-tabs-nav am-nav am-nav-tabs tab2">
+        <li {{if viewIndex==1}} class="am-active" {{/if}} data-viewindex="1"><a href="javascript: void(0)">学习成绩排行</a></li>
+        <li {{if viewIndex==2}} class="am-active" {{/if}} data-viewindex="2"><a href="javascript: void(0)">学习进度排行</a></li>
+        <li {{if viewIndex==3}} class="am-active" {{/if}} data-viewindex="3"><a href="javascript: void(0)">学习时长排行</a></li>
+      </ul>
+
+       <input type="hidden" name="courseOpenId" value="{{courseOpenId}}" />
+       <input type="hidden" name="openClassId" value="{{openClassId}}" />
+       <input type="hidden" name="viewIndex" value="{{viewIndex}}" />
+
+       <div class="am-form-group" style="margin-left: 25px;padding-top: 20px;">
+        <label class="am-form-label am-u-sm-1" style="text-align:right;padding-top: 7px;">姓名/学号：</label>
+        <div class="am-u-sm-3">
+            <input type="text" name="stuName" id="stuName" value="{{stuName}}" class="am-form-field" placeholder="学生姓名/学号" />
+        </div>
+       
+        <div class="am-u-sm-3 am-text-left am-text-middle am-u-end" style="padding-left: 20px;">
+            <button type="button" id="btn_search" class="am-btn am-btn-success">
+                <span class="am-icon am-icon-search"></span>查询</button>
+         </div>
+      </div>
+  </script>
+
+   <script type="text/html" id="table_htmlScore">
+      <table id="tabScore" class="am-table am-text-center" style="margin: 0px;">
+            <thead>
+                <tr>
+                    <th class="am-text-left" style="width: 5%; border-top: 1px solid #ddd; width: 8%;">序号</th>
+                    <th class="am-text-left" style="border-top: 1px solid #ddd;">姓名</th>
+                    <th class="am-text-left" style="border-top: 1px solid #ddd; width: 15%;">学号</th>
+                    <th class="am-text-center" style="border-top: 1px solid #ddd; width: 10%;">线下评分</th>
+                    <th class="am-text-center" style="border-top: 1px solid #ddd; width: 10%;">在线交互</th>
+                    <th class="am-text-center" style="border-top: 1px solid #ddd; width: 10%;">在线作业</th>
+                    <th class="am-text-center" style="border-top: 1px solid #ddd; width: 10%;">在线考试</th>
+                    <th class="am-text-center" style="border-top: 1px solid #ddd; width: 10%;">总成绩</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{if list.length != 0}}
+                  {{each list as item i}}
+                    <tr id="{{item.Id}}">
+                        <td class="am-text-left">{{(pagination.pageIndex - 1) * pagination.pageSize + i + 1}}</td>
+                        <td class="am-text-left">{{item.StudentName}} </td>
+                        <td class="am-text-left">{{item.StuNo}}</td>
+                        <td class="am-text-center">{{ if item.OffLineScore}}{{item.OffLineScore}}{{else}}0{{/if}}</td>
+                        <td class="am-text-center">{{ if item.InteractiveScore}}{{item.InteractiveScore}}{{else}}0{{/if}}</td>
+                        <td class="am-text-center"><a target="_blank" href="scoreInfo.html#courseOpenId={{courseOpenId}}&openClassId={{openClassId}}&stuId={{item.stuId}}">{{if item.HomeworkScore}}{{item.HomeworkScore}}{{else}}0{{/if}}</a></td>
+                        <td class="am-text-center">{{if item.ExamScore}}{{item.ExamScore}}{{else}}0{{/if}}</td>
+                        <td class="am-text-center">{{if item.TotalScore}}{{item.TotalScore}}{{else}}0{{/if}}</td>
+                     </tr>
+                 {{/each}}
+              {{else if list.length == 0}}
+                    <tr>
+                        <td colspan="8">
+                            <div class="am-text-center">暂无数据</div>
+                        </td>
+                    </tr>
+                {{/if}}
+            </tbody>
+        </table>
+      <div class="pagination ajax"></div>
+ </script>
+
+  <script type="text/html" id="table_htmProgress">
+     <table id="tabProgress" class="am-table am-text-center" style="margin: 0px;">
+        <thead>
+            <tr>
+                <th class="am-text-left" style="width: 5%; border-top: 1px solid #ddd;">排名</th>
+                <th class="am-text-left" style="border-top: 1px solid #ddd; width: 85px;">姓名</th>
+                <th class="am-text-left" style="width: 25%; border-top: 1px solid #ddd;">学号</th>
+                <th class="am-text-left sort" style="width: 10%; border-top: 1px solid #ddd;">学习进度</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{if list && list.length != 0}}
+                {{each list as item i}}
+                    <tr id="{{item.Id}}">
+                        <td class="am-text-left">{{(pagination.pageIndex - 1) * pagination.pageSize + i + 1}}</td>
+                        <td class="am-text-left">{{item.StudentName}} </td>
+                        <td class="am-text-left">{{item.StuNo}}</td>
+                        <td class="am-text-left">
+                            <div class="am-progress am-progress-striped">
+                                <div class="am-progress-bar am-progress-bar-success" style="width: {{item.Process}}%">{{item.Process}}%</div>
+                            </div>
+                        </td>
+                    </tr>
+                 {{/each}}
+             {{else if list.length == 0}}
+                 <tr>
+                    <td colspan="4">
+                        <div class="am-text-center">暂无数据</div>
+                    </td>
+                </tr>
+            {{/if}}
+        </tbody>
+    </table>
+    <div class="pagination ajax"></div>
+</script>
+
+  <script type="text/html" id="table_htmlLearningTime">
+    <div class="am-margin-top">
+        <table id="tabLearningTime" class="am-table am-text-center" style="margin: 0px;">
+            <thead>
+                <tr>
+                    <th class="am-text-left" style="width: 5%; border-top: 1px solid #ddd;">排名</th>
+                    <th class="am-text-left" style="border-top: 1px solid #ddd; width: 85px;">姓名</th>
+                    <th class="am-text-left" style="width: 25%; border-top: 1px solid #ddd;">学号</th>
+                    <th class="am-text-center sort" style="width: 10%; border-top: 1px solid #ddd;">学习时长</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{if list && list.length != 0}}
+                   {{each list as item i}}
+                      <tr id="{{item.Id}}">
+                        <td class="am-text-left">{{(pagination.pageIndex - 1) * pagination.pageSize + i + 1}}</td>
+                        <td class="am-text-left">{{item.StudentName}} </td>
+                        <td class="am-text-left">{{item.StuNo}}</td>
+                        <td class="am-text-center">{{item.time}}分钟</td>
+                    </tr>
+                   {{/each}}
+                 {{else if list.length == 0}}
+                     <tr>
+                        <td colspan="4">
+                            <div class="am-text-center">暂无数据</div>
+                        </td>
+                    </tr>
+                {{/if}}
+            </tbody>
+        </table>
+        <div class="pagination ajax"></div>
+    </div>
+  </script>
+
+ <script type="text/javascript" src="/study/js/viewScore/viewScore.js"></script>
+
+<!--内容右侧主体结束-->
+<!--#include file="/study/footer2.html"-->

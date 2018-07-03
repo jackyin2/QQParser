@@ -1,0 +1,25 @@
+﻿.webuploader-container {
+    position: relative;
+}
+
+.webuploader-element-invisible {
+    position: absolute !important;
+    clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+    clip: rect(1px,1px,1px,1px);
+}
+
+.webuploader-pick {
+    position: relative;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 3px;
+    overflow: hidden;
+    // width: 210px; // 上传插件里用到,
+                     // index.css已经修改，因为加载顺序的问题这里注释
+    height: 37px;
+}
+
+.webuploader-pick-disable {
+    opacity: 0.6;
+    pointer-events: none;
+}

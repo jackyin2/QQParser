@@ -1,0 +1,44 @@
+<!--#include virtual="/study/header2.html"-->
+<div id="d_coursetoc_t">
+    <input type="hidden" name="CourseOpenId" value="{{courseOpenId}}" />
+    <div class="am-panel am-panel-default">
+        <div class="am-panel-hd clearfix" style="margin: 0px;">
+            <h3 class="am-panel-title"><span class="am-icon am-icon-tasks"></span>课程公告查看</h3>
+            <div class="am-text-right" id ="returnmain">
+                    <script type="text/html" id="course_return">
+                <button class="am-btn am-btn-success am-btn-default" onclick="location.href='/study/announcement/announcement.html#courseOpenId={{courseOpenId}}&openClassId={{openClassId}}&dataType={{dataType}}'"><span class="am-icon am-icon-reply"></span>返回</button>
+                    </script>
+            </div>
+        </div>
+        <div class="am-panel-bd am-padding-horizontal-0" id="announcementtable">
+            <script type="text/html" id="message">
+                <div class="am-form am-form-horizontal">
+                <!-- am-form-group 的基础上添加了 am-form-group-sm -->
+                <div class="am-form-group ">
+                    <label for="" class="am-u-sm-1 am-form-label">公告标题:</label>
+                    <div class="am-u-sm-11" style="margin-top: 8px;">
+                        {{if list != null}}
+                            {{list.Title}}
+                        {{else}}
+                        {{/if}}
+                    </div>
+                </div>
+                <div class="am-form-group">
+                    <label for="" class="am-u-sm-1 am-form-label">公告内容:</label>
+                    <div class="am-u-sm-11" style="margin-top: 8px;">
+                     {{if list != null}}
+                         {{# list.Content}}
+                    {{else}}
+                    {{/if}}
+                    </div>
+                </div>
+            </div>
+            </script>
+          
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/study/js/announcement/courseAnnouncementView.js"></script>
+
+<!--内容右侧主体结束-->
+<!--#include virtual="/study/footer2.html"-->

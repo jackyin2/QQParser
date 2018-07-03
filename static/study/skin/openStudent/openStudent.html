@@ -1,0 +1,88 @@
+<!--#include file="/study/header2.html"-->
+
+<form id="indexForm" method="get" class="am-form am-form-horizontal gform full">
+    <div id="topic">
+        <div class="am-panel am-panel-default">
+            <div class="am-panel-hd am-cf" id="localhost_couser">
+               <h3 class="am-panel-title">
+                   <span class="am-icon am-icon-file-o"></span>课程同学
+                   <span id="labClassInfo" style="margin-left:20px;"></span>
+               </h3>
+            </div>
+
+            <div id="content_container"></div>
+        </div>
+    </div>
+</form>
+
+<script type="text/html" id="table_html">
+    <style>
+        .pagination ul {
+        position: relative;
+        top: -2px!important;
+        }
+        .pagination select{
+            display: inline-block;
+            width: 45px!important;
+            height: 32px!important;
+            padding:0!important;
+            line-height:32px!important;
+            padding-left:5px!important;
+        }
+        .pagination input{
+             display: inline-block!important;
+            width: 45px!important;
+            height: 32px!important;
+            
+        }
+        .pagination .go {
+            position: relative;
+            top: 0!important;
+        }
+    </style>
+    <input type="hidden" name="courseOpenId" value="{{courseOpenId}}" />
+    <input type="hidden" name="openClassId" value="{{openClassId}}" />
+    
+    <div class="am-form-group" style="margin-left: 25px;padding-top: 20px;">
+        <label class="am-form-label am-u-sm-1">姓名/学号：</label>
+         <div class="am-u-sm-3">
+            <input type="text" id="studentData" name="studentData" value="{{studentData}}" placeholder="输入姓名/学号查询" class="am-input-field keysearch" />
+         </div>
+
+        <div class="am-u-sm-2 am-text-left am-u-end" style="padding-left: 10px;">
+            <a id="btn_search" class="am-btn am-btn-success">
+               <span class="am-icon am-icon-search"></span>查询
+            </a>
+        </div>
+    </div>
+     <table id="table_info" class="am-table am-text-center">
+        <thead>
+            <tr>
+                <th class="am-text-left" style="width: 8%; border-top: 1px solid #ddd;">序号</th>
+                <th class="am-text-left" style="border-top: 1px solid #ddd;">姓名</th>
+                <th class="am-text-center" style="width: 18%; border-top: 1px solid #ddd;">学号</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{if list && list.length > 0}}
+              {{each list as item i}}
+                <tr data-stuid="{{item.stuId}}" data-subid="{{item.subId}}" data-classid="{{item.classId}}">
+                    <td class="am-text-left">{{(pagination.pageIndex - 1) * pagination.pageSize + i + 1}}</td>
+                    <td class="am-text-left"><a href="reply.html#Id={{item.stuId}}&courseOpenId={{courseOpenId}}&openClassId={{openClassId}}&type=0" title="点击发送邮件">{{item.stuName}}</a></td>
+                    <td class="am-text-center">{{item.stuNo}}</td>
+               </tr>
+             {{/each}}
+          {{else}}
+            <tr>
+                <td colspan="3"><span>暂无数据</span></td>
+            </tr>
+         {{/if}}
+        </tbody>
+    </table>
+    <div class="pagination ajax"></div>
+</script>
+
+<!--#include file="/study/footer2.html"-->
+
+<script type="text/javascript" src="/study/js/openStudent/openStudent.js"></script>
+

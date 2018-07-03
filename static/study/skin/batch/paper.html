@@ -1,0 +1,102 @@
+<!--#include virtual="/study/header3.html"-->
+<div class="subject_content">
+</div>
+
+<script type="text/html" id="paper_html">
+<div class="clearfix" style="overflow: hidden;">
+    <label class="btn_score">考试课程：<i>{{course.CourseName}}</i></label>
+    <label class="btn_score">考试代码：<i>{{course.PaperCode}}</i></label>
+    <label class="btn_score">学生：<i>{{UserName}}</i></label>
+ 
+    <a href="#" class="btn_back">返回</a>
+    <input type="hidden" name="paperId" value="{{paper.Id}}"/>
+    {{if paper.IsPublic}}
+            <a href="#" class="btn_again">再做一次</a>
+            <label class="btn_score">得分：<i>{{paper.PaperScore}}</i></label>
+    {{/if}}
+</div>
+    {{if pqList1.length > 0}}
+
+            <div class="subject_title">
+                一、单选题
+                <label>（共{{pqList1.length}}题）</label>
+            </div>
+    <div class="item">
+        {{each pqList1 as item}}
+                <div class="priList" data-qid="{{item.Id}}">
+                    <label>{{item.SortOrder}}.</label>
+                    <span>{{htmldecode(item.Title)}}</span>
+                    <ul class="choices clearfix single_choice">
+                        {{each parseJSON(item.DataJson) as dd i}}
+                        <li>
+                            <input type="radio" name="{{item.Id}}"  data-num="{{i}}"  {{if contains(item.StudentAnswer,i)>-1}}checked="checked"{{/if}}  {{if paper.IsPublic}}disabled="disabled"{{/if}} />
+                            <span class="count">{{select_NameArr[i]}}.</span>
+                            <span>{{dd.Content}}</span>
+                        </li>
+                        {{/each}}
+                    </ul>
+                </div>
+        {{/each}}
+
+    </div>
+    {{/if}}
+    {{if pqList2.length>0}}
+    <div class="subject_title">
+        二、多选题
+        <label>（共{{pqList2.length}}题）</label>
+    </div>
+    <div class="item">
+        {{each pqList2 as item}}
+        <div class="priList" data-qid="{{item.Id}}">
+            <label>{{item.SortOrder}}.</label>
+            <span>{{htmldecode(item.Title)}}</span>
+            <ul class="choices clearfix">
+                {{each parseJSON(item.DataJson) as dd i}}
+                    <li>
+                        <input type="checkbox" data-num="{{i}}" {{if contains(item.StudentAnswer,i)>-1}}checked="checked"{{/if}} {{if paper.IsPublic}}disabled="disabled"{{/if}} />
+                        <span class="count">{{select_NameArr[i]}}.</span>
+                        <span>{{dd.Content}}</span>
+                    </li>
+                {{/each}}
+            </ul>
+        </div>
+        {{/each}}
+    </div>
+    {{/if}}
+    {{if pqList3.length>0}}
+            <div class="subject_title">
+                三、判断题
+                <label>（共{{pqList3.length}}题）</label>
+            </div>
+    <div class="item">
+        {{each pqList3 as item}}
+                <div class="priList" data-qid="{{item.Id}}">
+                    <label>{{item.SortOrder}}.</label>
+                    <span>{{htmldecode(item.Title)}}</span>
+                    <ul class="choices clearfix single_choice">
+                        <li>
+                            <input type="radio" name="{{item.Id}}" data-num="1" {{if contains(item.StudentAnswer,"1")>-1}}checked="checked"{{/if}} {{if paper.IsPublic}}disabled="disabled"{{/if}}/>
+                            <span>正确</span>
+                        </li>
+                        <li>
+                            <input type="radio" name="{{item.Id}}"  data-num="0" {{if contains(item.StudentAnswer,"0")>-1}}checked="checked"{{/if}} {{if paper.IsPublic}}disabled="disabled"{{/if}}/>
+                            <span>错误</span>
+                        </li>
+                    </ul>
+                </div>
+        {{/each}}
+    </div>
+    {{/if}}
+    {{if !paper.IsPublic}}
+    <div class="subject_title subject_submit">
+        <button class="btn_submit">提交</button>
+    </div>
+    {{/if}}
+
+
+</script>
+
+<!--内容右侧主体结束-->
+<script type="text/javascript" src="/study/js/batch/paper.js"></script>
+
+<!--#include virtual="/study/footer3.html"-->

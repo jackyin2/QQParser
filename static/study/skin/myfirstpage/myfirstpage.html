@@ -1,0 +1,54 @@
+<!--#include file="/study/header.html"-->
+<div class="primary" id="myfirstpageinfo">
+            <div class="main_content">
+                <div class="main_content_title">
+                    <div class="attr">
+                        <i class="iconfont icon-kecheng"></i>
+                        我的首页
+                    </div>
+                </div>
+            </div>
+            <div id="myfirstpageList"class="myfirstpageList" style="width: 700px; height:200px; margin:20px auto; border:1px solid; border-color:#4eb008;">
+                <script id="myfirstpageListShow" type="text/html">
+                     <div class="iconImg" style="float:left; margin-left:-80px;margin-top:20px;">
+                            <div id="div_pic" class="position" style="height: 160px; width: 160px; position: relative; display: inline-block;">
+                                <img id="cover" {{if url.indexOf('study_headimg')>-1}}src="{{url}}"{{else}}src="/common/img/person.png"{{/if}} style="border-radius:80px; display:block; z-index: 998;" class="personImg" width="160px" height="160px" alt="">
+                            </div>
+                            <div id="uploader_pic" data-file_system_url="{{file_system_url}}" style="top: 2px; margin-bottom: 12px;">
+                            </div>
+                         </div>
+                    <form >
+                        <div style="width: 500px; height:175px; margin:20px 140px;">
+                            <div style="padding-top:10px;">
+                                <label style="color: #4eb008;"><i class="iconfont icon-renyuan"></i>用户昵称：</label>
+                                <input id="UserName" value="{{username}}" class="perinfos noEditor" disabled />
+                            </div>
+                            <div style="padding-top:10px;">
+                                <label style="color: #4eb008;"><i class="iconfont icon-dianziyouxiang"></i>电子邮箱：</label>
+                                <input id="Email" value="{{person.Email}}" class="perinfos noEditor" disabled />
+                            </div>
+                            <div style="padding-top:10px;">
+                                <label style="color: #4eb008;"><i class="iconfont icon-shenfenzheng"></i>身份证号:</label>
+                                <input id="IdentityCardNum" value="{{person.IdentityCardNum}}" class="perinfos noEditor" disabled />
+                            </div>
+                            <div style="padding-top:10px;">
+                                <label style="color: #4eb008;"><i class="iconfont icon-qianming"></i>个性签名：</label>
+                                <input id="sign" value="{{sign}}" size="30" class="perinfos noEditor" disabled />
+                            </div>
+                         </div>
+                    </form>
+                </script>
+            </div>
+    
+     <div id="container" style="height: 210px; width: 810px; margin: -20px 60px;">
+         <div id="container1" style=" height: 210px; width: 200px;float:left;"></div>
+         <div id="container2" style=" height: 210px; width: 200px;float:left;"></div>
+         <div id="container3" style=" height: 210px; width: 200px;float:left;"></div>
+         <div id="container4" style=" height: 210px; width: 200px;float:left;"></div>
+     </div>
+</div>
+<!--内容右侧主体结束-->
+<script type="text/javascript" src="/study/js/highcharts.js"></script>
+<script type="text/javascript" src="/study/js/exporting.js"></script>
+<script type="text/javascript" src="/study/js/myfirstpage/myfirstpage.js"></script>
+<!--#include file="/study/footer.html"-->

@@ -1,0 +1,77 @@
+<!--#include file="/student/header.html"-->
+  <link rel="stylesheet" type="text/css" href="/design/css/basic.css" />
+<link type="text/css" rel="stylesheet" href="/common/js/Jcrop/css/jquery.Jcrop.min.css" />
+
+ <div class="am-panel am-panel-default">
+        <div class="am-panel-hd">
+            <h3 class="am-panel-title"><span class="am-icon am-icon-tasks"></span><a href="javascript:;">修改头像</a></h3>
+        </div>
+        <div id="container"></div>
+ </div>
+
+ <script type="text/html" id="info_html">
+    <div class="am-panel-bd">
+       <div data-am-tabs="{noSwipe: 1}" class="am-tabs np-tabs">
+            <ul class="am-tabs-nav am-nav am-nav-tabs ultab">
+                <li class="am-active"><a href="javascript:;">修改头像</a></li>
+            </ul>
+            <div class="am-tabs-bd divtab">
+                <div class="am-tab-panel divpanel am-active">
+                   <div class="am-margin-top np-upload-avatar" id="avatarWrap">
+                      <div class="np-upload-avatar-original">
+                                <a class="am-btn am-btn-primary np-uploader-container btn_addPic" href="javascript:;">
+                                        <span class="np-icon np-icon-shangchuantupian"></span> 选择本地图片
+                                    <div class="">
+                                        <input type="file" name="localSelect" id="localSelect" class="np-uploader-invisible filePrew" />
+                                    </div>
+                                </a>
+
+                                <!--<a class="am-btn am-btn-primary btn_addPic" id="camera" href="javascript:void(0)">
+                                    <span class="np-icon np-icon-shexiangtou pzsc"></span>
+                                    拍照上传
+                                </a>-->
+
+                                <div id="imageSource" class="np-avatar-original am-margin-top">
+                                    <span><img src="/common/img/header.png" id="target" alt="select" /></span>
+                                </div>
+                            </div>
+
+                      <div class="np-upload-avatar-scale imagesource">
+                                <h5 class="np-upload-avatar-notice" style="margin:0px">您上传的头像会自动生成三种尺寸，请注意中小尺寸的头像是否清晰，<br/>也可以通过手机端拍照上传</h5>
+                                <div class="am-margin-top previews">
+                                    <div class="np-avatar-scale np-avatar-scale-lg preview180">
+                                        <div id="preview180">
+                                        </div>
+                                        <p>大尺寸头像</p>
+                                        <p>180x180像素</p>
+                                    </div>
+
+                                    <div class="np-avatar-scale np-avatar-scale-sm preview50">
+                                        <div id="preview50"></div>
+                                        <p>中尺寸头像</p>
+                                        <p>50x50像素(自动生成)</p>
+                                    </div>
+
+                                    <div class="np-avatar-scale np-avatar-scale-xs preview30">
+                                        <div id="preview30"></div>
+                                        <p>小尺寸头像</p>
+                                        <p>30x30像素(自动生成)</p>
+                                    </div>
+                                </div>
+                                <div class="am-margin-top am-text-right">
+                                    <a href="javascript:void(0)" id="avatarSave" class="am-btn am-btn-primary disabled">保存</a>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+       </div>
+    </div>
+ </script>
+
+
+<script type="text/javascript" src="/common/js/Jcrop/jquery-Jcrop.js"></script>
+<script type="text/javascript" src="/common/js/avatarUpload/flash.js"></script>
+<script type="text/javascript" src="/common/js/uploadStuImg.js"></script>
+<!--内容右侧主体结束-->
+<!--#include file="/student/footer.html"-->

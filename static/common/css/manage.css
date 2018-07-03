@@ -1,0 +1,77 @@
+/*管理系统*/
+body{ background: #f4f4f4; font-size: 16px;}
+.top{ width: 100%; min-width: 1200px; background: #186ab7;}
+.top .top_inner{ width: 1200px; height: 95px; margin: 0 auto; overflow: hidden;}
+.wrap{ width: 100%;}
+.wrap .wrap_inner{ width: 1200px; margin: 0 auto; overflow: hidden; padding-top: 20px;}
+.wrap .wrap_inner .sidebar{ float: left; width: 240px; text-align: center; background: #fff;}
+.wrap .wrap_inner .sidebar .menu{ height: 60px; line-height: 60px; background: #4eb008; color: #fff; font-size: 18px;}
+.wrap .wrap_inner .sidebar .menu .icon-liebiao{ font-size: 20px;}
+.wrap .wrap_inner .sidebar .submenu{ border: 1px solid #ddd; min-height: 440px;}
+.wrap .wrap_inner .sidebar .submenu li{ position: relative;}
+.wrap .wrap_inner .sidebar .submenu li a{ display: block; font-size: 16px; color: #484848; height: 50px; line-height: 50px;}
+.wrap .wrap_inner .sidebar .submenu li.current a{ background: #e9ffd9; color: #3d9300;}
+.wrap .wrap_inner .sidebar .submenu li.current .border{ position: absolute; top: 0; left: 0; display: block; height: 50px; border-left: 4px solid #4eb008;}
+.wrap .wrap_inner .primary{ margin-left: 260px; border: 1px solid #ddd; background: #fff; min-height: 500px;}
+.wrap .wrap_inner .primary h2{ height: 45px; line-height: 45px; background: url(../img/manage_titleBg.jpg) repeat-x; color: #484848; font-size: 16px; text-indent: 30px; font-weight: 400; border-bottom: 1px solid #ddd;}
+.wrap .wrap_inner .primary .main_content{ padding: 40px 60px;}
+.wrap .wrap_inner .primary .main_content .main_content_title{ background: #186ab7; padding: 0 20px; height: 45px; line-height: 45px;}
+.wrap .wrap_inner .primary .main_content .main_content_title .attr{ display: inline-block; color: #fff; font-size: 16px;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton{ float: right; font-size: 16px;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .add{ border-radius: 3px; cursor: pointer; border: 0 none; background: #fff; width: 98px; height: 30px; color: #484848; font-size: 16px;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .add:hover{ color: #fff;background:#4eb008;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .search{ border-radius: 3px; display: inline-block; position: relative; margin-left: 5px;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .search .dicSearch{ width: 32px!important;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .search .dicSearch:hover .icon-search{ color: #fff;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .search .dicSearch .icon-search{ top: -4px; right: 2px;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .search input{ border-radius: 3px; border: 0 none; color: #484848; height: 30px; text-indent: 10px; background: #fff;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .search .icon-search{ cursor: pointer; position: absolute; right: 0; top: 0; font-size: 24px; color: #6b6767;}
+.wrap .wrap_inner .primary .main_content .shop{ }
+.wrap .wrap_inner .primary .main_content .shop .table{ text-align: center; border: 1px solid #ddd;}
+.wrap .wrap_inner .primary .main_content .shop .table tbody tr{ cursor: pointer; height: 45px; line-height: 45px;}
+.wrap .wrap_inner .primary .main_content .shop .table thead tr{ height: 45px; line-height: 45px;}
+.wrap .wrap_inner .primary .main_content .shop .table thead tr th{ background: #ededed;}
+.wrap .wrap_inner .primary .main_content .shop .table thead tr th,
+.wrap .wrap_inner .primary .main_content .shop .table tbody tr td{ border: 1px solid #ddd;}
+.wrap .wrap_inner .primary .main_content .shop .table thead tr .chooseAll{ cursor: pointer; vertical-align: middle; color: #000; border: 0 none; border: 1px solid #ddd; width: 15px; height: 15px; margin-top: 0;}
+.wrap .wrap_inner .primary .main_content .shop .table tbody tr:hover{ background: #FFF9DE;}
+.wrap .wrap_inner .primary .main_content .shop .table tbody tr.current{ background: #e9ffd9;}
+.wrap .wrap_inner .primary .main_content .shop .table tbody tr .choose{ cursor: pointer; vertical-align: middle; color: #000; border: 0 none; border: 1px solid #ddd; width: 15px; height: 15px; margin-top: 0;}
+.wrap .wrap_inner .primary .main_content .shop .table tbody tr td a{ color: #186ab7; border: 1px solid #ddd; padding: 1px 20px; border-radius: 5px;}
+.wrap .wrap_inner .primary .main_content .shop .table tbody tr td a:hover{ color: red;}
+.wrap .wrap_inner .primary .main_content .shop .table tbody tr td a.current{ color: #fff; background: #4eb008;}
+.wrap .wrap_inner .primary .main_content .footer{ margin: 15px 0; font-size: 14px; color: #1c568a;}
+.wrap .wrap_inner .primary .main_content .footer .choosePage{ display: inline-block; font-size: 14px; float: left; margin-right: 20px;}
+.wrap .wrap_inner .primary .main_content .footer select{ width: 45px; height: 21px;}
+.wrap .wrap_inner .primary .main_content .footer .page{ float: right;}
+.wrap .wrap_inner .primary .main_content .footer .page li{ float: left;}
+.wrap .wrap_inner .primary .main_content .footer .page li a{ display: inline-block; font-size: 14px; color: #1c568a; background: url(../img/pageIcon.png) no-repeat -35px -3px; width: 55px; height: 20px; line-height: 20px; margin-right: 5px; text-align: center;}
+.wrap .wrap_inner .primary .main_content .footer .page li .go{ width: 25px; background: url(../img/pageIcon.png) no-repeat -6px -3px; font-size: 12px;}
+.wrap .wrap_inner .primary .main_content .footer .page li a span{ display: inline-block; width: 12px; height: 12px; background: url(../img/pageIcon.png) no-repeat; position: relative; top: 1px;}
+.wrap .wrap_inner .primary .main_content .footer .page li a .left{ background-position: -132px -3px;}
+.wrap .wrap_inner .primary .main_content .footer .page li a .up{ background-position: -95px -3px;}
+.wrap .wrap_inner .primary .main_content .footer .page li a .next{ background-position: -110px -3px;}
+.wrap .wrap_inner .primary .main_content .footer .page li a .right{ background-position: -153px -3px;}
+.wrap .wrap_inner .primary .main_content .footer .page li input{ width: 25px; height: 18px; border: 0 none; border: 1px solid #7f9db9; text-align: center;}
+
+/*MDialog*/
+.ui-MDialog-table{ font-family: "Microsoft YaHei"; font-size: 18px;}
+.ui-MDialog-title{ color: #1c568a; font-size: 18px;}
+.dialog_content{ background: #f5f5f5; border: 1px solid #ddd; text-align: center; color: #1c568a; padding: 50px 0;}
+.dialog_content form .bar{ margin: 20px 0;}
+.dialog_content form .bar label{ margin-right: 10px;}
+.dialog_content form .formbox label{ min-width: 170px; display: inline-block; text-align: right;}
+.dialog_content form .bar input{ width: 330px; border: 0 none; border: 1px solid #ddd; text-indent: 5px;}
+.dialog_content form .bar input:focus{ border-color: #4eb008; box-shadow: 0 0 3px #4eb008;}
+.dialog_content form .bar .icon-xiaoxingxing{ color: #ff0600; margin-left: 5px; font-size: 18px;}
+.ui-MDialog-autofocus{ float: left;}
+.ui-MDialog-wrap .ui-MDialog-bottom button.ui-MDialog-autofocus{ background: #4eb008; border-color: #4eb008;}
+
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .search .position{ left: 0; width: 24px;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .search .inputSearch{ width: 220px; text-indent: 25px;}
+.wrap .wrap_inner .primary .main_content .main_content_title .inputOrbutton .search .buttonPosition{ position: absolute; top: 8px; right: 0; width: 50px; height: 29px;}
+
+
+
+
+

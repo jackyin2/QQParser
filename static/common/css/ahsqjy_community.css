@@ -1,0 +1,96 @@
+/*社区活动*/
+.wrap_community{ width: 1200px; margin: 20px auto; overflow: hidden; background: #f8f8f8; border: 1px solid #ddd;}
+.wrap_community .wrap_title{ border-bottom: 1px solid #24a9b6; padding: 0 30px; height: 60px; line-height: 60px;}
+.wrap_community .wrap_title .title{ color: #24a9b6; font-size: 18px; float: left; width: 200px; height: 60px; line-height: 60px;}
+.wrap_community .wrap_title .currentAddress{ color: #3a3a3a; text-align: right; margin-left: 200px; line-height: 60px;}
+.wrap_community .wrap_title .currentAddress span{ color: #24a9b6;}
+.wrap_community .content{ padding: 0 30px;}
+.wrap_community .content .tag{ margin: 10px 0; background: #efefef; height: 45px; line-height: 45px;}
+.wrap_community .content .tag label{ padding-left: 20px; font-size: 16px; font-weight: bold;}
+.wrap_community .content .tag span{ padding: 5px; border: 1px dashed #ff0000; color: #ff0000;}
+.wrap_community .content .tag span .icon-xiaochahao{ cursor: pointer;}
+.wrap_community .content .item{ }
+.wrap_community .content .item .item_list{ padding: 0 20px 0; border-bottom: 1px solid #ddd; margin-bottom: 10px;}
+.wrap_community .content .item .item_list label{ float: left; font-size: 16px; font-weight: bold;}
+.wrap_community .content .item .item_list ul{ margin-left: 50px;}
+.wrap_community .content .item .item_list ul li{ float: left;}
+.wrap_community .content .item .item_list ul li a{ color: #333; display: block; padding: 2px 12px; margin: 0 5px 10px 0;}
+.wrap_community .content .item .item_list ul li a.active{ background: #24a9b6; border-radius: 3px; color: #fff;}
+.wrap_community .content .item .item_list ul li .all{ color: #e70000; text-decoration: underline;}
+.wrap_community .content .tips{ margin: 20px 0 20px; padding-bottom: 5px; border-bottom: 1px solid #ddd;}
+.wrap_community .content .tips ul{ display: inline-block;}
+.wrap_community .content .tips ul li{ float: left;}
+.wrap_community .content .tips ul li a{ display: block; padding: 2px 12px; background: #e6e6e6; color: #333; margin-right: 5px;}
+.wrap_community .content .tips ul li a.active{ background: #24a9b6; color: #fff;}
+.wrap_community .content .tips p{ float: right;}
+.wrap_community .content .tips p span{ color: #e70000;}
+.wrap_community .content .tips ul li .search{ float: right; width: 260px; position: relative;}
+.wrap_community .content .tips ul li .search input{ width: 215px; padding: 1px 10px; border: 0 none; border: 1px solid #e6e6e6;}
+.wrap_community .content .tips ul li .search button{ position: absolute; top: 0; right: 0; width: 25px; height: 25px; cursor: pointer; background: #e6e6e6; border: 0 none;}
+.wrap_community .content .tips ul li .search button:hover{ background: #c7c5c5;}
+.wrap_community .content .tips ul li .search button .icon-search{ font-size: 18px; color: #fff;}
+.wrap_community .content .section{ width: 1170px;}
+.wrap_community .content .section .list{ float: left; padding: 20px; border: 1px solid #ddd; margin: 0 15px 20px 0;}
+.wrap_community .content .section .list .img{ width: 270px; float: left; position: relative;}
+.wrap_community .content .section .list .img img{ display: block; vertical-align: middle;}
+.wrap_community .content .section .list .img span{ position: absolute; display: block; width: 73px; height: 73px; background: url(../img/icon.png) no-repeat;}
+.wrap_community .content .section .list .img .now{ background-position: -5px -38px;}
+.wrap_community .content .section .list .img .over{ background-position: -91px -38px;}
+.wrap_community .content .section .list ul{ margin-left: 290px; width: 230px;}
+.wrap_community .content .section .list ul li{ line-height: 25px;}
+.wrap_community .content .section .list ul li h3{ font-size: 18px; color: #131313; padding: 5px 0;}
+.wrap_community .content .section .list ul li label{ width: 70px; text-align: right; display: inline-block;}
+.wrap_community .content .section .list ul li.join{ text-align: right; margin-top: 5px;}
+.wrap_community .content .section .list ul li.join a{ font-size: 16px; color: #fff; background: #24a9b6; padding: 2px 10px;}
+.wrap_community .content .wrap_footer{ text-align: center; margin: 50px 0;}
+.wrap_community .content .wrap_footer a{ border: 1px solid #ddd; padding: 5px 10px; font-size: 14px; color: #505050;}
+.wrap_community .content .wrap_footer .current{ display: inline-block; background: #24a9b6; color: #fff; border: 1px solid #ddd; padding: 5px 10px;}
+
+/*社区活动二级页面*/
+.wrap_community_second{ width: 1200px; margin: 20px auto; overflow: hidden;}
+.wrap_community_second .shop{ border: 1px solid #ddd; background: #f8f8f8;}
+.wrap_community_second .wrap_title{ border-bottom: 1px solid #24a9b6; padding: 0 30px; height: 60px; line-height: 60px;}
+.wrap_community_second .wrap_title .title{ color: #24a9b6; font-size: 18px; float: left; width: 200px; height: 60px; line-height: 60px;}
+.wrap_community_second .wrap_title .currentAddress{ color: #3a3a3a; text-align: right; margin-left: 200px; line-height: 60px;}
+.wrap_community_second .wrap_title .currentAddress span{ color: #24a9b6;}
+.wrap_community_second .content{ margin: 30px; padding: 15px; background: #ededed;}
+.wrap_community_second .content .img{ width: 410px; float: left; position: relative;}
+.wrap_community_second .content .img img{ display: block; vertical-align: middle;}
+.wrap_community_second .content .img span{ position: absolute; display: block; width: 73px; height: 73px; background: url(../img/icon.png) no-repeat;}
+.wrap_community_second .content .img .now{ background-position: -5px -38px;}
+.wrap_community_second .content .img .over{ background-position: -91px -38px;}
+.wrap_community_second .content ul{ margin-left: 430px; height: 220px;}
+.wrap_community_second .content ul li{ line-height: 25px;}
+.wrap_community_second .content ul li h3{ font-size: 18px; color: #131313; padding: 5px 0;}
+.wrap_community_second .content ul li label{ width: 70px; text-align: right; display: inline-block;}
+.wrap_community_second .content ul li .info{ margin-top: 20px;}
+.wrap_community_second .content ul li .info a{ position: relative; float: left; font-size: 16px; display: block; width: 330px; height: 140px; background: #fff; text-align: center; line-height: 30px; color: #303030;}
+.wrap_community_second .content ul li .info a:first-child{ border-right: 1px solid #ddd;}
+.wrap_community_second .content ul li .info a.join{ color: #fff; background: #24a9b6; font-size: 18px;}
+.wrap_community_second .content ul li .info a .iconfont{ font-size: 27px; position: absolute;top: 85px;left: 30px}
+.wrap_community_second .content ul li .info a span{ display: block; margin-top: 58px;}
+.wrap_community_second .content ul li .info .txt {
+                   padding-left:70px;
+                   padding-right: 10px;
+                   text-align: left;
+                }
+.wrap_community_second .intro{ border: 1px solid #ddd; background: #f8f8f8; padding: 30px; margin: 20px 0 100px;}
+.wrap_community_second .intro div{ margin-bottom: 20px;}
+.wrap_community_second .intro div h3{ font-size: 16px;}
+.wrap_community_second .intro p{ line-height: 27px;}
+.wrap_community_second .intro div span{ text-indent: 21px; display: block; line-height: 27px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

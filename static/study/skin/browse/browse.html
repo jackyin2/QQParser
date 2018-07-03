@@ -1,0 +1,58 @@
+<!--#include file="/study/header.html"-->
+    <div class="primary browse" id="browseinfo">
+            <div class="main_content">
+                <div class="main_content_title">
+                    <div class="attr">
+                        <i class="iconfont icon-yanjing"></i>
+                        浏览过的资源
+                    </div>
+                    <div class="inputOrbutton">
+                        <div class="search">
+                            <input name="search" type="text" placeholder="资源名称" />
+                            <button id="search" class="add buttonPosition"><i class="iconfont icon-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div id="browseList"></div>
+                <script id="browseListShow" type="text/html">
+                <div class="shop">
+                    <table class="table" id="table" border="1" width="938px">
+                        <thead>
+                            <tr>
+                                <th width="55%">资源名称</th>
+                                <th width="15%">资源大小</th>
+                                <th width="15%">浏览时间</th>
+                                <th width="15%">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{if list.length > 0}}
+                            {{each list as item i}}
+                            <tr id="{{item.Id}}">
+                                <td title="{{item.DocName}}" style="text-align: left;padding-left:20px"><img src="{{item.DocPic}}" alt="" width="30px" height="30px" />{{#substring(item.DocName,0,26)}}</td>
+                                <td>{{item.DocSize | b2other}}</td>
+                                <td>{{item.DateCreated | dateFormat:'yyyy-MM-dd'}}</td>
+                                <td>
+                                    <a class="edit" href="/mainsite/resource/resourceInfo.html#Id={{item.DocId}}" target="_blank" data-id="{{item.DocId}}">点击查看</a>
+                                </td>
+                            </tr>
+                            {{/each}}
+                            {{else}}
+                            <tr>
+                                <td colspan="10" style="background-color: #fff;">
+                                    <div>暂无数据</div>
+                                </td>
+                            </tr>
+                            {{/if}}
+                        </tbody>
+                    </table>
+
+                </div>
+                   <div class="footer pagination ajax">
+                   </div>
+                </script>
+            </div>
+</div>
+<!--内容右侧主体结束-->
+<script type="text/javascript" src="/study/js/browse/browse.js"></script>
+<!--#include file="/study/footer.html"-->

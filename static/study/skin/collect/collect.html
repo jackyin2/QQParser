@@ -1,0 +1,58 @@
+<!--#include file="/study/header.html"-->
+    <div class="primary browse" id="collectinfo">
+            <div class="main_content">
+                <div class="main_content_title">
+                    <div class="attr">
+                        <i class="iconfont icon-aixin2"></i>
+                        我的收藏
+                    </div>
+                    <div class="inputOrbutton">
+                        <div class="search">
+                            <input name="search" type="text" placeholder="资源名称" />
+                            <button id="search" class="add buttonPosition"><i class="iconfont icon-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div id="collectList" class="collectList"></div>
+                <script id="collectListShow" type="text/html">
+              <div class="shop">
+                    <table class="table" id="table" border="1" width="938px">
+                        <thead>
+                            <tr>
+                                <th width="35%">资源名称</th>
+                                <th width="20%">资源类型</th>
+                                <th width="25%">收藏时间</th>
+                                <th width="20%">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{if list.length > 0}}
+                            {{each list as item i}}
+                            <tr id="">
+                                <td "{{item.DocName}}">{{#substring(item.DocName,0,10)}}</td>
+                                <td>{{item.DocType}}</td>
+                                <td>{{item.DateCreated | dateFormat:'yyyy-MM-dd'}}</td>
+                                <td>
+                                    <a class="edit"target="_blank" href="/mainsite/resource/resourceInfo.html#Id={{item.DocId}}">点击查看</a>
+                                </td>
+                            </tr>
+                            {{/each}}
+                            {{else}}
+                            <tr>
+                                <td colspan="10" style="background-color: #fff;">
+                                    <div>暂无数据</div>
+                                </td>
+                            </tr>
+                            {{/if}}
+                        </tbody>
+                    </table>
+
+                </div>
+                   <div class="footer pagination ajax">
+                   </div>
+                </script>
+            </div>
+</div>
+<!--内容右侧主体结束-->
+<script type="text/javascript" src="/study/js/collect/collect.js"></script>
+<!--#include file="/study/footer.html"-->

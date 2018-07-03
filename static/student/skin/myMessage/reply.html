@@ -1,0 +1,52 @@
+﻿<!--#include  file="/student/header.html"-->
+
+<div class="am-panel am-panel-default" id="right_content">
+    <div class="am-panel-hd clearfix" style="margin: 0px;">
+        <h3 class="am-panel-title"><span class="am-icon am-icon-tasks"></span>&nbsp;回复</h3>
+         <div class="am-text-right" id="returnmain"><button class="am-btn am-btn-success am-btn-default" ><span class="am-icon am-icon-reply"></span>返回</button></div>
+    </div>
+   
+
+    <form id="form_reply" method="post">
+        <script id="reply_html" type="text/html">
+            <div class="am-panel-bd">
+                <div class="am-form am-form-horizontal">
+                    <div class="am-form-group ">
+                        <label for="" class="am-u-sm-1 am-form-label">回复:&nbsp;&nbsp;&nbsp;</label>
+                        <div class="am-u-sm-11">
+                            <input type="text" name="ReceiveUserName" value="{{ReceiveUserName}}" class="am-form-field ui-widget-content ui-corner-all" disabled="disabled">
+                        </div>
+                    </div>
+                    <div class="am-form-group ">
+                        <label for="" class="am-u-sm-1 am-form-label">主题:&nbsp;&nbsp;&nbsp;</label>
+                        <div class="am-u-sm-11">
+                            <input type="text" name="Title" value="" class="am-form-field ui-widget-content ui-corner-all" maxlength="500" placeholder="填写主题">
+                        </div>
+                    </div>
+                    <div class="am-form-group ">
+                        <label for="" class="am-u-sm-1 am-form-label">内容:&nbsp;&nbsp;&nbsp;</label>
+                        <div class="am-u-sm-11">
+                            <textarea id="cm_content" name="content" cols="30" rows="10" maxlength="5000"></textarea>
+                        </div>
+                    </div>
+                    <div class="am-form-group">
+                        <div class="am-u-sm-1"></div>
+                        <div class="am-u-sm-11">
+                            <button type="button" id="btn_send" class="am-btn am-btn-default am-btn-success">回复</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <input type="hidden" name="userId" value="{{ReceiveUserID }}" />
+        <input type="hidden" name="ReceiveUserName" value="{{ReceiveUserName }}" />
+        <input type="hidden" name="replyId" value="{{ReplyID}}" />
+        <input type="hidden" name="ReceiveUserType" value="{{ReceiveUserType }}" />
+        </script>
+    </form>
+</div>
+
+<!--#include file="/student/footer.html"-->
+
+<script type="text/javascript" src="/student/js/myMessage/reply.js"></script>
+

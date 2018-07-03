@@ -1,0 +1,249 @@
+﻿<!--#include file="/student/header.html"-->
+<form id="thesisForm" method="post" class="gform full">
+
+</form>
+
+<!--#include file="/student/footer.html"-->
+
+<script type="text/javascript" src="/student/js/thesis/thesis.js"></script>
+<script type="text/javascript" src="/common/js/uploader/uploadFile.js"></script>
+
+
+<script type="text/html" id="thesis_info_html">
+    <div class="am-panel am-panel-default">
+        <div class="am-panel-hd am-cf" id="bbs_headshow">
+            <h3 class="am-panel-title">
+                <span class="am-icon am-icon-tasks"></span>
+                <a href="javascript:;">我的论文 </a>
+            </h3>
+            <div class="am-text-right">
+                <a class="am-btn am-btn-success am-btn-default" href="myThesis.html"><span class="am-icon am-icon-reply"></span>返回</a>
+            </div>
+        </div>
+
+        <div class="thesis_process">
+            <ul  class="process_ul clearfix">
+                <li class="aboutThesis  {{if !thesisBatchInfo}}unfinish{{/if}}">
+                    <label>关于论文</label>
+                    <div class="cont">
+                        <p>论文名称：{{thesisBatchInfo.thesisTitle}}</p>
+                        <p>论文编码：{{thesisBatchInfo.thesisCode}}</p>
+                        <p>开始时间：{{dateFormat(thesisBatchInfo.startDate,"yyyy-MM-dd")}}</p>
+                        <p>截止时间：{{dateFormat(thesisBatchInfo.endDate,"yyyy-MM-dd")}}</p>
+                        <i class="triangle"></i>
+                    </div>
+                </li>
+                <li class="teacher {{if !(thesisBatchInfo && stuThesisInfo)}}unfinish{{/if}}">
+                    <span class="border"></span>
+                    <label>我的导师</label>
+                    {{if thesisBatchInfo && stuThesisInfo}}
+                        <input type="hidden" name="thesisBatchId" value="{{thesisBatchInfo.Id}}"/>
+                        <input type="hidden" name="stuThesisId" value="{{stuThesisInfo.StuThesisId}}"/>
+                        <input type="hidden" name="guideTeaId" value="{{stuThesisInfo.ThesisTeaId}}"/>
+                        <input type="hidden" name="guideTeaName" value="{{stuThesisInfo.ThesisTeaName}}"/>
+                    <div class="cont">
+                        <p>我的导师：</p>
+                        <p>姓名：{{stuThesisInfo.ThesisTeaName}}</p>
+                        <p>工号：{{stuThesisInfo.ThesisTeaNo}}</p>
+                        <p>电话：{{stuThesisInfo.TeaMobile}}</p>
+                        <i class="triangle"></i>
+                    </div>
+                    {{else}}
+                    <div class="cont">
+                        <p>正在分配指导老师...</p>
+                        <i class="triangle"></i>
+                    </div>
+                   {{/if}}
+                </li>
+                <li class="myTopic {{if !(thesisBatchInfo && stuThesisInfo && thesisTitleInfo)}}unfinish{{/if}}">
+                    <span class="border"></span>
+                    <label>我的选题</label>
+                    {{if thesisBatchInfo && stuThesisInfo && thesisTitleInfo}}
+                    <div class="cont">
+                        <p>名称：{{thesisTitleInfo.Title}}</p>
+                        <p>要求：{{thesisTitleInfo.Request}}</p>
+                        <p>状态：{{if stuThesisInfo.ThesisStatus==3 || stuThesisInfo.ThesisStatus==5||stuThesisInfo.ThesisStatus==7}}待审核{{else if stuThesisInfo.ThesisStatus==4}}
+                            <b style="color:red;font-weight: 400;">审核未通过<a href="/student/thesis/addThesisTitle.html#thesisBatchId={{thesisBatchInfo.Id}}&stuThesisId={{stuThesisInfo.StuThesisId}}">重新选题</a></b>
+                            {{else if stuThesisInfo.ThesisStatus>8}}<b style="color:green;font-weight: 400;">审核通过</b>{{else}}---{{/if}}
+                        </p>
+                       <i class="triangle"></i>
+                    </div>
+                    {{else}}
+                        {{if count==0}}
+                            <div class="cont">
+                                <p><b style="color:red;font-weight: 400;">论文接口已经关闭，无法选题</b></p>
+                                <i class="triangle"></i>
+                            </div>
+                        {{else}}
+                            {{ if dateCompare(nowTime,dateFormat(thesisBatchInfo.endDate,"yyyy/MM/dd hh:mm:ss"),">=")}}
+                                <div class="cont">
+                                    <p><b style="color:red;font-weight: 400;">已过论文截止日期，无法选题</b></p>
+                                    <i class="triangle"></i>
+                                </div>
+                            {{else if dateCompare(nowTime,dateFormat(thesisBatchInfo.startDate,"yyyy/MM/dd hh:mm:ss"),"<=")}}
+                                <div class="cont">
+                                    <p><b style="color:red;font-weight: 400;">论文计划尚未开始</b></p>
+                                    <i class="triangle"></i>
+                                </div>
+                            {{else if stuThesisInfo}}
+                                <div class="cont">
+                                    <p><b style="color:red;font-weight: 400;">
+                                        您尚未选择论文选题，请点击<a href="/student/thesis/addThesisTitle.html#thesisBatchId={{thesisBatchInfo.Id}}&stuThesisId={{stuThesisInfo.StuThesisId}}">添加选题</a>
+                                        </b>
+                                    </p>
+                                    <i class="triangle"></i>
+                                </div>
+                            {{/if}}
+                        {{/if}}
+                     {{/if}}
+                </li>
+                <li class="myThesis  {{if thesisBatchInfo && stuThesisInfo && thesisTitleInfo && stuThesisInfo.ThesisStatus>8}}{{else}}unfinishLast{{/if}}">
+                    <span class="border"></span>
+                    <label>我的论文</label>
+                 {{if thesisBatchInfo && stuThesisInfo && thesisTitleInfo && stuThesisInfo.ThesisStatus>8}}
+                    {{if stuThesisInfo && stuThesisInfo.ThesisStatus==9 || stuThesisInfo.ThesisStatus==11}}
+                        {{if stuThesisInfo.ThesisStatus==11}}
+                            <div class="cont">
+                                <p class="upagain">论文：<a data-preview_url_ueditor="{{stuThesisInfo.DocUrl}}">{{stuThesisInfo.DocTitle}}</a></p>
+                                <p class="upagain">状态：<b style="color:red;font-weight: 400;">论文批阅未通过</b></p>
+                                <!--<i class="triangle"></i>
+                            </div>-->
+                        {{/if}}
+                        {{if dateCompare(nowTime,dateFormat(thesisBatchInfo.endDate,"yyyy/MM/dd hh:mm:ss"),">=")}}
+                           <!-- <div class="cont">-->
+                            <p><b style="color:red;font-weight: 400;">已过论文截止日期，无法上传论文</b></p>
+                            <!--<i class="triangle"></i>
+                        </div>-->
+                        {{else}}
+                        <!--<div class="cont">-->
+                            <p>
+                                <div class="wu-example am-inline-block uploader_preview" data-file_system_url="{{file_system_url}}">
+                                    <div class="btns">
+                                        <div id="picker" class="">上传论文</div>
+                                    </div>
+                                </div>
+                            </p>
+                            <div class="am-inline-block am-hide thesis-content">
+                                <p>
+                                    <a href="javascript:;" class="myThesis" data-docsize="" data-doctype="" data-doctitle="" data-docurl="" data-docmd5="" data-preview_url_ueditor=""style="text-decoration: underline">我的论文(点击预览)</a>
+                                    <a href="javascript:;" style="color: red" class="deleteThesis"> 删除</a> 
+                                    <a href="javascript:;" style="color: blue" class="submitThesis"> 提交</a>
+                                </p>
+                            </div>
+                            <i class="triangle"></i>
+                        </div>
+                        {{/if}}
+                        {{else if stuThesisInfo.ThesisStatus==10 || stuThesisInfo.ThesisStatus==12 ||stuThesisInfo.ThesisStatus==13 ||stuThesisInfo.ThesisStatus==14 }}
+                        <div class="cont">
+                            <p>名称：<a class="thesisName" data-download="1" data-title="{{stuThesisInfo.DocTitle}}" data-preview_url_ueditor="{{stuThesisInfo.DocUrl}}">{{stuThesisInfo.DocTitle}}</a></p>
+                            {{if stuThesisInfo.ThesisStatus==14}}
+                            <p>状态：审核通过</p>
+                            <p>得分：{{stuThesisInfo.FinalScore}}</p>
+                            {{else}}
+                            <p>状态：论文审核中...</p>
+                            {{/if}}
+                            <i class="triangle"></i>
+                        </div>
+                    {{/if}}
+                  {{/if}}
+                </li>
+            </ul>
+        </div>
+
+
+
+
+        <!--<div class="am-panel-bd">
+            <div class="sortlist am-cf" style="height: 100px">
+                {{if thesisBatchInfo }}
+                    论文名称：{{thesisBatchInfo.thesisTitle}}<br />
+                    论文编码：{{thesisBatchInfo.thesisCode}}<br />
+                    开始时间：{{dateFormat(thesisBatchInfo.startDate,"yyyy-MM-dd")}}<br />
+                    截止时间：{{dateFormat(thesisBatchInfo.endDate,"yyyy-MM-dd")}}<br />
+                {{else}}
+                    论文计划尚未开始
+                 {{/if}}
+            </div>
+            {{if thesisBatchInfo }}
+                    {{if stuThesisInfo}}
+                    <input type="hidden" name="thesisBatchId" value="{{thesisBatchInfo.Id}}"/>
+                    <input type="hidden" name="stuThesisId" value="{{stuThesisInfo.StuThesisId}}"/>
+                    <input type="hidden" name="guideTeaId" value="{{stuThesisInfo.ThesisTeaId}}"/>
+                    <input type="hidden" name="guideTeaName" value="{{stuThesisInfo.ThesisTeaName}}"/>
+                     <div class="sortlist am-cf" style="height: 100px">
+                           我的导师：<br />
+                            &nbsp;&nbsp;&nbsp;姓名：{{stuThesisInfo.ThesisTeaName}}<br />
+                            &nbsp;&nbsp;&nbsp;工号：{{stuThesisInfo.ThesisTeaNo}}<br />
+                            &nbsp;&nbsp;&nbsp;电话：{{stuThesisInfo.TeaMobile}}
+                     </div>
+                    <div class="sortlist am-cf" style="height: 100px">
+                       我的选题：<br />
+                        {{if thesisTitleInfo}}
+                                &nbsp;&nbsp;&nbsp;名称：{{thesisTitleInfo.Title}}<br />
+                                &nbsp;&nbsp;&nbsp;要求：{{thesisTitleInfo.Request}}<br />
+                                &nbsp;&nbsp;&nbsp;状态：{{if stuThesisInfo.ThesisStatus==3 || stuThesisInfo.ThesisStatus==5||stuThesisInfo.ThesisStatus==7}}待审核{{else if stuThesisInfo.ThesisStatus==4}}<span style="color:red">审核未通过<a href="/student/thesis/addThesisTitle.html#thesisBatchId={{thesisBatchInfo.Id}}&stuThesisId={{stuThesisInfo.StuThesisId}}">重新选题</a></span>{{else if stuThesisInfo.ThesisStatus>8}}<span style="color:green">审核通过</span>{{else}}---{{/if}}<br />
+                        {{else}}
+                            {{if count==0}}
+                             <span style="color:red">论文接口已经关闭，无法选题</span>
+                            {{else}}
+                                {{if dateCompare(nowTime,dateFormat(thesisBatchInfo.endDate,"yyyy/MM/dd hh:mm:ss"),">=")}}
+                                    <span style="color:red">已过论文截止日期，无法选题</span>
+                                    {{else if dateCompare(nowTime,dateFormat(thesisBatchInfo.startDate,"yyyy/MM/dd hh:mm:ss"),"<=")}}
+                                        论文计划尚未开始
+                                {{else}}
+                                    &nbsp;&nbsp;&nbsp;您尚未选择论文选题，请点击<a href="/student/thesis/addThesisTitle.html#thesisBatchId={{thesisBatchInfo.Id}}&stuThesisId={{stuThesisInfo.StuThesisId}}">添加选题</a>
+                                {{/if}}
+                            {{/if}}
+                         {{/if}}
+                     </div>
+                        {{if stuThesisInfo.ThesisStatus>8}}
+                            <div class="sortlist am-cf" style="height: 100px">
+                                  我的论文：<br/>
+                                {{if stuThesisInfo.ThesisStatus==9 || stuThesisInfo.ThesisStatus==11}}
+                                    {{if stuThesisInfo.ThesisStatus==11}}
+                                        <div class="upagain">
+                                        &nbsp;&nbsp;&nbsp;论文：<a data-preview_url_ueditor="{{stuThesisInfo.DocUrl}}">{{stuThesisInfo.DocTitle}}</a><br />
+                                        <span style="color: red">论文批阅未通过</span>
+                                    </div>
+                                    {{/if}}
+                                    {{if dateCompare(nowTime,dateFormat(thesisBatchInfo.endDate,"yyyy/MM/dd hh:mm:ss"),">=")}}
+                                        <span style="color:red">已过论文截止日期，无法上传论文</span>
+                                    {{else}}
+                                        <div class="wu-example am-inline-block uploader_preview" data-file_system_url="{{file_system_url}}">
+                                        <div class="btns">
+                                            <div id="picker" class="">上传论文</div>
+                                        </div>
+                                    </div>
+                                        <div class="am-inline-block am-hide thesis-content">
+                                            <a href="javascript:;" class="myThesis" data-docsize="" data-doctype="" data-doctitle="" data-docurl="" data-docmd5="" data-preview_url_ueditor=""style="text-decoration: underline">我的论文(点击预览)</a>
+                                            <a href="javascript:;" style="color: red" class="deleteThesis"> 删除</a>
+                                            <a href="javascript:;" style="color: blue" class="submitThesis"> 提交</a>
+                                        </div>
+                                    {{/if}}
+
+
+
+                                    {{else if stuThesisInfo.ThesisStatus==10 || stuThesisInfo.ThesisStatus==12 ||stuThesisInfo.ThesisStatus==13 ||stuThesisInfo.ThesisStatus==14 }}
+                                     &nbsp;&nbsp;&nbsp;名称：<a data-download="1"  data-title="{{stuThesisInfo.DocTitle}}" data-preview_url_ueditor="{{stuThesisInfo.DocUrl}}">{{stuThesisInfo.DocTitle}}</a><br />
+                                    {{if stuThesisInfo.ThesisStatus==14}}
+                                     &nbsp;&nbsp;&nbsp;状态：审核通过<br />
+                                     &nbsp;&nbsp;&nbsp;得分：{{stuThesisInfo.FinalScore}}<br />
+                                    {{else}}
+                                     &nbsp;&nbsp;&nbsp;状态：论文审核中...<br />
+                                    {{/if}}
+
+                                {{/if}}
+                            </div>
+                        {{/if}}
+                    {{else}}
+                    正在分配指导老师...
+                    {{/if}}
+            {{/if}}
+        </div>-->
+
+
+    </div>
+
+</script>
+
+
