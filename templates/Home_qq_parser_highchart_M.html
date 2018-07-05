@@ -1,0 +1,87 @@
+{% extends  'Home_base.html' %}
+{% load  staticfiles %}
+{% block jsscript %}
+        <script src="https://img.hcharts.cn/highcharts/highcharts.js"></script>
+        <script src="https://img.hcharts.cn/highcharts/modules/exporting.js"></script>
+        <script src="https://img.hcharts.cn/highcharts/modules/oldie.js"></script>
+        <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+{% endblock %}
+{% block footerscript %}
+ <script type="application/javascript">
+    $(document).on('click','.btn_submit2',function(){
+        Search();
+});
+    function Search(){
+        debugger;
+        var year = $('#yearId option:selected').val();
+        var month = $('#monthId option:selected').val();
+        request_url = '';
+        if(year == "" && month=="" ){
+            return
+        }else {
+            request_url = "/qqhome/qqparser/month?year="+year+"&month="+month
+        }
+        window.location.href = request_url
+    }
+</script>
+<script type="application/javascript">
+
+    var chart = Highcharts.chart('container_m', {
+    chart: {
+        type: 'line'
+    },
+    title: {
+        text: '当年每月老师咨询反馈数量'
+    },
+    subtitle: {
+        text: '数据来源: QQ'
+    },
+    xAxis: {
+        categories: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
+    },
+    yAxis: {
+        title: {
+            text: '个 '
+        }
+    },
+    plotOptions: {
+        line: {
+            dataLabels: {
+                // 开启数据标签
+                enabled: true
+            },
+            // 关闭鼠标跟踪，对应的提示框、点击事件会失效
+            enableMouseTracking: false
+        }
+    },
+    series: {{ series|safe  }}
+
+});
+
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="gform full">
+    <div id="right_content" class="am-g am-g-collapse ">
+        <div class="am-panel">
+            <div class="am-panel am-panel-default">
+                <div class="am-panel-hd am-cf">
+                    <h3 class="am-panel-title">
+                        <span class="am-icon am-icon-tasks">QQ统计</span>&nbsp;
+                    </h3>
+                    <div class="am-text-right"></div>
+                </div>
+                <div style="margin-right: 28px;" class="am-form-group am-margin-top-sm" id="searchInfo"></div>
+                <div>
+
+                </div>
+                <div id="container_m" style="min-width:400px;height:400px"></div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

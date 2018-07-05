@@ -1,0 +1,100 @@
+{% extends  'Home_base.html' %}
+{% load  staticfiles %}
+{% block jsscript %}
+        <script src="https://img.hcharts.cn/highcharts/highcharts.js"></script>
+        <script src="https://img.hcharts.cn/highcharts/modules/exporting.js"></script>
+        <script src="https://img.hcharts.cn/highcharts/modules/oldie.js"></script>
+        <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+{% endblock %}
+{% block footerscript %}
+ <script type="application/javascript">
+    $(document).on('click','.btn_submit2',function(){
+        Search();
+});
+    function Search(){
+        debugger;
+        var year = $('#yearId option:selected').val();
+        var month = $('#monthId option:selected').val();
+        request_url = '';
+        if(year == "" && month=="" ){
+            return
+        }else {
+            request_url = "/qqhome/qqparser/month?year="+year+"&month="+month
+        }
+        window.location.href = request_url
+    }
+</script>
+<script type="application/javascript">
+
+    var chart = Highcharts.chart('container_d', {
+    chart: {
+        type: 'line'
+    },
+    title: {
+        text: '每年老师咨询按日统计趋势图'
+    },
+    subtitle: {
+        text: '数据来源: 运营部门'
+    },
+    xAxis: {
+        categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12','13',
+            '14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31']
+    },
+    yAxis: {
+        title: {
+            text: '个 '
+        }
+    },
+    plotOptions: {
+        line: {
+            dataLabels: {
+                // 开启数据标签
+                enabled: true
+            },
+            // 关闭鼠标跟踪，对应的提示框、点击事件会失效
+            enableMouseTracking: false
+        }
+    },
+    series: {{ series|safe  }}
+{#    series: [{#}
+{#        name:'2017',#}
+{#        data:[1,2,3,4]#}
+{#    },{#}
+{#        name:'2017',#}
+{#        data:[1,2,3,4]#}
+{#    },]#}
+
+{#        {% for i in series %}#}
+{#            JSON.parse({{ i }}),#}
+{#        JSON.parse({{ series|safe  }})#}
+{#        {% endfor %}#}
+
+});
+
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="gform full">
+    <div id="right_content" class="am-g am-g-collapse ">
+        <div class="am-panel">
+            <div class="am-panel am-panel-default">
+                <div class="am-panel-hd am-cf">
+                    <h3 class="am-panel-title">
+                        <span class="am-icon am-icon-tasks">QQ统计</span>&nbsp;
+                    </h3>
+                    <div class="am-text-right"></div>
+                </div>
+                <div style="margin-right: 28px;" class="am-form-group am-margin-top-sm" id="searchInfo"></div>
+                <div>
+
+                </div>
+                <div id="container_d" style="min-width:400px;height:400px"></div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

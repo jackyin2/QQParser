@@ -310,7 +310,6 @@ class HighChart_Y_View(View):
 
         })
 
-
 class HighChart_D_View(View):
     def get(self, request):
         years= [2017, 2018]
@@ -332,4 +331,27 @@ class HighChart_D_View(View):
         print(type(series1), series1)
         return render(request, 'Home_qq_parser_highchart_D.html', {
             'series':series1
+        })
+
+class HighChart_H_View(View):
+    def get(self, request):
+        years = [2017, 2018]
+        chartlist = []
+        for y in years:
+            data = []  # 如果希望每次都是一个新的列表或者数组，那么就需要在循环内进行声明变量
+            chartdict2 = {}
+            for m in range(0, 24):
+                y_d_count = QQContent.objects.filter(Q(qqdate__year=y), Q(qqdate__hour=m)).count()
+                data.append(y_d_count)
+            chartdict2['data'] = data
+            chartdict2['name'] = str(y)
+            # chartlist.append(json.dumps(chartdict))
+            chartlist.append(chartdict2)
+            # print(json.dumps(chartdict))
+        series = str(chartlist)
+        series1 = chartlist
+        print(type(series), series)
+        print(type(series1), series1)
+        return render(request, 'Home_qq_parser_highchart_H.html', {
+            'series': series1
         })

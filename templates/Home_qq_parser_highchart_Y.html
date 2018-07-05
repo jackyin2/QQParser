@@ -1,0 +1,99 @@
+{% extends  'Home_base.html' %}
+{% load  staticfiles %}
+{% block jsscript %}
+        <script src="https://img.hcharts.cn/highcharts/highcharts.js"></script>
+        <script src="https://img.hcharts.cn/highcharts/modules/exporting.js"></script>
+        <script src="https://img.hcharts.cn/highcharts/modules/oldie.js"></script>
+        <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+        <script src="https://img.hcharts.cn/highcharts/modules/drilldown.js"></script>
+
+{% endblock %}
+{% block footerscript %}
+ <script type="application/javascript">
+    $(document).on('click','.btn_submit2',function(){
+        Search();
+});
+    function Search(){
+        debugger;
+        var year = $('#yearId option:selected').val();
+        var month = $('#monthId option:selected').val();
+        request_url = '';
+        if(year == "" && month=="" ){
+            return
+        }else {
+            request_url = "/qqhome/qqparser/month?year="+year+"&month="+month
+        }
+        window.location.href = request_url
+    }
+</script>
+<script type="application/javascript">
+
+var chart = Highcharts.chart('container',{
+		chart: {
+				type: 'column'
+		},
+		title: {
+				text: '年聊天记录条数总计'
+		},
+		subtitle: {
+				text: '数据来源: 运营部门'
+		},
+		xAxis: {
+				categories: {{ years|safe }},
+				crosshair: true
+		},
+		yAxis: {
+				min: 0,
+				title: {
+						text: '聊天次数(条)'
+				}
+		},
+		tooltip: {
+				// head + 每个 point + footer 拼接成完整的 table
+				headerFormat: '<span style="font-size:10px"></span><table>',
+				pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+				'<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+				footerFormat: '</table>',
+				shared: true,
+				useHTML: true
+		},
+		plotOptions: {
+				column: {
+						borderWidth: 0
+				}
+		},
+		series: {{ series|safe }}
+});
+
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="gform full">
+    <div id="right_content" class="am-g am-g-collapse ">
+        <div class="am-panel">
+            <div class="am-panel am-panel-default">
+                <div class="am-panel-hd am-cf">
+                    <h3 class="am-panel-title">
+                        <span class="am-icon am-icon-tasks">QQ统计</span>&nbsp;
+                    </h3>
+                    <div class="am-text-right"></div>
+                </div>
+                <div style="margin-right: 28px;" class="am-form-group am-margin-top-sm" id="searchInfo"></div>
+                <div>
+
+                </div>
+                <div id="container" style="min-width:400px;height:400px"></div>
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
