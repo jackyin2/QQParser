@@ -32,6 +32,7 @@
 
 <script type="application/javascript">
 $('#freshbutton').on('click', function(){
+{#    debugger;#}
     dateO= $(".day");
     var lista=new Array()
     var partTInfStr = {};
@@ -63,19 +64,14 @@ $('#freshbutton').on('click', function(){
                     }
                 }else if(data.status == "success"){
 {#                    window.location.reload();//刷新当前页面.#}
-
                         tongji = $('.tongji')
                         var listc=new Array()
                         listc = data.a_count;
-                        debugger;
+{#                        debugger;#}
                         for (var i=0,len=tongji.size(); i<len; i++) {
                               for (var j=0,len=tongji.size(); j<len; j++) {
-
                                   if (i == j){
                                       $('.tongji')[i].innerText=listc[j];
-{#                                      if(listc[j]>data.avg_count){#}
-{#                                       $('.tongji').css("color",'red') ;#}
-{#                                       }#}
                                       continue;
                                   }
 
@@ -132,6 +128,7 @@ $('#clearbutton').on('click', function(){
 {#                <button type="submit" class="btn_submit2"> 查询 </button>#}
                 <div><button id="freshbutton">查看数据</button> <button id="clearbutton">清空数据</button> </div>
                 <div id="container" style="float:none;margin: 0px auto;"></div>
+{#                <div id="container" style="min-width:400px;height:400px"></div>#}
 {#                <div id="table_html"  class="'day_">#}
 {#                     <p align="center">}周期教师访问频度统计</p>#}
 

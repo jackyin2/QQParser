@@ -22,7 +22,7 @@
 
                 <div id="table_html"  class="year_">
                     <input type="hidden" name="type" value="" />
-                     <p align="center">每年教师访问频度统计</p>
+                    <p align="center"><a href="{% url 'qqhome:highchart_y' %}">教师咨询按年统计</a></p>
                     <table id="table_info" class="am-table am-text-center">
                         <tbody>
                                 <tr>
@@ -44,7 +44,7 @@
                 </div>
                 <div id="table_html"  class="month_">
                     <input type="hidden" name="type" value="" />
-                     <p align="center">每年教师访问频度统计</p>
+                    <p align="center"><a href="{% url 'qqhome:highchart_m' %}">每年教师咨询按月统计</a></p>
                     <table id="table_info" class="am-table am-text-center">
                         <tbody>
                                 <tr>
@@ -66,7 +66,8 @@
                 </div>
                 <div id="table_html"  class="'day_">
                     <input type="hidden" name="type" value="" />
-                    <p align="center"><a href="{% url 'qqhome:month' %}">月周期教师访问频度统计</a></p>
+                    <p align="center"><a href="{% url 'qqhome:highchart_d' %}">月周期教师咨询按日统计</a></p>
+                    <p align="center"><a href="{% url 'qqhome:month' %}">日历</a></p>
                     <table id="table_info" class="am-table am-text-center">
                         <tbody>
                                 <tr>

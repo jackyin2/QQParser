@@ -1,6 +1,7 @@
 # coding=utf-8
 
 # from openpyxl.writer.excel import ExcelWriter
+import json
 
 from django.http import HttpResponse, JsonResponse,HttpResponseRedirect
 from django.shortcuts import render
@@ -260,4 +261,75 @@ class ParserCommentView(View):
             return HttpResponse('{ "status" : "fail","msg": "请检查文件格式" }', content_type='application/json')
 
 
+class HighChart_M_View(View):
+    def get(self, request):
+        years= [2017, 2018]
+        month = [1,2,3,4,5,6,7,8,9,10,11,12]
+        chartlist = []
+        for y in years:
+            data = []                       # 如果希望每次都是一个新的列表或者数组，那么就需要在循环内进行声明变量
+            chartdict2 = {}
+            for m in month:
+                y_m_count = QQContent.objects.filter(Q(qqdate__year=y), Q(qqdate__month=m)).count()
+                data.append(y_m_count)
+            chartdict2['data'] = data
+            chartdict2['name'] = str(y)
+            # chartlist.append(json.dumps(chartdict))
+            chartlist.append(chartdict2)
+            # print(json.dumps(chartdict))
+        series = str(chartlist)
+        series1 = chartlist
+        print(type(series), series)
+        print(type(series1), series1)
+        return render(request, 'Home_qq_parser_highchart_M.html', {
+            'series':series1
+        })
 
+class HighChart_Y_View(View):
+    def get(self, request):
+        years = ['2017', '2018']
+        month = [1,2,3,4,5,6,7,8,9,10,11,12]
+        chartlist = []
+        for y in years:
+            data = []                       # 如果希望每次都是一个新的列表或者数组，那么就需要在循环内进行声明变量
+            chartdict2 = {}
+            y_count = QQContent.objects.filter(Q(qqdate__year=int(y))).count()
+            data.append(y_count)
+            chartdict2['data'] = data
+            chartdict2['name'] = y
+            # chartlist.append(json.dumps(chartdict))
+            chartlist.append(chartdict2)
+            # print(json.dumps(chartdict))
+        series = str(chartlist)
+
+
+        print(type(series), series)
+        return render(request, 'Home_qq_parser_highchart_Y.html', {
+            'series':series,
+            'years': years
+
+        })
+
+
+class HighChart_D_View(View):
+    def get(self, request):
+        years= [2017, 2018]
+        chartlist = []
+        for y in years:
+            data = []                       # 如果希望每次都是一个新的列表或者数组，那么就需要在循环内进行声明变量
+            chartdict2 = {}
+            for m in range(1, 32):
+                y_d_count = QQContent.objects.filter(Q(qqdate__year=y), Q(qqdate__day=m)).count()
+                data.append(y_d_count)
+            chartdict2['data'] = data
+            chartdict2['name'] = str(y)
+            # chartlist.append(json.dumps(chartdict))
+            chartlist.append(chartdict2)
+            # print(json.dumps(chartdict))
+        series = str(chartlist)
+        series1 = chartlist
+        print(type(series), series)
+        print(type(series1), series1)
+        return render(request, 'Home_qq_parser_highchart_D.html', {
+            'series':series1
+        })
